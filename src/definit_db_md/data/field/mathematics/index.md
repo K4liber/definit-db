@@ -4,6 +4,8 @@
 - [function](./definitions/foundamental/function.md)
 - [relation](./definitions/foundamental/relation.md)
 - [object](./definitions/foundamental/object.md)
+- [label](./definitions/foundamental/notations/label.md)
+- [hash_function](./definitions/foundamental/hash_function.md)
 - [graph](./definitions/graph/graph.md)
 - [node](./definitions/graph/node.md)
 - [edge](./definitions/graph/edge.md)

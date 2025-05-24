@@ -11,3 +11,6 @@ wheels/
 
 # Other
 .pypirc
+
+# generated md-database
+src/definit_db/data_md

@@ -3,5 +3,8 @@ from definit_db.data.track.track import get_track_list
 
 
 def test_get_track_list() -> None:
-    data_structure_track = get_track_list(track=Track.DATA_STRUCTURES)
-    assert len(data_structure_track) == 62
+    track_to_length = {Track.DATA_STRUCTURES: 70, Track.ALGORITHMS: 14}
+
+    for track, expected_length in track_to_length.items():
+        track_list = get_track_list(track=track)
+        assert len(track_list) == expected_length

@@ -20,6 +20,6 @@ class _Recursion(Definition):
 RECURSION = _Recursion(
     key=DefinitionKey(
         name="recursion",
-        field=Field.COMPUTER_SCIENCE,
+        field=Field.MATHEMATICS,
     )
 )

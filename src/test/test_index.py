@@ -9,3 +9,6 @@ def test_indexes_load_and_length():
     for field, index_length in field_to_index_length.items():
         field_index = get_index(field)
         assert len(field_index) == index_length
+        assert all(definition_key.field == field for definition_key in field_index), (
+            f"All definitions in the index for {field} should have the correct field."
+        )

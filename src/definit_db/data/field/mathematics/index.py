@@ -37,10 +37,13 @@ from definit_db.data.field.mathematics.definitions.graph.tree.tree import TREE
 from definit_db.data.field.mathematics.definitions.graph.tree.unbalanced_binary_tree import UNBALANCED_BINARY_TREE
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.subproblem import SUBPROBLEM
+from definit_db.data.field.mathematics.definitions.problem.base_case import BASE_CASE
 from definit_db.data.field.mathematics.definitions.problem.criterion import CRITERION
 from definit_db.data.field.mathematics.definitions.problem.optimal_solution import OPTIMAL_SOLUTION
 from definit_db.data.field.mathematics.definitions.problem.optimal_substructure import OPTIMAL_SUBSTRUCTURE
 from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
+from definit_db.data.field.mathematics.definitions.problem.recursion import RECURSION
+from definit_db.data.field.mathematics.definitions.problem.reduction import REDUCTION
 from definit_db.data.field.mathematics.definitions.problem.solution import SOLUTION
 from definit_db.definition.definition import Definition
 
@@ -89,4 +92,7 @@ field_index: list[Definition] = [
     SUBTREE,
     TREE,
     UNBALANCED_BINARY_TREE,
+    REDUCTION,
+    BASE_CASE,
+    RECURSION,
 ]

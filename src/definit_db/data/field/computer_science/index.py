@@ -1,3 +1,5 @@
+from definit_db.data.field.computer_science.definitions.algorithms.divide_and_conquer import DIVIDE_AND_CONQUER
+from definit_db.data.field.computer_science.definitions.algorithms.greedy_algorithm import GREEDY_ALGORITHM
 from definit_db.data.field.computer_science.definitions.algorithms.problems.graph_labeling.graph_coloring import (
     GRAPH_COLORING,
 )
@@ -97,4 +99,6 @@ field_index: list[Definition] = [
     HASH_COLLISION,
     ROLLING_HASH,
     RABIN_KARP_ALGORITHM,
+    GREEDY_ALGORITHM,
+    DIVIDE_AND_CONQUER,
 ]

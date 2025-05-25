@@ -10,7 +10,15 @@ python -m build
 
 python -m twine upload dist/*
 ```
-## Generate tracks
+
+## Generate Markdown database
 ```
-python -m definit_db.data.track.track
+cd src
+python -m definit_db.generate_db_md
+```
+
+## Run unit tests
+```
+cd src
+python -m pytest
 ```

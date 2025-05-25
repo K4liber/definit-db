@@ -6,7 +6,10 @@ from definit_db.definition.field import Field
 
 class _Relation(Definition):
     def _get_content(self) -> str:
-        return f"A relation (also called relationship) describes a connection or association between elements of a {SET.key.get_reference(phrase='set(s)')}."
+        return (
+            "A relation (also called relationship) describes a connection or association between elements of a "
+            f"{SET.key.get_reference(phrase='set(s)')}."
+        )
 
 
 RELATION = _Relation(

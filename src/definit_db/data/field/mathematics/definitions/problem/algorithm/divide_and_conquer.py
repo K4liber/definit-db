@@ -25,6 +25,6 @@ class _DivideAndConquer(Definition):
 DIVIDE_AND_CONQUER = _DivideAndConquer(
     key=DefinitionKey(
         name="divide_and_conquer",
-        field=Field.COMPUTER_SCIENCE,
+        field=Field.MATHEMATICS,
     )
 )

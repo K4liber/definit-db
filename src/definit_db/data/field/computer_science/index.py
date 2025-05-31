@@ -1,5 +1,3 @@
-from definit_db.data.field.computer_science.definitions.algorithms.divide_and_conquer import DIVIDE_AND_CONQUER
-from definit_db.data.field.computer_science.definitions.algorithms.greedy_algorithm import GREEDY_ALGORITHM
 from definit_db.data.field.computer_science.definitions.algorithms.problems.graph_labeling.graph_coloring import (
     GRAPH_COLORING,
 )
@@ -10,9 +8,6 @@ from definit_db.data.field.computer_science.definitions.algorithms.problems.grap
     VERTEX_COLORING,
 )
 from definit_db.data.field.computer_science.definitions.algorithms.problems.hash_collision import HASH_COLLISION
-from definit_db.data.field.computer_science.definitions.algorithms.problems.property.overlapping_subproblems import (
-    OVERLAPPING_SUBPROBLEMS,
-)
 from definit_db.data.field.computer_science.definitions.algorithms.problems.rolling_hash import ROLLING_HASH
 from definit_db.data.field.computer_science.definitions.algorithms.searching.string.rabin_karp_algorithm import (
     RABIN_KARP_ALGORITHM,
@@ -95,10 +90,7 @@ field_index: list[Definition] = [
     GRAPH_LABELING,
     GRAPH_COLORING,
     VERTEX_COLORING,
-    OVERLAPPING_SUBPROBLEMS,
     HASH_COLLISION,
     ROLLING_HASH,
     RABIN_KARP_ALGORITHM,
-    GREEDY_ALGORITHM,
-    DIVIDE_AND_CONQUER,
 ]

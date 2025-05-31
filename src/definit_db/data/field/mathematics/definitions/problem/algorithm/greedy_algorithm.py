@@ -20,6 +20,6 @@ class _GreedyAlgorithm(Definition):
 GREEDY_ALGORITHM = _GreedyAlgorithm(
     key=DefinitionKey(
         name="greedy_algorithm",
-        field=Field.COMPUTER_SCIENCE,
+        field=Field.MATHEMATICS,
     )
 )

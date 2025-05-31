@@ -17,6 +17,6 @@ class _OverlappingSubProblems(Definition):
 OVERLAPPING_SUBPROBLEMS = _OverlappingSubProblems(
     key=DefinitionKey(
         name="overlapping_subproblems",
-        field=Field.COMPUTER_SCIENCE,
+        field=Field.MATHEMATICS,
     )
 )

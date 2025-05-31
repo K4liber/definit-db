@@ -36,11 +36,17 @@ from definit_db.data.field.mathematics.definitions.graph.tree.subtree import SUB
 from definit_db.data.field.mathematics.definitions.graph.tree.tree import TREE
 from definit_db.data.field.mathematics.definitions.graph.tree.unbalanced_binary_tree import UNBALANCED_BINARY_TREE
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
+from definit_db.data.field.mathematics.definitions.problem.algorithm.divide_and_conquer import DIVIDE_AND_CONQUER
+from definit_db.data.field.mathematics.definitions.problem.algorithm.greedy_algorithm import GREEDY_ALGORITHM
+from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.quick_sort import QUICK_SORT
+from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.selection_sort import SELECTION_SORT
+from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.sorting import SORTING
 from definit_db.data.field.mathematics.definitions.problem.algorithm.subproblem import SUBPROBLEM
 from definit_db.data.field.mathematics.definitions.problem.base_case import BASE_CASE
 from definit_db.data.field.mathematics.definitions.problem.criterion import CRITERION
 from definit_db.data.field.mathematics.definitions.problem.optimal_solution import OPTIMAL_SOLUTION
 from definit_db.data.field.mathematics.definitions.problem.optimal_substructure import OPTIMAL_SUBSTRUCTURE
+from definit_db.data.field.mathematics.definitions.problem.overlapping_subproblems import OVERLAPPING_SUBPROBLEMS
 from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
 from definit_db.data.field.mathematics.definitions.problem.recursion import RECURSION
 from definit_db.data.field.mathematics.definitions.problem.reduction import REDUCTION
@@ -67,6 +73,7 @@ field_index: list[Definition] = [
     OPTIMAL_SUBSTRUCTURE,
     SOLUTION,
     SUBPROBLEM,
+    OVERLAPPING_SUBPROBLEMS,
     ALGORITHM,
     GRAPH,
     NODE,
@@ -95,4 +102,9 @@ field_index: list[Definition] = [
     REDUCTION,
     BASE_CASE,
     RECURSION,
+    GREEDY_ALGORITHM,
+    DIVIDE_AND_CONQUER,
+    SORTING,
+    QUICK_SORT,
+    SELECTION_SORT,
 ]

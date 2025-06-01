@@ -1,4 +1,4 @@
-from definit_db.data.field.computer_science.definitions.data_structure.collection import COLLECTION
+from definit_db.data.field.computer_science.definitions.data_structure.collection.collection import COLLECTION
 from definit_db.data.field.computer_science.definitions.foundamental.data_structure import DATA_STRUCTURE
 from definit_db.data.field.computer_science.definitions.foundamental.operation import OPERATION
 from definit_db.definition.definition import Definition

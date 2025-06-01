@@ -1,5 +1,5 @@
 from definit_db.data.field.computer_science.definitions.data_structure.abstract_data_type import ABSTRACT_DATA_TYPE
-from definit_db.data.field.computer_science.definitions.data_structure.collection import COLLECTION
+from definit_db.data.field.computer_science.definitions.data_structure.collection.collection import COLLECTION
 from definit_db.data.field.computer_science.definitions.data_structure.map import MAP
 from definit_db.data.field.computer_science.definitions.foundamental.operation import OPERATION
 from definit_db.definition.definition import Definition

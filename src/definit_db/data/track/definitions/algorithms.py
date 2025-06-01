@@ -1,5 +1,3 @@
-from definit_db.data.field.computer_science.definitions.algorithms.divide_and_conquer import DIVIDE_AND_CONQUER
-from definit_db.data.field.computer_science.definitions.algorithms.greedy_algorithm import GREEDY_ALGORITHM
 from definit_db.data.field.computer_science.definitions.algorithms.problems.graph_labeling.graph_coloring import (
     GRAPH_COLORING,
 )
@@ -10,19 +8,22 @@ from definit_db.data.field.computer_science.definitions.algorithms.problems.grap
     VERTEX_COLORING,
 )
 from definit_db.data.field.computer_science.definitions.algorithms.problems.hash_collision import HASH_COLLISION
-from definit_db.data.field.computer_science.definitions.algorithms.problems.property.overlapping_subproblems import (
-    OVERLAPPING_SUBPROBLEMS,
-)
 from definit_db.data.field.computer_science.definitions.algorithms.problems.rolling_hash import ROLLING_HASH
 from definit_db.data.field.computer_science.definitions.algorithms.searching.string.rabin_karp_algorithm import (
     RABIN_KARP_ALGORITHM,
 )
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
+from definit_db.data.field.mathematics.definitions.problem.algorithm.divide_and_conquer import DIVIDE_AND_CONQUER
+from definit_db.data.field.mathematics.definitions.problem.algorithm.greedy_algorithm import GREEDY_ALGORITHM
+from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.quick_sort import QUICK_SORT
+from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.selection_sort import SELECTION_SORT
+from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.sorting import SORTING
 from definit_db.data.field.mathematics.definitions.problem.algorithm.subproblem import SUBPROBLEM
 from definit_db.data.field.mathematics.definitions.problem.base_case import BASE_CASE
 from definit_db.data.field.mathematics.definitions.problem.criterion import CRITERION
 from definit_db.data.field.mathematics.definitions.problem.optimal_solution import OPTIMAL_SOLUTION
 from definit_db.data.field.mathematics.definitions.problem.optimal_substructure import OPTIMAL_SUBSTRUCTURE
+from definit_db.data.field.mathematics.definitions.problem.overlapping_subproblems import OVERLAPPING_SUBPROBLEMS
 from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
 from definit_db.data.field.mathematics.definitions.problem.recursion import RECURSION
 from definit_db.data.field.mathematics.definitions.problem.reduction import REDUCTION
@@ -50,6 +51,9 @@ _definition_keys: tuple[DefinitionKey, ...] = (
     RECURSION.key,
     BASE_CASE.key,
     REDUCTION.key,
+    SORTING.key,
+    SELECTION_SORT.key,
+    QUICK_SORT.key,
 )
 
 

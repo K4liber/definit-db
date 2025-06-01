@@ -1,0 +1,6 @@
+[importlinter]
+root_package = definit_db
+
+[importlinter:contract:1]
+name=AcyclicDependenciesNotAllowed
+type=acyclic

@@ -1,3 +1,4 @@
 pytest
 build
 twine
+import-linter@git+https://github.com/K4liber/import-linter@issue/221_tree_contract

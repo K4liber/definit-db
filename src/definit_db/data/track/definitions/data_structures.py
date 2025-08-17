@@ -39,19 +39,19 @@ from definit_db.data.field.computer_science.definitions.foundamental.data_struct
 from definit_db.data.field.computer_science.definitions.foundamental.data_type import DATA_TYPE
 from definit_db.data.field.computer_science.definitions.foundamental.object import OBJECT as CS_OBJECT
 from definit_db.data.field.computer_science.definitions.foundamental.operation import OPERATION as CS_OPERATION
-from definit_db.data.field.mathematics.definitions.foundamental.finite_sequence import FINITE_SEQUENCE
-from definit_db.data.field.mathematics.definitions.foundamental.finite_set import FINITE_SET
-from definit_db.data.field.mathematics.definitions.foundamental.function import FUNCTION
-from definit_db.data.field.mathematics.definitions.foundamental.hash_function import HASH_FUNCTION
-from definit_db.data.field.mathematics.definitions.foundamental.information import INFORMATION
-from definit_db.data.field.mathematics.definitions.foundamental.instruction import INSTRUCTION
-from definit_db.data.field.mathematics.definitions.foundamental.multiset import MULTISET
-from definit_db.data.field.mathematics.definitions.foundamental.notations.label import LABEL
-from definit_db.data.field.mathematics.definitions.foundamental.object import OBJECT
-from definit_db.data.field.mathematics.definitions.foundamental.operation import OPERATION
-from definit_db.data.field.mathematics.definitions.foundamental.relation import RELATION
-from definit_db.data.field.mathematics.definitions.foundamental.sequence import SEQUENCE
-from definit_db.data.field.mathematics.definitions.foundamental.set import SET
+from definit_db.data.field.mathematics.definitions.fundamental.finite_sequence import FINITE_SEQUENCE
+from definit_db.data.field.mathematics.definitions.fundamental.finite_set import FINITE_SET
+from definit_db.data.field.mathematics.definitions.fundamental.function import FUNCTION
+from definit_db.data.field.mathematics.definitions.fundamental.hash_function import HASH_FUNCTION
+from definit_db.data.field.mathematics.definitions.fundamental.information import INFORMATION
+from definit_db.data.field.mathematics.definitions.fundamental.instruction import INSTRUCTION
+from definit_db.data.field.mathematics.definitions.fundamental.multiset import MULTISET
+from definit_db.data.field.mathematics.definitions.fundamental.notations.label import LABEL
+from definit_db.data.field.mathematics.definitions.fundamental.object import OBJECT
+from definit_db.data.field.mathematics.definitions.fundamental.operation import OPERATION
+from definit_db.data.field.mathematics.definitions.fundamental.relation import RELATION
+from definit_db.data.field.mathematics.definitions.fundamental.sequence import SEQUENCE
+from definit_db.data.field.mathematics.definitions.fundamental.set import SET
 from definit_db.data.field.mathematics.definitions.graph.adjacency_list import ADJACENCY_LIST
 from definit_db.data.field.mathematics.definitions.graph.bipartite_graph import BIPARTITE_GRAPH
 from definit_db.data.field.mathematics.definitions.graph.cycle import CYCLE

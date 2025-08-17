@@ -1,5 +1,5 @@
 from definit_db.data.field.computer_science.definitions.foundamental.data import DATA
-from definit_db.data.field.mathematics.definitions.foundamental.information import INFORMATION
+from definit_db.data.field.mathematics.definitions.fundamental.information import INFORMATION
 from definit_db.definition.definition import Definition
 from definit_db.definition.definition_key import DefinitionKey
 from definit_db.definition.field import Field

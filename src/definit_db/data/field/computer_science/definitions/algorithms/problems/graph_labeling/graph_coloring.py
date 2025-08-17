@@ -1,7 +1,7 @@
 from definit_db.data.field.computer_science.definitions.algorithms.problems.graph_labeling.graph_labeling import (
     GRAPH_LABELING,
 )
-from definit_db.data.field.mathematics.definitions.foundamental.notations.label import LABEL
+from definit_db.data.field.mathematics.definitions.fundamental.notations.label import LABEL
 from definit_db.definition.definition import Definition
 from definit_db.definition.definition_key import DefinitionKey
 from definit_db.definition.field import Field

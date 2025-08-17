@@ -1,5 +1,5 @@
-from definit_db.data.field.mathematics.definitions.foundamental.finite_sequence import FINITE_SEQUENCE
-from definit_db.data.field.mathematics.definitions.foundamental.instruction import INSTRUCTION
+from definit_db.data.field.mathematics.definitions.fundamental.finite_sequence import FINITE_SEQUENCE
+from definit_db.data.field.mathematics.definitions.fundamental.instruction import INSTRUCTION
 from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
 from definit_db.definition.definition import Definition
 from definit_db.definition.definition_key import DefinitionKey

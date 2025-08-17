@@ -1,6 +1,6 @@
 from definit_db.data.field.computer_science.definitions.data_structure.abstract_data_type import ABSTRACT_DATA_TYPE
 from definit_db.data.field.computer_science.definitions.data_structure.collection.collection import COLLECTION
-from definit_db.data.field.mathematics.definitions.foundamental.finite_set import FINITE_SET
+from definit_db.data.field.mathematics.definitions.fundamental.finite_set import FINITE_SET
 from definit_db.definition.definition import Definition
 from definit_db.definition.definition_key import DefinitionKey
 from definit_db.definition.field import Field

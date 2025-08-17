@@ -1,4 +1,4 @@
-from definit_db.data.field.mathematics.definitions.foundamental.sequence import SEQUENCE
+from definit_db.data.field.mathematics.definitions.fundamental.sequence import SEQUENCE
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.sorting import SORTING
 from definit_db.definition.definition import Definition

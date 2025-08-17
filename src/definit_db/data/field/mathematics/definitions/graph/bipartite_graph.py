@@ -1,4 +1,4 @@
-from definit_db.data.field.mathematics.definitions.foundamental.set import SET
+from definit_db.data.field.mathematics.definitions.fundamental.set import SET
 from definit_db.data.field.mathematics.definitions.graph.edge import EDGE
 from definit_db.data.field.mathematics.definitions.graph.graph import GRAPH
 from definit_db.data.field.mathematics.definitions.graph.node import NODE

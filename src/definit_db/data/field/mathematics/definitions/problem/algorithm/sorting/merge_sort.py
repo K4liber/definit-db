@@ -8,20 +8,20 @@ from definit_db.definition.definition_key import DefinitionKey
 from definit_db.definition.field import Field
 
 
-class _QuickSort(Definition):
+class _MergeSort(Definition):
     def _get_content(self) -> str:
         return (
-            f"QuickSort is a {SORTING.key.get_reference()} {ALGORITHM.key.get_reference()} that uses a "
-            f"{DIVIDE_AND_CONQUER.key.get_reference()} approach to sort elements. It selects a 'pivot' element, "
-            f"partitions the other elements into two sub-{SEQUENCE.key.get_reference('sequences')} according to "
-            f"whether they are less than or greater than the pivot, and then "
-            f"{RECURSION.key.get_reference('recursively')} sorts the sub-sequences."
+            f"MergeSort is a {SORTING.key.get_reference()} {ALGORITHM.key.get_reference()} that uses a "
+            f"{DIVIDE_AND_CONQUER.key.get_reference()} approach: "
+            f"it divides the input {SEQUENCE.key.get_reference('sequence')} into two halves, "
+            f"{RECURSION.key.get_reference('recursively')} sorts each half, and then merges the "
+            f"two sorted halves into a single sorted {SEQUENCE.key.get_reference('sequence')}. "
         )
 
 
-QUICK_SORT = _QuickSort(
+MERGE_SORT = _MergeSort(
     key=DefinitionKey(
-        name="quick_sort",
+        name="merge_sort",
         field=Field.MATHEMATICS,
     )
 )

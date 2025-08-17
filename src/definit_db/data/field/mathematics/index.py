@@ -1,16 +1,20 @@
-from definit_db.data.field.mathematics.definitions.foundamental.finite_sequence import FINITE_SEQUENCE
-from definit_db.data.field.mathematics.definitions.foundamental.finite_set import FINITE_SET
-from definit_db.data.field.mathematics.definitions.foundamental.function import FUNCTION
-from definit_db.data.field.mathematics.definitions.foundamental.hash_function import HASH_FUNCTION
-from definit_db.data.field.mathematics.definitions.foundamental.information import INFORMATION
-from definit_db.data.field.mathematics.definitions.foundamental.instruction import INSTRUCTION
-from definit_db.data.field.mathematics.definitions.foundamental.multiset import MULTISET
-from definit_db.data.field.mathematics.definitions.foundamental.notations.label import LABEL
-from definit_db.data.field.mathematics.definitions.foundamental.object import OBJECT
-from definit_db.data.field.mathematics.definitions.foundamental.operation import OPERATION
-from definit_db.data.field.mathematics.definitions.foundamental.relation import RELATION
-from definit_db.data.field.mathematics.definitions.foundamental.sequence import SEQUENCE
-from definit_db.data.field.mathematics.definitions.foundamental.set import SET
+from definit_db.data.field.mathematics.definitions.fundamental.distribution import DISTRIBUTION
+from definit_db.data.field.mathematics.definitions.fundamental.finite_sequence import FINITE_SEQUENCE
+from definit_db.data.field.mathematics.definitions.fundamental.finite_set import FINITE_SET
+from definit_db.data.field.mathematics.definitions.fundamental.function import FUNCTION
+from definit_db.data.field.mathematics.definitions.fundamental.hash_function import HASH_FUNCTION
+from definit_db.data.field.mathematics.definitions.fundamental.information import INFORMATION
+from definit_db.data.field.mathematics.definitions.fundamental.instruction import INSTRUCTION
+from definit_db.data.field.mathematics.definitions.fundamental.merge import MERGE
+from definit_db.data.field.mathematics.definitions.fundamental.multiset import MULTISET
+from definit_db.data.field.mathematics.definitions.fundamental.notations.label import LABEL
+from definit_db.data.field.mathematics.definitions.fundamental.object import OBJECT
+from definit_db.data.field.mathematics.definitions.fundamental.operation import OPERATION
+from definit_db.data.field.mathematics.definitions.fundamental.probability import PROBABILITY
+from definit_db.data.field.mathematics.definitions.fundamental.relation import RELATION
+from definit_db.data.field.mathematics.definitions.fundamental.sequence import SEQUENCE
+from definit_db.data.field.mathematics.definitions.fundamental.set import SET
+from definit_db.data.field.mathematics.definitions.fundamental.uniform_distribution import UNIFORM_DISTRIBUTION
 from definit_db.data.field.mathematics.definitions.graph.adjacency_list import ADJACENCY_LIST
 from definit_db.data.field.mathematics.definitions.graph.bipartite_graph import BIPARTITE_GRAPH
 from definit_db.data.field.mathematics.definitions.graph.cycle import CYCLE
@@ -38,6 +42,8 @@ from definit_db.data.field.mathematics.definitions.graph.tree.unbalanced_binary_
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.divide_and_conquer import DIVIDE_AND_CONQUER
 from definit_db.data.field.mathematics.definitions.problem.algorithm.greedy_algorithm import GREEDY_ALGORITHM
+from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.bucket_sort import BUCKET_SORT
+from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.merge_sort import MERGE_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.quick_sort import QUICK_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.selection_sort import SELECTION_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.sorting import SORTING
@@ -107,4 +113,10 @@ field_index: list[Definition] = [
     SORTING,
     QUICK_SORT,
     SELECTION_SORT,
+    PROBABILITY,
+    DISTRIBUTION,
+    UNIFORM_DISTRIBUTION,
+    MERGE,
+    MERGE_SORT,
+    BUCKET_SORT,
 ]

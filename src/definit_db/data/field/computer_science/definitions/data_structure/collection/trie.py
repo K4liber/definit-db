@@ -1,5 +1,5 @@
 from definit_db.data.field.computer_science.definitions.data_structure.collection.string.string import STRING
-from definit_db.data.field.mathematics.definitions.foundamental.set import SET
+from definit_db.data.field.mathematics.definitions.fundamental.set import SET
 from definit_db.data.field.mathematics.definitions.graph.node import NODE
 from definit_db.data.field.mathematics.definitions.graph.tree.tree import TREE
 from definit_db.definition.definition import Definition

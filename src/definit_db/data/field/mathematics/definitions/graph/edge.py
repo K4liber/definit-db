@@ -1,4 +1,4 @@
-from definit_db.data.field.mathematics.definitions.foundamental.relation import RELATION
+from definit_db.data.field.mathematics.definitions.fundamental.relation import RELATION
 from definit_db.data.field.mathematics.definitions.graph.node import NODE
 from definit_db.definition.definition import Definition
 from definit_db.definition.definition_key import DefinitionKey

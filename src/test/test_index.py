@@ -4,7 +4,7 @@ from definit_db.definition.field import Field
 
 def test_indexes_load_and_length():
     """By loading the index we check if there are no circular dependencies between definitions."""
-    field_to_index_length = {Field.COMPUTER_SCIENCE: 39, Field.MATHEMATICS: 53}
+    field_to_index_length = {Field.COMPUTER_SCIENCE: 39, Field.MATHEMATICS: 59}
 
     for field, index_length in field_to_index_length.items():
         field_index = get_index(field)

@@ -1,5 +1,5 @@
-from definit_db.data.field.mathematics.definitions.foundamental.hash_function import HASH_FUNCTION
-from definit_db.data.field.mathematics.definitions.foundamental.sequence import SEQUENCE
+from definit_db.data.field.mathematics.definitions.fundamental.hash_function import HASH_FUNCTION
+from definit_db.data.field.mathematics.definitions.fundamental.sequence import SEQUENCE
 from definit_db.definition.definition import Definition
 from definit_db.definition.definition_key import DefinitionKey
 from definit_db.definition.field import Field

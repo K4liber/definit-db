@@ -12,9 +12,15 @@ from definit_db.data.field.computer_science.definitions.algorithms.problems.roll
 from definit_db.data.field.computer_science.definitions.algorithms.searching.string.rabin_karp_algorithm import (
     RABIN_KARP_ALGORITHM,
 )
+from definit_db.data.field.mathematics.definitions.fundamental.distribution import DISTRIBUTION
+from definit_db.data.field.mathematics.definitions.fundamental.merge import MERGE
+from definit_db.data.field.mathematics.definitions.fundamental.probability import PROBABILITY
+from definit_db.data.field.mathematics.definitions.fundamental.uniform_distribution import UNIFORM_DISTRIBUTION
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.divide_and_conquer import DIVIDE_AND_CONQUER
 from definit_db.data.field.mathematics.definitions.problem.algorithm.greedy_algorithm import GREEDY_ALGORITHM
+from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.bucket_sort import BUCKET_SORT
+from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.merge_sort import MERGE_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.quick_sort import QUICK_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.selection_sort import SELECTION_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.sorting import SORTING
@@ -54,6 +60,12 @@ _definition_keys: tuple[DefinitionKey, ...] = (
     SORTING.key,
     SELECTION_SORT.key,
     QUICK_SORT.key,
+    PROBABILITY.key,
+    DISTRIBUTION.key,
+    UNIFORM_DISTRIBUTION.key,
+    MERGE.key,
+    MERGE_SORT.key,
+    BUCKET_SORT.key,
 )
 
 

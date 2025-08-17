@@ -1,22 +1,21 @@
 from definit_db.data.field.mathematics.definitions.fundamental.operation import OPERATION
 from definit_db.data.field.mathematics.definitions.fundamental.sequence import SEQUENCE
-from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
 from definit_db.definition.definition import Definition
 from definit_db.definition.definition_key import DefinitionKey
 from definit_db.definition.field import Field
 
 
-class _Solution(Definition):
+class _Merge(Definition):
     def _get_content(self) -> str:
         return (
-            f"A method or process for solving a {PROBLEM.key.get_reference(phrase='problem')}, often involving a "
-            f"{SEQUENCE.key.get_reference(phrase='sequence')} of steps or {OPERATION.key.get_reference(phrase='operations')}."
+            f"Merge is an {OPERATION.key.get_reference()} that combines two {SEQUENCE.key.get_reference('sequences')} "
+            "into a single sequence by interleaving their elements while preserving the order of each input sequence."
         )
 
 
-SOLUTION = _Solution(
+MERGE = _Merge(
     key=DefinitionKey(
-        name="solution",
+        name="merge",
         field=Field.MATHEMATICS,
     )
 )

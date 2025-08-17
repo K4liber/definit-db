@@ -2,7 +2,7 @@ from definit_db.data.field.computer_science.definitions.data_structure.collectio
 from definit_db.data.field.computer_science.definitions.data_structure.collection.queue import QUEUE
 from definit_db.data.field.computer_science.definitions.foundamental.data_structure import DATA_STRUCTURE
 from definit_db.data.field.computer_science.definitions.foundamental.operation import OPERATION
-from definit_db.data.field.mathematics.definitions.foundamental.set import SET
+from definit_db.data.field.mathematics.definitions.fundamental.set import SET
 from definit_db.definition.definition import Definition
 from definit_db.definition.definition_key import DefinitionKey
 from definit_db.definition.field import Field

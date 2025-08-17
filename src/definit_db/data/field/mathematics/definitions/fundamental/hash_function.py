@@ -1,4 +1,4 @@
-from definit_db.data.field.mathematics.definitions.foundamental.object import OBJECT
+from definit_db.data.field.mathematics.definitions.fundamental.object import OBJECT
 from definit_db.definition.definition import Definition
 from definit_db.definition.definition_key import DefinitionKey
 from definit_db.definition.field import Field

@@ -7,8 +7,9 @@ from definit_db.definition.field import Field
 class _DataStructure(Definition):
     def _get_content(self) -> str:
         return (
-            f"A data structure is a way of organizing and storing {DATA.key.get_reference(phrase='data')} so it can be accessed and modified efficiently. "
-            "A data structure contains a value or group of values and the functions or operations that can be applied to the data."
+            f"A data structure is a way of organizing and storing {DATA.key.get_reference(phrase='data')} "
+            f"so it can be accessed and modified efficiently. A data structure contains a value or group of values "
+            f"and the functions or operations that can be applied to the data."
         )
 
 

@@ -39,12 +39,15 @@ from definit_db.data.field.mathematics.definitions.graph.tree.red_black_tree imp
 from definit_db.data.field.mathematics.definitions.graph.tree.subtree import SUBTREE
 from definit_db.data.field.mathematics.definitions.graph.tree.tree import TREE
 from definit_db.data.field.mathematics.definitions.graph.tree.unbalanced_binary_tree import UNBALANCED_BINARY_TREE
+from definit_db.data.field.mathematics.definitions.number.integer import INTEGER
+from definit_db.data.field.mathematics.definitions.number.number import NUMBER
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.divide_and_conquer import DIVIDE_AND_CONQUER
 from definit_db.data.field.mathematics.definitions.problem.algorithm.greedy_algorithm import GREEDY_ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.bucket_sort import BUCKET_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.merge_sort import MERGE_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.quick_sort import QUICK_SORT
+from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.radix_sort import RADIX_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.selection_sort import SELECTION_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.sorting import SORTING
 from definit_db.data.field.mathematics.definitions.problem.algorithm.subproblem import SUBPROBLEM
@@ -119,4 +122,7 @@ field_index: list[Definition] = [
     MERGE,
     MERGE_SORT,
     BUCKET_SORT,
+    NUMBER,
+    INTEGER,
+    RADIX_SORT,
 ]

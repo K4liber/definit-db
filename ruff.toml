@@ -1,5 +1,12 @@
 line-length = 120
-unfixable = ["F401"] # Disable fix for unused imports (`F401`).
+
+[lint]
+select = [
+    "I",  # isort
+    "PLC0415",  # import-outside-top-level
+    "TID252",  # relative-imports
+    "F403",  # undefined-local-with-import-star-usage
+]
 
 [lint.isort]
 force-single-line = true

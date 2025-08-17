@@ -6,7 +6,10 @@ from definit_db.definition.field import Field
 
 class _Integer(Definition):
     def _get_content(self) -> str:
-        return f"A {PRIMITIVE_DATA_TYPE.key.get_reference(phrase='primitive data type')} that represents whole numbers. Integers can be positive, negative, or zero."
+        return (
+            f"A {PRIMITIVE_DATA_TYPE.key.get_reference(phrase='primitive data type')} that represents whole numbers. "
+            f"Integers can be positive, negative, or zero."
+        )
 
 
 INTEGER = _Integer(

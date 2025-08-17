@@ -22,9 +22,3 @@ python -m build
 
 python -m twine upload dist/*
 ```
-
-## Automated checks
-```
-cd src
-lint-imports --verbose --config ../.importlinter
-```

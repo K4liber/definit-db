@@ -1,6 +1,8 @@
 [importlinter]
-root_package = definit_db
+root_package = src
 
 [importlinter:contract:1]
-name=AcyclicDependenciesNotAllowed
-type=acyclic
+name=AcyclicDependencies
+type=acyclic_siblings
+ancestors = 
+    src.definit_db

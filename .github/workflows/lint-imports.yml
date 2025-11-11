@@ -28,6 +28,5 @@ jobs:
           python -m pip install -r requirements-dev.txt
 
       - name: Run lint-imports
-        working-directory: src
         run: |
-          lint-imports --verbose --config ../.importlinter
+          lint-imports --verbose

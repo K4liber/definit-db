@@ -20,7 +20,6 @@ from definit_db.data.field.computer_science.definitions.data_structure.collectio
 from definit_db.data.field.computer_science.definitions.data_structure.collection.bag import BAG
 from definit_db.data.field.computer_science.definitions.data_structure.collection.collection import COLLECTION
 from definit_db.data.field.computer_science.definitions.data_structure.collection.hash_table import HASH_TABLE
-from definit_db.data.field.computer_science.definitions.data_structure.collection.heap_tree import HEAP_TREE
 from definit_db.data.field.computer_science.definitions.data_structure.collection.list.array import ARRAY
 from definit_db.data.field.computer_science.definitions.data_structure.collection.list.linked_list import LINKED_LIST
 from definit_db.data.field.computer_science.definitions.data_structure.collection.list.list import LIST
@@ -69,7 +68,6 @@ field_index: list[Definition] = [
     HASH_TABLE,
     BAG,
     SET,
-    HEAP_TREE,
     ARRAY,
     LINKED_LIST,
     LIST,

@@ -6,7 +6,6 @@ from definit_db.data.field.computer_science.definitions.data_structure.collectio
 from definit_db.data.field.computer_science.definitions.data_structure.collection.bag import BAG
 from definit_db.data.field.computer_science.definitions.data_structure.collection.collection import COLLECTION
 from definit_db.data.field.computer_science.definitions.data_structure.collection.hash_table import HASH_TABLE
-from definit_db.data.field.computer_science.definitions.data_structure.collection.heap_tree import HEAP_TREE
 from definit_db.data.field.computer_science.definitions.data_structure.collection.list.array import ARRAY
 from definit_db.data.field.computer_science.definitions.data_structure.collection.list.linked_list import LINKED_LIST
 from definit_db.data.field.computer_science.definitions.data_structure.collection.list.list import LIST
@@ -49,6 +48,7 @@ from definit_db.data.field.mathematics.definitions.fundamental.multiset import M
 from definit_db.data.field.mathematics.definitions.fundamental.notations.label import LABEL
 from definit_db.data.field.mathematics.definitions.fundamental.object import OBJECT
 from definit_db.data.field.mathematics.definitions.fundamental.operation import OPERATION
+from definit_db.data.field.mathematics.definitions.fundamental.radix import RADIX
 from definit_db.data.field.mathematics.definitions.fundamental.relation import RELATION
 from definit_db.data.field.mathematics.definitions.fundamental.sequence import SEQUENCE
 from definit_db.data.field.mathematics.definitions.fundamental.set import SET
@@ -68,6 +68,7 @@ from definit_db.data.field.mathematics.definitions.graph.tree.balanced_binary_tr
 from definit_db.data.field.mathematics.definitions.graph.tree.binary_search_tree import BINARY_SEARCH_TREE
 from definit_db.data.field.mathematics.definitions.graph.tree.binary_tree import BINARY_TREE
 from definit_db.data.field.mathematics.definitions.graph.tree.complete_binary_tree import COMPLETE_BINARY_TREE
+from definit_db.data.field.mathematics.definitions.graph.tree.heap_tree import HEAP_TREE
 from definit_db.data.field.mathematics.definitions.graph.tree.interval_tree import INTERVAL_TREE
 from definit_db.data.field.mathematics.definitions.graph.tree.k_ary_tree import K_ARY_TREE
 from definit_db.data.field.mathematics.definitions.graph.tree.leaf import LEAF
@@ -76,6 +77,8 @@ from definit_db.data.field.mathematics.definitions.graph.tree.red_black_tree imp
 from definit_db.data.field.mathematics.definitions.graph.tree.subtree import SUBTREE
 from definit_db.data.field.mathematics.definitions.graph.tree.tree import TREE
 from definit_db.data.field.mathematics.definitions.graph.tree.unbalanced_binary_tree import UNBALANCED_BINARY_TREE
+from definit_db.data.field.mathematics.definitions.number.integer import INTEGER as INTEGER_MATH
+from definit_db.data.field.mathematics.definitions.number.number import NUMBER
 from definit_db.data.track.definitions.track_definitions_abstract import TrackDefinitionsAbstract
 from definit_db.definition.definition_key import DefinitionKey
 
@@ -141,6 +144,9 @@ _definition_keys: tuple[DefinitionKey, ...] = (
     STACK.key,
     BOOLEAN.key,
     INTEGER.key,
+    NUMBER.key,
+    INTEGER_MATH.key,
+    RADIX.key,
     CHARACTER_ENCODING.key,
     ASCII.key,
     EXTENDED_ASCII.key,

@@ -19,12 +19,20 @@ from definit_db.data.field.mathematics.definitions.fundamental.uniform_distribut
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.divide_and_conquer import DIVIDE_AND_CONQUER
 from definit_db.data.field.mathematics.definitions.problem.algorithm.greedy_algorithm import GREEDY_ALGORITHM
+from definit_db.data.field.mathematics.definitions.problem.algorithm.searching.binary_search import BINARY_SEARCH
+from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.bubble_sort import BUBBLE_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.bucket_sort import BUCKET_SORT
+from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.heap_sort import HEAP_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.merge_sort import MERGE_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.quick_sort import QUICK_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.radix_sort import RADIX_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.selection_sort import SELECTION_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.sorting import SORTING
+from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.topological_sort import TOPOLOGICAL_SORT
+from definit_db.data.field.mathematics.definitions.problem.algorithm.strategy.bottom_up_approach import (
+    BOTTOM_UP_APPROACH,
+)
+from definit_db.data.field.mathematics.definitions.problem.algorithm.strategy.top_down_approach import TOP_DOWN_APPROACH
 from definit_db.data.field.mathematics.definitions.problem.algorithm.subproblem import SUBPROBLEM
 from definit_db.data.field.mathematics.definitions.problem.base_case import BASE_CASE
 from definit_db.data.field.mathematics.definitions.problem.criterion import CRITERION
@@ -68,6 +76,12 @@ _definition_keys: tuple[DefinitionKey, ...] = (
     MERGE_SORT.key,
     BUCKET_SORT.key,
     RADIX_SORT.key,
+    BUBBLE_SORT.key,
+    TOPOLOGICAL_SORT.key,
+    HEAP_SORT.key,
+    BINARY_SEARCH.key,
+    BOTTOM_UP_APPROACH.key,
+    TOP_DOWN_APPROACH.key,
 )
 
 

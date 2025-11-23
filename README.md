@@ -13,6 +13,8 @@ python -m definit_db.generate_db_md
 ```
 
 ## Build and upload the package
+Upgrade version in `pyproject.toml` and `src/definit_db/__init__.py` before running the commands below.
+
 ```
 (just once) python -m pip install requirements-dev.txt
 

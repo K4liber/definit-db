@@ -1,0 +1,25 @@
+from definit_db.data.field.mathematics.definitions.fundamental.sequence import SEQUENCE
+from definit_db.data.field.mathematics.definitions.graph.tree.heap_tree import HEAP_TREE
+from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
+from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.sorting import SORTING
+from definit_db.definition.definition import Definition
+from definit_db.definition.definition_key import DefinitionKey
+from definit_db.definition.field import Field
+
+
+class _HeapSort(Definition):
+    def _get_content(self) -> str:
+        return (
+            f"Heap Sort is a {SORTING.key.get_reference()} {ALGORITHM.key.get_reference()} that builds a "
+            f"{HEAP_TREE.key.get_reference(phrase='heap tree')} from the elements of a "
+            f"{SEQUENCE.key.get_reference('sequence')}, and then repeatedly extracts the root (the maximum or minimum) "
+            f"and restores the heap until the entire {SEQUENCE.key.get_reference('sequence')} is sorted."
+        )
+
+
+HEAP_SORT = _HeapSort(
+    key=DefinitionKey(
+        name="heap_sort",
+        field=Field.MATHEMATICS,
+    )
+)

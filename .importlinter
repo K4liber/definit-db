@@ -6,3 +6,4 @@ name=AcyclicDependencies
 type=acyclic_siblings
 ancestors = 
     src.definit_db
+    src.test

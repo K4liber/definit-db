@@ -11,6 +11,7 @@ from definit_db.data.field.mathematics.definitions.fundamental.notations.label i
 from definit_db.data.field.mathematics.definitions.fundamental.object import OBJECT
 from definit_db.data.field.mathematics.definitions.fundamental.operation import OPERATION
 from definit_db.data.field.mathematics.definitions.fundamental.probability import PROBABILITY
+from definit_db.data.field.mathematics.definitions.fundamental.radix import RADIX
 from definit_db.data.field.mathematics.definitions.fundamental.relation import RELATION
 from definit_db.data.field.mathematics.definitions.fundamental.sequence import SEQUENCE
 from definit_db.data.field.mathematics.definitions.fundamental.set import SET
@@ -31,6 +32,7 @@ from definit_db.data.field.mathematics.definitions.graph.tree.balanced_binary_tr
 from definit_db.data.field.mathematics.definitions.graph.tree.binary_search_tree import BINARY_SEARCH_TREE
 from definit_db.data.field.mathematics.definitions.graph.tree.binary_tree import BINARY_TREE
 from definit_db.data.field.mathematics.definitions.graph.tree.complete_binary_tree import COMPLETE_BINARY_TREE
+from definit_db.data.field.mathematics.definitions.graph.tree.heap_tree import HEAP_TREE
 from definit_db.data.field.mathematics.definitions.graph.tree.interval_tree import INTERVAL_TREE
 from definit_db.data.field.mathematics.definitions.graph.tree.k_ary_tree import K_ARY_TREE
 from definit_db.data.field.mathematics.definitions.graph.tree.leaf import LEAF
@@ -44,12 +46,20 @@ from definit_db.data.field.mathematics.definitions.number.number import NUMBER
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.divide_and_conquer import DIVIDE_AND_CONQUER
 from definit_db.data.field.mathematics.definitions.problem.algorithm.greedy_algorithm import GREEDY_ALGORITHM
+from definit_db.data.field.mathematics.definitions.problem.algorithm.searching.binary_search import BINARY_SEARCH
+from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.bubble_sort import BUBBLE_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.bucket_sort import BUCKET_SORT
+from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.heap_sort import HEAP_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.merge_sort import MERGE_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.quick_sort import QUICK_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.radix_sort import RADIX_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.selection_sort import SELECTION_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.sorting import SORTING
+from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.topological_sort import TOPOLOGICAL_SORT
+from definit_db.data.field.mathematics.definitions.problem.algorithm.strategy.bottom_up_approach import (
+    BOTTOM_UP_APPROACH,
+)
+from definit_db.data.field.mathematics.definitions.problem.algorithm.strategy.top_down_approach import TOP_DOWN_APPROACH
 from definit_db.data.field.mathematics.definitions.problem.algorithm.subproblem import SUBPROBLEM
 from definit_db.data.field.mathematics.definitions.problem.base_case import BASE_CASE
 from definit_db.data.field.mathematics.definitions.problem.criterion import CRITERION
@@ -108,6 +118,7 @@ field_index: list[Definition] = [
     SUBTREE,
     TREE,
     UNBALANCED_BINARY_TREE,
+    HEAP_TREE,
     REDUCTION,
     BASE_CASE,
     RECURSION,
@@ -124,5 +135,12 @@ field_index: list[Definition] = [
     BUCKET_SORT,
     NUMBER,
     INTEGER,
+    RADIX,
     RADIX_SORT,
+    BUBBLE_SORT,
+    HEAP_SORT,
+    TOPOLOGICAL_SORT,
+    BINARY_SEARCH,
+    BOTTOM_UP_APPROACH,
+    TOP_DOWN_APPROACH,
 ]

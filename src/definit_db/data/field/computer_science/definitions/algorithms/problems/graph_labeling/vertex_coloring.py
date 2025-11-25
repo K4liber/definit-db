@@ -9,7 +9,10 @@ from definit_db.definition.field import Field
 
 class _VertexColoring(Definition):
     def _get_content(self) -> str:
-        return f"A specific type of {GRAPH_COLORING.key.get_reference(phrase='graph coloring')} where the goal is to ensure that no two connected {NODE.key.get_reference(phrase='nodes')} share the same color."
+        return f"""
+A specific type of {GRAPH_COLORING.key.get_reference(phrase="graph coloring")} where the goal is to ensure that 
+no two connected {NODE.key.get_reference(phrase="nodes")} share the same color.
+"""
 
 
 VERTEX_COLORING = _VertexColoring(

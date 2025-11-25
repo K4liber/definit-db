@@ -7,7 +7,10 @@ from definit_db.definition.field import Field
 
 class _PrimitiveDataType(Definition):
     def _get_content(self) -> str:
-        return f"Primitive data types are a {SET.key.get_reference(phrase='set')} of basic {DATA_STRUCTURE.key.get_reference(phrase='data structures')} from which all other data types are constructed."
+        return f"""
+Primitive data types are a {SET.key.get_reference(phrase="set")} of basic 
+{DATA_STRUCTURE.key.get_reference(phrase="data structures")} from which all other data types are constructed.
+"""
 
 
 PRIMITIVE_DATA_TYPE = _PrimitiveDataType(

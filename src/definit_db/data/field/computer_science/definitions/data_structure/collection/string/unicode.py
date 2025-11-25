@@ -8,7 +8,10 @@ from definit_db.definition.field import Field
 
 class _Unicode(Definition):
     def _get_content(self) -> str:
-        return f"A {CHARACTER_ENCODING.key.get_reference(phrase='character encoding')} standard that aims to provide a unique number for every character, regardless of the system."
+        return f"""
+A {CHARACTER_ENCODING.key.get_reference(phrase="character encoding")} standard that aims to provide a unique 
+number for every character, regardless of the system.
+"""
 
 
 UNICODE = _Unicode(

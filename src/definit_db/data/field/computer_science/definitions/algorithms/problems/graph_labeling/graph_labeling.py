@@ -11,7 +11,11 @@ from definit_db.definition.field import Field
 
 class _GraphLabeling(Definition):
     def _get_content(self) -> str:
-        return f"A {PROBLEM.key.get_reference()} of assigning {LABEL.key.get_reference(phrase='labels')}, traditionally represented by {INTEGER.key.get_reference(phrase='integers')}, to {EDGE.key.get_reference(phrase='edges')} and/or {NODE.key.get_reference(phrase='nodes')} of a {GRAPH.key.get_reference(phrase='graph')}."
+        return f"""
+A {PROBLEM.key.get_reference()} of assigning {LABEL.key.get_reference(phrase="labels")}, traditionally 
+represented by {INTEGER.key.get_reference(phrase="integers")}, to {EDGE.key.get_reference(phrase="edges")} and/or 
+{NODE.key.get_reference(phrase="nodes")} of a {GRAPH.key.get_reference(phrase="graph")}.
+"""
 
 
 GRAPH_LABELING = _GraphLabeling(

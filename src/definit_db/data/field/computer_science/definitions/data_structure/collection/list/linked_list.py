@@ -7,7 +7,12 @@ from definit_db.definition.field import Field
 
 class _LinkedList(Definition):
     def _get_content(self) -> str:
-        return f"An ordered {COLLECTION.key.get_reference(phrase='collection')} of elements. Each element is stored in a {NODE.key.get_reference(phrase='node')} that contains a reference to the next node in the list. Linked lists can be singly linked or doubly linked, depending on whether each node has a reference to the next node only or both the next and previous nodes."
+        return f"""
+An ordered {COLLECTION.key.get_reference(phrase="collection")} of elements. Each element is stored in a 
+{NODE.key.get_reference(phrase="node")} that contains a reference to the next node in the list. Linked lists can 
+be singly linked or doubly linked, depending on whether each node has a reference to the next node only or both the 
+next and previous nodes.
+"""
 
 
 LINKED_LIST = _LinkedList(

@@ -8,7 +8,10 @@ from definit_db.definition.field import Field
 
 class _String(Definition):
     def _get_content(self) -> str:
-        return f"A sequence of {CHARACTER_ENCODING.key.get_reference(phrase='decoded characters')}, typically used to represent text. Strings can be of variable length and can contain letters, numbers, symbols, and whitespace."
+        return f"""
+A sequence of {CHARACTER_ENCODING.key.get_reference(phrase="decoded characters")}, typically used to represent 
+text. Strings can be of variable length and can contain letters, numbers, symbols, and whitespace.
+"""
 
 
 STRING = _String(

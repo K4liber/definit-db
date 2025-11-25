@@ -6,7 +6,9 @@ from definit_db.definition.field import Field
 
 class _Object(Definition):
     def _get_content(self) -> str:
-        return f"An object is an instance of a {DATA_STRUCTURE.key.get_reference(phrase='data structure')}."
+        return f"""
+An object is an instance of a {DATA_STRUCTURE.key.get_reference(phrase="data structure")}.
+"""
 
 
 OBJECT = _Object(

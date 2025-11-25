@@ -7,11 +7,11 @@ from definit_db.definition.field import Field
 
 class _RollingHash(Definition):
     def _get_content(self) -> str:
-        return (
-            "A rolling hash is an approach designed to enable efficient execution of the "
-            f"{HASH_FUNCTION.key.get_reference(phrase='hash function')} when the input is modified incrementally, "
-            f"such as when a window of fixed size moves over a {SEQUENCE.key.get_reference()}."
-        )
+        return f"""
+A rolling hash is an approach designed to enable efficient execution of the 
+{HASH_FUNCTION.key.get_reference(phrase="hash function")} when the input is modified incrementally, such as when 
+a window of fixed size moves over a {SEQUENCE.key.get_reference()}.
+"""
 
 
 ROLLING_HASH = _RollingHash(

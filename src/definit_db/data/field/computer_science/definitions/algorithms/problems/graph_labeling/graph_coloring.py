@@ -9,10 +9,10 @@ from definit_db.definition.field import Field
 
 class _GraphColoring(Definition):
     def _get_content(self) -> str:
-        return (
-            f"A special case of {GRAPH_LABELING.key.get_reference(phrase='graph labeling')} where the "
-            f"{LABEL.key.get_reference(phrase='labels')} are colors."
-        )
+        return f"""
+A special case of {GRAPH_LABELING.key.get_reference(phrase="graph labeling")} where the 
+{LABEL.key.get_reference(phrase="labels")} are colors.
+"""
 
 
 GRAPH_COLORING = _GraphColoring(

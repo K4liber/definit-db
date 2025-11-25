@@ -7,7 +7,10 @@ from definit_db.definition.field import Field
 
 class _BinarySearchTree(Definition):
     def _get_content(self) -> str:
-        return f"A special case of a {B_TREE.key.get_reference(phrase='b_tree')} in that a {NODE.key.get_reference(phrase='node')} can only have maximum two children."
+        return f"""
+A special case of a {B_TREE.key.get_reference(phrase="b_tree")} in that a {NODE.key.get_reference(phrase="node")} 
+can only have maximum two children.
+"""
 
 
 BINARY_SEARCH_TREE = _BinarySearchTree(

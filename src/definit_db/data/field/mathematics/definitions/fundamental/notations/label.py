@@ -6,7 +6,10 @@ from definit_db.definition.field import Field
 
 class _Label(Definition):
     def _get_content(self) -> str:
-        return f"A label is a name, number, or symbol attached to an {OBJECT.key.get_reference(phrase='object')} to give it meaning or identify it."
+        return f"""
+A label is a name, number, or symbol attached to an {OBJECT.key.get_reference(phrase="object")} to give it 
+meaning or identify it.
+"""
 
 
 LABEL = _Label(

@@ -9,11 +9,14 @@ from definit_db.definition.field import Field
 
 class _IntervalTree(Definition):
     def _get_content(self) -> str:
-        return (
-            f"A type of {BINARY_SEARCH_TREE.key.get_reference(phrase='binary search tree')} that stores intervals as its keys. "
-            f"Each {NODE.key.get_reference(phrase='node')} in the interval tree represents an interval, and the tree is structured in such a way that it allows for efficient searching of all intervals that overlap with a given interval or point. "
-            f"The intervals are typically represented by their start and end points, and the {TREE.key.get_reference(phrase='tree')} is {BALANCED_BINARY_TREE.key.get_reference(phrase='balanced')} to ensure efficient search operations."
-        )
+        return f"""
+A type of {BINARY_SEARCH_TREE.key.get_reference(phrase="binary search tree")} that stores intervals as its keys. 
+Each {NODE.key.get_reference(phrase="node")} in the interval tree represents an interval, and the tree is 
+structured in such a way that it allows for efficient searching of all intervals that overlap with a given 
+interval or point. The intervals are typically represented by their start and end points, and the 
+{TREE.key.get_reference(phrase="tree")} is {BALANCED_BINARY_TREE.key.get_reference(phrase="balanced")} to ensure 
+efficient search operations.
+"""
 
 
 INTERVAL_TREE = _IntervalTree(

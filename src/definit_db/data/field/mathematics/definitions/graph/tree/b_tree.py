@@ -8,11 +8,13 @@ from definit_db.definition.field import Field
 
 class _BTree(Definition):
     def _get_content(self) -> str:
-        return (
-            f"A self-balancing {TREE.key.get_reference(phrase='tree')} data structure in which each {NODE.key.get_reference(phrase='node')} has a value, "
-            f"and for each node, the values of all nodes in its left {SUBTREE.key.get_reference(phrase='subtree')} are less than its own value, "
-            "and the values of all nodes in its right subtree are greater than its own value. This property allows for efficient searching, insertion, and deletion operations."
-        )
+        return f"""
+A self-balancing {TREE.key.get_reference(phrase="tree")} data structure in which each 
+{NODE.key.get_reference(phrase="node")} has a value, and for each node, the values of all nodes in its left 
+{SUBTREE.key.get_reference(phrase="subtree")} are less than its own value, and the values of all nodes in its 
+right subtree are greater than its own value. This property allows for efficient searching, insertion, and 
+deletion operations.
+"""
 
 
 B_TREE = _BTree(

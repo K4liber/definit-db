@@ -9,12 +9,11 @@ from definit_db.definition.field import Field
 
 class _Recursion(Definition):
     def _get_content(self) -> str:
-        return (
-            f"A method of solving a {PROBLEM.key.get_reference()} where the {SOLUTION.key.get_reference()} "
-            f"depends on solutions to smaller instances of the same problem. "
-            f"Recursion involves a {FUNCTION.key.get_reference()} calling itself with simpler inputs until reaching a "
-            f"{BASE_CASE.key.get_reference()}."
-        )
+        return f"""
+A method of solving a {PROBLEM.key.get_reference()} where the {SOLUTION.key.get_reference()} depends on solutions 
+to smaller instances of the same problem. Recursion involves a {FUNCTION.key.get_reference()} calling itself with 
+simpler inputs until reaching a {BASE_CASE.key.get_reference()}.
+"""
 
 
 RECURSION = _Recursion(

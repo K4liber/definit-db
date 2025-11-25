@@ -7,11 +7,11 @@ from definit_db.definition.field import Field
 
 class _Reduction(Definition):
     def _get_content(self) -> str:
-        return (
-            f"Reduction refers to the rewriting of an expression into a simpler form."
-            f"It is process of transforming a {PROBLEM.key.get_reference()} into a simpler or smaller instance of the "
-            f"same or a {RELATION.key.get_reference('related')} problem, often to make it easier to solve."
-        )
+        return f"""
+Reduction refers to the rewriting of an expression into a simpler form. It is process of transforming a 
+{PROBLEM.key.get_reference()} into a simpler or smaller instance of the same or a 
+{RELATION.key.get_reference("related")} problem, often to make it easier to solve.
+"""
 
 
 REDUCTION = _Reduction(

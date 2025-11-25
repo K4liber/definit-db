@@ -6,7 +6,9 @@ from definit_db.definition.field import Field
 
 class _Leaf(Definition):
     def _get_content(self) -> str:
-        return f"A {NODE.key.get_reference(phrase='node')} in a tree that does not have any children (descendants)."
+        return f"""
+A {NODE.key.get_reference(phrase="node")} in a tree that does not have any children (descendants).
+"""
 
 
 LEAF = _Leaf(

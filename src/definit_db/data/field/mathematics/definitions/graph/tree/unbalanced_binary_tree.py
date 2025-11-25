@@ -9,10 +9,12 @@ from definit_db.definition.field import Field
 
 class _UnbalancedBinaryTree(Definition):
     def _get_content(self) -> str:
-        return (
-            f"A {BINARY_TREE.key.get_reference(phrase='binary tree')} that does not satisfy the {BALANCED_BINARY_TREE.key.get_reference(phrase='balanced binary tree')} property. "
-            f"In an unbalanced binary tree, the depth of the two {SUBTREE.key.get_reference(phrase='subtrees')} of at least one {NODE.key.get_reference(phrase='node')} differs by more than one."
-        )
+        return f"""
+A {BINARY_TREE.key.get_reference(phrase="binary tree")} that does not satisfy the 
+{BALANCED_BINARY_TREE.key.get_reference(phrase="balanced binary tree")} property. In an unbalanced binary tree, 
+the depth of the two {SUBTREE.key.get_reference(phrase="subtrees")} of at least one 
+{NODE.key.get_reference(phrase="node")} differs by more than one.
+"""
 
 
 UNBALANCED_BINARY_TREE = _UnbalancedBinaryTree(

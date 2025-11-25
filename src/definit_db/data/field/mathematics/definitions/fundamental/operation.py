@@ -6,10 +6,9 @@ from definit_db.definition.field import Field
 
 class _Operation(Definition):
     def _get_content(self) -> str:
-        return (
-            "A mathematical action performed on one or more "
-            f"{OBJECT.key.get_reference(phrase='objects')} to produce a result."
-        )
+        return f"""
+A mathematical action performed on one or more {OBJECT.key.get_reference(phrase="objects")} to produce a result.
+"""
 
 
 OPERATION = _Operation(

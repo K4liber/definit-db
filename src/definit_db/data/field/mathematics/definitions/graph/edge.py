@@ -7,10 +7,10 @@ from definit_db.definition.field import Field
 
 class _Edge(Definition):
     def _get_content(self) -> str:
-        return (
-            f"An edge is a directed or undirected connection between two {NODE.key.get_reference(phrase='nodes')}. "
-            f"It defines a {RELATION.key.get_reference(phrase='relationship')} or link between them."
-        )
+        return f"""
+An edge is a directed or undirected connection between two {NODE.key.get_reference(phrase="nodes")}. 
+It defines a {RELATION.key.get_reference(phrase="relationship")} or link between them.
+"""
 
 
 EDGE = _Edge(

@@ -9,11 +9,12 @@ from definit_db.definition.field import Field
 
 class _BipartiteGraph(Definition):
     def _get_content(self) -> str:
-        return (
-            f"A {GRAPH.key.get_reference(phrase='graph')} whose {NODE.key.get_reference(phrase='nodes')} can be divided into two disjoint "
-            f"{SET.key.get_reference(phrase='sets')} such that every {EDGE.key.get_reference(phrase='edge')} connects a node in one set to a node in the other set. "
-            "In other words, there are no edges connecting nodes within the same set."
-        )
+        return f"""
+A {GRAPH.key.get_reference(phrase="graph")} whose {NODE.key.get_reference(phrase="nodes")} can be divided into 
+two disjoint {SET.key.get_reference(phrase="sets")} such that every {EDGE.key.get_reference(phrase="edge")} 
+connects a node in one set to a node in the other set. In other words, there are no edges connecting nodes 
+within the same set.
+"""
 
 
 BIPARTITE_GRAPH = _BipartiteGraph(

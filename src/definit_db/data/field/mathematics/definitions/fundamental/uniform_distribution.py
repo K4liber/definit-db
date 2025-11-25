@@ -7,11 +7,10 @@ from definit_db.definition.field import Field
 
 class _UniformDistribution(Definition):
     def _get_content(self) -> str:
-        return (
-            f"A uniform distribution is a {DISTRIBUTION.key.get_reference()} in which all elements of a "
-            f"{SET.key.get_reference('set')} are assigned equal weight or probability, "
-            f"so each outcome is equally likely."
-        )
+        return f"""
+A uniform distribution is a {DISTRIBUTION.key.get_reference()} in which all elements of a 
+{SET.key.get_reference("set")} are assigned equal weight or probability, so each outcome is equally likely.
+"""
 
 
 UNIFORM_DISTRIBUTION = _UniformDistribution(

@@ -5,7 +5,9 @@ from definit_db.definition.field import Field
 
 class _Problem(Definition):
     def _get_content(self) -> str:
-        return "A question or a challenge defined in a formal way."
+        return """
+A question or a challenge defined in a formal way.
+"""
 
 
 PROBLEM = _Problem(

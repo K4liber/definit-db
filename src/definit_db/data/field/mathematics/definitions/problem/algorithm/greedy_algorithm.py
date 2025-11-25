@@ -8,13 +8,12 @@ from definit_db.definition.field import Field
 
 class _GreedyAlgorithm(Definition):
     def _get_content(self) -> str:
-        return (
-            f"A type of {ALGORITHM.key.get_reference()} that builds up a "
-            f"{SOLUTION.key.get_reference()} piece by piece, always choosing the next piece that offers "
-            f"the most immediate benefit. Greedy algorithms do not always produce the "
-            f"{OPTIMAL_SOLUTION.key.get_reference('optimal solution')}, but they are often faster and simpler "
-            f"than other approaches."
-        )
+        return f"""
+A type of {ALGORITHM.key.get_reference()} that builds up a {SOLUTION.key.get_reference()} piece by piece, always 
+choosing the next piece that offers the most immediate benefit. Greedy algorithms do not always produce the 
+{OPTIMAL_SOLUTION.key.get_reference("optimal solution")}, but they are often faster and simpler than other 
+approaches.
+"""
 
 
 GREEDY_ALGORITHM = _GreedyAlgorithm(

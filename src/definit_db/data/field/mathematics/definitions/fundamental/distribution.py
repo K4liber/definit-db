@@ -8,12 +8,12 @@ from definit_db.definition.field import Field
 
 class _Distribution(Definition):
     def _get_content(self) -> str:
-        return (
-            "A distribution describes how values (or outcomes) are spread over a domain. "
-            f"Typically it associates elements of a {SET.key.get_reference('set')} "
-            f"or values to their frequencies or {PROBABILITY.key.get_reference(phrase='probabilities')}, "
-            f"describing how likely or how common different {OBJECT.key.get_reference(phrase='objects')} are."
-        )
+        return f"""
+A distribution describes how values (or outcomes) are spread over a domain. Typically it associates elements of a 
+{SET.key.get_reference("set")} or values to their frequencies or 
+{PROBABILITY.key.get_reference(phrase="probabilities")}, describing how likely or how common different 
+{OBJECT.key.get_reference(phrase="objects")} are.
+"""
 
 
 DISTRIBUTION = _Distribution(

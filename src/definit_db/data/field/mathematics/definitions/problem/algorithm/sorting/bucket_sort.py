@@ -9,14 +9,14 @@ from definit_db.definition.field import Field
 
 class _BucketSort(Definition):
     def _get_content(self) -> str:
-        return (
-            f"BucketSort is a {SORTING.key.get_reference()} {ALGORITHM.key.get_reference()} that distributes "
-            f"the elements of a {SEQUENCE.key.get_reference('sequence')} into a number of buckets, "
-            f"sorts each bucket individually (often using another {ALGORITHM.key.get_reference()}), and "
-            f"then concatenates the sorted buckets to produce the final sorted {SEQUENCE.key.get_reference('sequence')}. "
-            f"Bucket sort can be very efficient when input is uniformly distributed; in some cases it can achieve "
-            f"linear time and approach the {OPTIMAL_SOLUTION.key.get_reference('optimal solution')} for specific distributions."
-        )
+        return f"""
+BucketSort is a {SORTING.key.get_reference()} {ALGORITHM.key.get_reference()} that distributes the elements of a 
+{SEQUENCE.key.get_reference("sequence")} into a number of buckets, sorts each bucket individually (often using 
+another {ALGORITHM.key.get_reference()}), and then concatenates the sorted buckets to produce the final sorted 
+{SEQUENCE.key.get_reference("sequence")}. Bucket sort can be very efficient when input is uniformly distributed; 
+in some cases it can achieve linear time and approach the {OPTIMAL_SOLUTION.key.get_reference("optimal solution")} 
+for specific distributions.
+"""
 
 
 BUCKET_SORT = _BucketSort(

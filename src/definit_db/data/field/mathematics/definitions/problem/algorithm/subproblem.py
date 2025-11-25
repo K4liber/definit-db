@@ -6,7 +6,10 @@ from definit_db.definition.field import Field
 
 class _Subproblem(Definition):
     def _get_content(self) -> str:
-        return f"A smaller, more manageable {PROBLEM.key.get_reference(phrase='problem')} derived from a larger problem, often used in the context of problem-solving and algorithm design."
+        return f"""
+A smaller, more manageable {PROBLEM.key.get_reference(phrase="problem")} derived from a larger problem, often 
+used in the context of problem-solving and algorithm design.
+"""
 
 
 SUBPROBLEM = _Subproblem(

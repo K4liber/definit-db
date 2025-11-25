@@ -8,10 +8,10 @@ from definit_db.definition.field import Field
 
 class _BaseCase(Definition):
     def _get_content(self) -> str:
-        return (
-            f"The simplest instance of the {PROBLEM.key.get_reference()}, which can be "
-            f"{SOLUTION.key.get_reference('solved')} directly without further {REDUCTION.key.get_reference()}."
-        )
+        return f"""
+The simplest instance of the {PROBLEM.key.get_reference()}, which can be 
+{SOLUTION.key.get_reference("solved")} directly without further {REDUCTION.key.get_reference()}.
+"""
 
 
 BASE_CASE = _BaseCase(

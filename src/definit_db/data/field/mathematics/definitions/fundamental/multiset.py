@@ -6,10 +6,11 @@ from definit_db.definition.field import Field
 
 class _Multiset(Definition):
     def _get_content(self) -> str:
-        return (
-            f"A multiset is a {SET.key.get_reference(phrase='set')} that allows for multiple occurrences of the same element. "
-            "Unlike a traditional set, which only allows unique elements, a multi-set can contain duplicates. This means that the same element can appear more than once."
-        )
+        return f"""
+A multiset is a {SET.key.get_reference(phrase="set")} that allows for multiple occurrences of the same element. 
+Unlike a traditional set, which only allows unique elements, a multi-set can contain duplicates. This means that 
+the same element can appear more than once.
+"""
 
 
 MULTISET = _Multiset(

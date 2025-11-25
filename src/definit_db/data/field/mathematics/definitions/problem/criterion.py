@@ -5,7 +5,9 @@ from definit_db.definition.field import Field
 
 class _Criterion(Definition):
     def _get_content(self) -> str:
-        return "A standard or principle by which something is judged or decided."
+        return """
+A standard or principle by which something is judged or decided.
+"""
 
 
 CRITERION = _Criterion(

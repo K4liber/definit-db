@@ -7,7 +7,10 @@ from definit_db.definition.field import Field
 
 class _OptimalSolution(Definition):
     def _get_content(self) -> str:
-        return f"A {SOLUTION.key.get_reference(phrase='solution')} that is the best among all possible solutions, often in terms of a specific {CRITERION.key.get_reference(phrase='criterion')}."
+        return f"""
+A {SOLUTION.key.get_reference(phrase="solution")} that is the best among all possible solutions, often in terms 
+of a specific {CRITERION.key.get_reference(phrase="criterion")}.
+"""
 
 
 OPTIMAL_SOLUTION = _OptimalSolution(

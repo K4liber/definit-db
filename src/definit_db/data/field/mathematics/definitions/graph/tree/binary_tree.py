@@ -7,10 +7,11 @@ from definit_db.definition.field import Field
 
 class _BinaryTree(Definition):
     def _get_content(self) -> str:
-        return (
-            f"A {TREE.key.get_reference(phrase='tree')} in which each node has at most two children, referred to as the left child and the right child. "
-            f"A binary tree is a special case of a {K_ARY_TREE.key.get_reference(phrase='k-ary tree')} where k = 2."
-        )
+        return f"""
+A {TREE.key.get_reference(phrase="tree")} in which each node has at most two children, referred to as the left 
+child and the right child. A binary tree is a special case of a {K_ARY_TREE.key.get_reference(phrase="k-ary tree")} 
+where k = 2.
+"""
 
 
 BINARY_TREE = _BinaryTree(

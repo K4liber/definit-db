@@ -9,7 +9,11 @@ from definit_db.definition.field import Field
 
 class _ExtendedAscii(Definition):
     def _get_content(self) -> str:
-        return f"An extension of the {ASCII.key.get_reference(phrase='ASCII')} {CHARACTER_ENCODING.key.get_reference(phrase='character encoding')} standard that uses 8 bits to represent 256 characters, including additional symbols and characters from various languages."
+        return f"""
+An extension of the {ASCII.key.get_reference(phrase="ASCII")} 
+{CHARACTER_ENCODING.key.get_reference(phrase="character encoding")} standard that uses 8 bits to represent 256 
+characters, including additional symbols and characters from various languages.
+"""
 
 
 EXTENDED_ASCII = _ExtendedAscii(

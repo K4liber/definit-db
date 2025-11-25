@@ -10,13 +10,12 @@ from definit_db.definition.field import Field
 
 class _MergeSort(Definition):
     def _get_content(self) -> str:
-        return (
-            f"MergeSort is a {SORTING.key.get_reference()} {ALGORITHM.key.get_reference()} that uses a "
-            f"{DIVIDE_AND_CONQUER.key.get_reference()} approach: "
-            f"it divides the input {SEQUENCE.key.get_reference('sequence')} into two halves, "
-            f"{RECURSION.key.get_reference('recursively')} sorts each half, and then merges the "
-            f"two sorted halves into a single sorted {SEQUENCE.key.get_reference('sequence')}. "
-        )
+        return f"""
+MergeSort is a {SORTING.key.get_reference()} {ALGORITHM.key.get_reference()} that uses a 
+{DIVIDE_AND_CONQUER.key.get_reference()} approach: it divides the input 
+{SEQUENCE.key.get_reference("sequence")} into two halves, {RECURSION.key.get_reference("recursively")} sorts each 
+half, and then merges the two sorted halves into a single sorted {SEQUENCE.key.get_reference("sequence")}. 
+"""
 
 
 MERGE_SORT = _MergeSort(

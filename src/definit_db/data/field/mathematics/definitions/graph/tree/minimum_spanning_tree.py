@@ -9,10 +9,12 @@ from definit_db.definition.field import Field
 
 class _MinimumSpanningTree(Definition):
     def _get_content(self) -> str:
-        return (
-            f"A {TREE.key.get_reference(phrase='tree')} that connects all the {NODE.key.get_reference(phrase='nodes')} in a {GRAPH.key.get_reference(phrase='graph')} with the minimum possible total {EDGE.key.get_reference(phrase='edge')} weight. "
-            "In other words, it is a subset of the edges of the graph that forms a tree and includes every node, such that the sum of the weights of the edges is minimized."
-        )
+        return f"""
+A {TREE.key.get_reference(phrase="tree")} that connects all the {NODE.key.get_reference(phrase="nodes")} in a 
+{GRAPH.key.get_reference(phrase="graph")} with the minimum possible total {EDGE.key.get_reference(phrase="edge")} 
+weight. In other words, it is a subset of the edges of the graph that forms a tree and includes every node, such 
+that the sum of the weights of the edges is minimized.
+"""
 
 
 MINIMUM_SPANNING_TREE = _MinimumSpanningTree(

@@ -7,10 +7,11 @@ from definit_db.definition.field import Field
 
 class _BalancedBinaryTree(Definition):
     def _get_content(self) -> str:
-        return (
-            f"A type of {BINARY_TREE.key.get_reference(phrase='binary tree')} in which the depth of the two subtrees of every {NODE.key.get_reference(phrase='node')} never differs by more than one. "
-            "This means that for any given node in the tree, the height of its left and right subtrees can differ by at most one."
-        )
+        return f"""
+A type of {BINARY_TREE.key.get_reference(phrase="binary tree")} in which the depth of the two subtrees of every 
+{NODE.key.get_reference(phrase="node")} never differs by more than one. This means that for any given node in the 
+tree, the height of its left and right subtrees can differ by at most one.
+"""
 
 
 BALANCED_BINARY_TREE = _BalancedBinaryTree(

@@ -6,7 +6,9 @@ from definit_db.definition.field import Field
 
 class _Number(Definition):
     def _get_content(self) -> str:
-        return f"A number is a mathematical {OBJECT.key.get_reference()} used to count, measure, and label."
+        return f"""
+A number is a mathematical {OBJECT.key.get_reference()} used to count, measure, and label.
+"""
 
 
 NUMBER = _Number(

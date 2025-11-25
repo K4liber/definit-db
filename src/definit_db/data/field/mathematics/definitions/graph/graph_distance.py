@@ -8,7 +8,10 @@ from definit_db.definition.field import Field
 
 class _GraphDistance(Definition):
     def _get_content(self) -> str:
-        return f"A measure of the shortest {PATH.key.get_reference(phrase='path')} between two {NODE.key.get_reference(phrase='nodes')} in a {GRAPH.key.get_reference(phrase='graph')}."
+        return f"""
+A measure of the shortest {PATH.key.get_reference(phrase="path")} between two 
+{NODE.key.get_reference(phrase="nodes")} in a {GRAPH.key.get_reference(phrase="graph")}.
+"""
 
 
 GRAPH_DISTANCE = _GraphDistance(

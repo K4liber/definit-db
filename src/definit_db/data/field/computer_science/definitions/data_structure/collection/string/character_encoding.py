@@ -6,10 +6,11 @@ from definit_db.definition.field import Field
 
 class _CharacterEncoding(Definition):
     def _get_content(self) -> str:
-        return (
-            f"A method of representing characters as numerical values, allowing computers to store and manipulate text. "
-            f"Character encoding schemes define the {MAP.key.get_reference(phrase='mapping')} between characters and their corresponding numerical values."
-        )
+        return f"""
+A method of representing characters as numerical values, allowing computers to store and manipulate text. 
+Character encoding schemes define the {MAP.key.get_reference(phrase="mapping")} between characters and their 
+corresponding numerical values.
+"""
 
 
 CHARACTER_ENCODING = _CharacterEncoding(

@@ -7,7 +7,10 @@ from definit_db.definition.field import Field
 
 class _Array(Definition):
     def _get_content(self) -> str:
-        return f"Array is a {LIST.key.get_reference(phrase='list')} of elements of the same {DATA_TYPE.key.get_reference(phrase='type')}."
+        return f"""
+Array is a {LIST.key.get_reference(phrase="list")} of elements of the same 
+{DATA_TYPE.key.get_reference(phrase="type")}.
+"""
 
 
 ARRAY = _Array(

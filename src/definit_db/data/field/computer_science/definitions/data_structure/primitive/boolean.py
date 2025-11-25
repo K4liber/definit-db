@@ -9,10 +9,12 @@ from definit_db.definition.field import Field
 
 class _Boolean(Definition):
     def _get_content(self) -> str:
-        return (
-            f"Boolean (sometimes shortened to Bool) is a {PRIMITIVE_DATA_TYPE.key.get_reference(phrase='primitive data type')} that has one of two possible values usually denoted true and false. "
-            f"Boolean is a {BIT_FIELD.key.get_reference(phrase='bit field')} that stores a single {BIT.key.get_reference(phrase='bit')} of {INFORMATION.key.get_reference(phrase='information')}."
-        )
+        return f"""
+Boolean (sometimes shortened to Bool) is a {PRIMITIVE_DATA_TYPE.key.get_reference(phrase="primitive data type")} 
+that has one of two possible values usually denoted true and false. Boolean is a 
+{BIT_FIELD.key.get_reference(phrase="bit field")} that stores a single {BIT.key.get_reference(phrase="bit")} of 
+{INFORMATION.key.get_reference(phrase="information")}.
+"""
 
 
 BOOLEAN = _Boolean(

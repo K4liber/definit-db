@@ -8,12 +8,12 @@ from definit_db.definition.field import Field
 
 class _HashCollision(Definition):
     def _get_content(self) -> str:
-        return (
-            "A situation in which two different inputs produce the same hash value when processed by a "
-            f"{HASH_FUNCTION.key.get_reference(phrase='hash function')}. This can lead to "
-            f"{DATA.key.get_reference()} integrity issues and is a key consideration "
-            f"in the design of hash functions and {HASH_TABLE.key.get_reference(phrase='hash tables')}."
-        )
+        return f"""
+A situation in which two different inputs produce the same hash value when processed by a 
+{HASH_FUNCTION.key.get_reference(phrase="hash function")}. This can lead to 
+{DATA.key.get_reference()} integrity issues and is a key consideration in the design of hash functions and 
+{HASH_TABLE.key.get_reference(phrase="hash tables")}.
+"""
 
 
 HASH_COLLISION = _HashCollision(

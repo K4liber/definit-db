@@ -7,7 +7,10 @@ from definit_db.definition.field import Field
 
 class _List(Definition):
     def _get_content(self) -> str:
-        return f"An ordered {COLLECTION.key.get_reference(phrase='collection')}. Also known as a sequence. One can add, remove, and pop any element from the list. List can store elements of different {DATA_TYPE.key.get_reference(phrase='types')}."
+        return f"""
+An ordered {COLLECTION.key.get_reference(phrase="collection")}. Also known as a sequence. One can add, remove, and 
+pop any element from the list. List can store elements of different {DATA_TYPE.key.get_reference(phrase="types")}.
+"""
 
 
 LIST = _List(

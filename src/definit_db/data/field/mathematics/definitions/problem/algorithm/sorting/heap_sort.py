@@ -9,12 +9,12 @@ from definit_db.definition.field import Field
 
 class _HeapSort(Definition):
     def _get_content(self) -> str:
-        return (
-            f"Heap Sort is a {SORTING.key.get_reference()} {ALGORITHM.key.get_reference()} that builds a "
-            f"{HEAP_TREE.key.get_reference(phrase='heap tree')} from the elements of a "
-            f"{SEQUENCE.key.get_reference('sequence')}, and then repeatedly extracts the root (the maximum or minimum) "
-            f"and restores the heap until the entire {SEQUENCE.key.get_reference('sequence')} is sorted."
-        )
+        return f"""
+Heap Sort is a {SORTING.key.get_reference()} {ALGORITHM.key.get_reference()} that builds a 
+{HEAP_TREE.key.get_reference(phrase="heap tree")} from the elements of a {SEQUENCE.key.get_reference("sequence")}, 
+and then repeatedly extracts the root (the maximum or minimum) and restores the heap until the entire 
+{SEQUENCE.key.get_reference("sequence")} is sorted.
+"""
 
 
 HEAP_SORT = _HeapSort(

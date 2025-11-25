@@ -7,7 +7,13 @@ from definit_db.definition.field import Field
 
 class _PriorityQueue(Definition):
     def _get_content(self) -> str:
-        return f"A priority queue is an {ABSTRACT_DATA_TYPE.key.get_reference(phrase='abstract data type')} that operates similarly to a regular {QUEUE.key.get_reference(phrase='queue')} but with an added feature: each element in the priority queue has a 'priority' associated with it. Elements with higher priority are served before elements with lower priority. If two elements have the same priority, they are served according to their order in the queue (FIFO - First In, First Out)."
+        return f"""
+A priority queue is an {ABSTRACT_DATA_TYPE.key.get_reference(phrase="abstract data type")} that operates similarly 
+to a regular {QUEUE.key.get_reference(phrase="queue")} but with an added feature: each element in the priority 
+queue has a 'priority' associated with it. Elements with higher priority are served before elements with lower 
+priority. If two elements have the same priority, they are served according to their order in the queue (FIFO - 
+First In, First Out).
+"""
 
 
 PRIORITY_QUEUE = _PriorityQueue(

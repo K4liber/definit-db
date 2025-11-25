@@ -6,10 +6,10 @@ from definit_db.definition.field import Field
 
 class _Sequence(Definition):
     def _get_content(self) -> str:
-        return (
-            f"A collection of {OBJECT.key.get_reference(phrase='objects')} "
-            f"in which repetitions are allowed and order matters."
-        )
+        return f"""
+A collection of {OBJECT.key.get_reference(phrase="objects")} in which repetitions are allowed and order 
+matters.
+"""
 
 
 SEQUENCE = _Sequence(

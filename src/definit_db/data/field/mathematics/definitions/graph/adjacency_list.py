@@ -7,10 +7,11 @@ from definit_db.definition.field import Field
 
 class _AdjacencyList(Definition):
     def _get_content(self) -> str:
-        return (
-            f"An adjacency list is a way of representing a {GRAPH.key.get_reference(phrase='graph')} as a collection of lists. "
-            f"Each list corresponds to a {NODE.key.get_reference(phrase='node')} in the graph and contains a list of its adjacent nodes."
-        )
+        return f"""
+An adjacency list is a way of representing a {GRAPH.key.get_reference(phrase="graph")} as a collection of lists. 
+Each list corresponds to a {NODE.key.get_reference(phrase="node")} in the graph and contains a list of its 
+adjacent nodes.
+"""
 
 
 ADJACENCY_LIST = _AdjacencyList(

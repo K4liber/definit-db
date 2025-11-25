@@ -10,7 +10,11 @@ from definit_db.definition.field import Field
 
 class _Utf8(Definition):
     def _get_content(self) -> str:
-        return f"A {UTF.key.get_reference(phrase='UTF')} {CHARACTER_ENCODING.key.get_reference(phrase='character encoding')} scheme that uses 1 to 4 bytes to represent {UNICODE.key.get_reference(phrase='Unicode')} characters. It is backward compatible with ASCII and can represent any character in the Unicode standard."
+        return f"""
+A {UTF.key.get_reference(phrase="UTF")} {CHARACTER_ENCODING.key.get_reference(phrase="character encoding")} 
+scheme that uses 1 to 4 bytes to represent {UNICODE.key.get_reference(phrase="Unicode")} characters. It is 
+backward compatible with ASCII and can represent any character in the Unicode standard.
+"""
 
 
 UTF_8 = _Utf8(

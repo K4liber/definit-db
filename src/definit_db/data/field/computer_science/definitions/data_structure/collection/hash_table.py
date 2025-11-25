@@ -9,7 +9,12 @@ from definit_db.definition.field import Field
 
 class _HashTable(Definition):
     def _get_content(self) -> str:
-        return f"Data structure that implements {ASSOCIATIVE_ARRAY.key.get_reference(phrase='associative array')} using a {HASH_FUNCTION.key.get_reference(phrase='hash function')} to compute an index into an array of buckets or slots, from which the desired value can be found. Hash tables are designed to provide fast access to data by using a hash function to map keys to indices in an array."
+        return f"""
+Data structure that implements {ASSOCIATIVE_ARRAY.key.get_reference(phrase="associative array")} using a 
+{HASH_FUNCTION.key.get_reference(phrase="hash function")} to compute an index into an array of buckets or slots, 
+from which the desired value can be found. Hash tables are designed to provide fast access to data by using a hash 
+function to map keys to indices in an array.
+"""
 
 
 HASH_TABLE = _HashTable(

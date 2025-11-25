@@ -7,10 +7,10 @@ from definit_db.definition.field import Field
 
 class _Merge(Definition):
     def _get_content(self) -> str:
-        return (
-            f"Merge is an {OPERATION.key.get_reference()} that combines two {SEQUENCE.key.get_reference('sequences')} "
-            "into a single sequence by interleaving their elements while preserving the order of each input sequence."
-        )
+        return f"""
+Merge is an {OPERATION.key.get_reference()} that combines two {SEQUENCE.key.get_reference("sequences")} into a 
+single sequence by interleaving their elements while preserving the order of each input sequence.
+"""
 
 
 MERGE = _Merge(

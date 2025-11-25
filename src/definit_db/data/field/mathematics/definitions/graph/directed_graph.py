@@ -8,10 +8,12 @@ from definit_db.definition.field import Field
 
 class _DirectedGraph(Definition):
     def _get_content(self) -> str:
-        return (
-            f"A directed graph is a {GRAPH.key.get_reference(phrase='graph')} in which the {EDGE.key.get_reference(phrase='edges')} have a direction. "
-            f"Each edge connects an ordered pair of {NODE.key.get_reference(phrase='nodes')}, meaning that the connection goes from one node to another in a specific direction."
-        )
+        return f"""
+A directed graph is a {GRAPH.key.get_reference(phrase="graph")} in which the 
+{EDGE.key.get_reference(phrase="edges")} have a direction. Each edge connects an ordered pair of 
+{NODE.key.get_reference(phrase="nodes")}, meaning that the connection goes from one node to another in a 
+specific direction.
+"""
 
 
 DIRECTED_GRAPH = _DirectedGraph(

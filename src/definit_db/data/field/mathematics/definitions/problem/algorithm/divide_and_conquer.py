@@ -11,15 +11,14 @@ from definit_db.definition.field import Field
 
 class _DivideAndConquer(Definition):
     def _get_content(self) -> str:
-        return (
-            f"A type of {ALGORITHM.key.get_reference()} that solves a {PROBLEM.key.get_reference()} by "
-            f"{RECURSION.key.get_reference('recursively')} breaking it down into smaller "
-            f"{SUBPROBLEM.key.get_reference('subproblems')}, solving each subproblem independently, "
-            f"and then combining their {SOLUTION.key.get_reference('solutions')} "
-            "to form a solution to the original problem. "
-            f"Divide and conquer algorithms often lead to efficient and elegant solutions. "
-            f"They may or may not always produce the {OPTIMAL_SOLUTION.key.get_reference('optimal solution')}."
-        )
+        return f"""
+A type of {ALGORITHM.key.get_reference()} that solves a {PROBLEM.key.get_reference()} by 
+{RECURSION.key.get_reference("recursively")} breaking it down into smaller 
+{SUBPROBLEM.key.get_reference("subproblems")}, solving each subproblem independently, and then combining their 
+{SOLUTION.key.get_reference("solutions")} to form a solution to the original problem. Divide and conquer 
+algorithms often lead to efficient and elegant solutions. They may or may not always produce the 
+{OPTIMAL_SOLUTION.key.get_reference("optimal solution")}.
+"""
 
 
 DIVIDE_AND_CONQUER = _DivideAndConquer(

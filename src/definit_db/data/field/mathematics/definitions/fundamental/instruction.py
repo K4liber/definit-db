@@ -6,7 +6,9 @@ from definit_db.definition.field import Field
 
 class _Instruction(Definition):
     def _get_content(self) -> str:
-        return f"A detailed {INFORMATION.key.get_reference(phrase='information')} about how something should be done or operated"
+        return f"""
+A detailed {INFORMATION.key.get_reference(phrase="information")} about how something should be done or operated.
+"""
 
 
 INSTRUCTION = _Instruction(

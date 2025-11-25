@@ -6,7 +6,11 @@ from definit_db.definition.field import Field
 
 class _Data(Definition):
     def _get_content(self) -> str:
-        return f"A collection of discrete or continuous values that convey {INFORMATION.key.get_reference(phrase='information')}, describing the quantity, quality, fact, statistics, other basic units of meaning, or simply sequences of symbols that may be further interpreted formally."
+        return f"""
+A collection of discrete or continuous values that convey {INFORMATION.key.get_reference(phrase="information")}, 
+describing the quantity, quality, fact, statistics, other basic units of meaning, or simply sequences of symbols 
+that may be further interpreted formally.
+"""
 
 
 DATA = _Data(

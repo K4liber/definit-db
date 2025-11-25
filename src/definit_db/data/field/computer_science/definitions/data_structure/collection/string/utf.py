@@ -9,7 +9,11 @@ from definit_db.definition.field import Field
 
 class _Utf(Definition):
     def _get_content(self) -> str:
-        return f"UTF (Unicode Transformation Format) is a {CHARACTER_ENCODING.key.get_reference(phrase='character encoding')} standard that represents {UNICODE.key.get_reference(phrase='Unicode')} characters using variable-length sequences of bytes."
+        return f"""
+UTF (Unicode Transformation Format) is a {CHARACTER_ENCODING.key.get_reference(phrase="character encoding")} 
+standard that represents {UNICODE.key.get_reference(phrase="Unicode")} characters using variable-length sequences 
+of bytes.
+"""
 
 
 UTF = _Utf(

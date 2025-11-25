@@ -8,10 +8,10 @@ from definit_db.definition.field import Field
 
 class _Cycle(Definition):
     def _get_content(self) -> str:
-        return (
-            f"A cycle in a {GRAPH.key.get_reference(phrase='graph')} is a non-empty {PATH.key.get_reference(phrase='path')} "
-            f"in which only the first and last {NODE.key.get_reference(phrase='nodes')} are equal."
-        )
+        return f"""
+A cycle in a {GRAPH.key.get_reference(phrase="graph")} is a non-empty {PATH.key.get_reference(phrase="path")} 
+in which only the first and last {NODE.key.get_reference(phrase="nodes")} are equal.
+"""
 
 
 CYCLE = _Cycle(

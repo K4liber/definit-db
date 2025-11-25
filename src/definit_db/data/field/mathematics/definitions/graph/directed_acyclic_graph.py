@@ -7,10 +7,10 @@ from definit_db.definition.field import Field
 
 class _DirectedAcyclicGraph(Definition):
     def _get_content(self) -> str:
-        return (
-            f"A directed acyclic graph is a {DIRECTED_GRAPH.key.get_reference(phrase='directed graph')} with no "
-            f"{CYCLE.key.get_reference(phrase='cycles')}."
-        )
+        return f"""
+A directed acyclic graph is a {DIRECTED_GRAPH.key.get_reference(phrase="directed graph")} with no 
+{CYCLE.key.get_reference(phrase="cycles")}.
+"""
 
 
 DIRECTED_ACYCLIC_GRAPH = _DirectedAcyclicGraph(

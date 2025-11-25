@@ -8,10 +8,10 @@ from definit_db.definition.field import Field
 
 class _Solution(Definition):
     def _get_content(self) -> str:
-        return (
-            f"A method or process for solving a {PROBLEM.key.get_reference(phrase='problem')}, often involving a "
-            f"{SEQUENCE.key.get_reference(phrase='sequence')} of steps or {OPERATION.key.get_reference(phrase='operations')}."
-        )
+        return f"""
+A method or process for solving a {PROBLEM.key.get_reference(phrase="problem")}, often involving a 
+{SEQUENCE.key.get_reference(phrase="sequence")} of steps or {OPERATION.key.get_reference(phrase="operations")}.
+"""
 
 
 SOLUTION = _Solution(

@@ -1,5 +1,5 @@
-from definit_db.data.field.mathematics.definitions.problem.algorithm.subproblem import SUBPROBLEM
 from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
+from definit_db.data.field.mathematics.definitions.problem.subproblem import SUBPROBLEM
 from definit_db.definition.definition import Definition
 from definit_db.definition.definition_key import DefinitionKey
 from definit_db.definition.field import Field

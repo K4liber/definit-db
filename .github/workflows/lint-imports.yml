@@ -29,4 +29,5 @@ jobs:
 
       - name: Run lint-imports
         run: |
-          lint-imports --verbose
+          cd src
+          lint-imports --verbose --config ../.importlinter

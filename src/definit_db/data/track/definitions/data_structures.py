@@ -77,6 +77,7 @@ from definit_db.data.field.mathematics.definitions.graph.tree.red_black_tree imp
 from definit_db.data.field.mathematics.definitions.graph.tree.subtree import SUBTREE
 from definit_db.data.field.mathematics.definitions.graph.tree.tree import TREE
 from definit_db.data.field.mathematics.definitions.graph.tree.unbalanced_binary_tree import UNBALANCED_BINARY_TREE
+from definit_db.data.field.mathematics.definitions.graph.weighted_graph import WEIGHTED_GRAPH
 from definit_db.data.field.mathematics.definitions.number.integer import INTEGER as INTEGER_MATH
 from definit_db.data.field.mathematics.definitions.number.number import NUMBER
 from definit_db.data.track.definitions.track_definitions_abstract import TrackDefinitionsAbstract
@@ -106,6 +107,7 @@ _definition_keys: tuple[DefinitionKey, ...] = (
     DIRECTED_GRAPH.key,
     GRAPH_DISTANCE.key,
     PATH.key,
+    WEIGHTED_GRAPH.key,
     AVL_TREE.key,
     B_TREE.key,
     BALANCED_BINARY_TREE.key,

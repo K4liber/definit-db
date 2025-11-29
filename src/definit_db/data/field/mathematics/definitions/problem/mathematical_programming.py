@@ -1,0 +1,25 @@
+from definit_db.data.field.mathematics.definitions.problem.constraint import CONSTRAINT
+from definit_db.data.field.mathematics.definitions.problem.feasible_solution import FEASIBLE_SOLUTION
+from definit_db.data.field.mathematics.definitions.problem.objective_function import OBJECTIVE_FUNCTION
+from definit_db.data.field.mathematics.definitions.problem.optimal_solution import OPTIMAL_SOLUTION
+from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
+from definit_db.definition.definition import Definition
+from definit_db.definition.definition_key import DefinitionKey
+from definit_db.definition.field import Field
+
+
+class _MathematicalProgramming(Definition):
+    def __init__(self, key: DefinitionKey) -> None:
+        super().__init__(key)
+
+    def _get_content(self) -> str:
+        return f"""
+{self.key.get_reference()} is a mathematical approach to finding the {OPTIMAL_SOLUTION.key.get_reference("optimal solution")} 
+to a {PROBLEM.key.get_reference()} by optimizing an {OBJECTIVE_FUNCTION.key.get_reference()} subject to {CONSTRAINT.key.get_reference("constraints")}. 
+The goal is to maximize or minimize the objective function while ensuring the solution is a {FEASIBLE_SOLUTION.key.get_reference()}.
+"""
+
+
+MATHEMATICAL_PROGRAMMING = _MathematicalProgramming(
+    DefinitionKey(name="mathematical programming", field=Field.MATHEMATICS)
+)

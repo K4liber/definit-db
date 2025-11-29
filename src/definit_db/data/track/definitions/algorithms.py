@@ -16,11 +16,13 @@ from definit_db.data.field.mathematics.definitions.fundamental.analysis.asymptot
 from definit_db.data.field.mathematics.definitions.fundamental.analysis.bound import BOUND
 from definit_db.data.field.mathematics.definitions.fundamental.analysis.upper_bound import UPPER_BOUND
 from definit_db.data.field.mathematics.definitions.fundamental.distribution import DISTRIBUTION
+from definit_db.data.field.mathematics.definitions.fundamental.input_data import INPUT_DATA
 from definit_db.data.field.mathematics.definitions.fundamental.merge import MERGE
-from definit_db.data.field.mathematics.definitions.fundamental.notations.big_o_notation import BIG_O_NOTATION
 from definit_db.data.field.mathematics.definitions.fundamental.probability import PROBABILITY
+from definit_db.data.field.mathematics.definitions.fundamental.pure_function import PURE_FUNCTION
 from definit_db.data.field.mathematics.definitions.fundamental.uniform_distribution import UNIFORM_DISTRIBUTION
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
+from definit_db.data.field.mathematics.definitions.problem.algorithm.big_o_notation import BIG_O_NOTATION
 from definit_db.data.field.mathematics.definitions.problem.algorithm.brute_force import BRUTE_FORCE
 from definit_db.data.field.mathematics.definitions.problem.algorithm.complexity import COMPLEXITY
 from definit_db.data.field.mathematics.definitions.problem.algorithm.divide_and_conquer import DIVIDE_AND_CONQUER
@@ -29,6 +31,7 @@ from definit_db.data.field.mathematics.definitions.problem.algorithm.graph.a_sta
 from definit_db.data.field.mathematics.definitions.problem.algorithm.graph.bellman_ford_algorithm import (
     BELLMAN_FORD_ALGORITHM,
 )
+from definit_db.data.field.mathematics.definitions.problem.algorithm.graph.cycle_detection import CYCLE_DETECTION
 from definit_db.data.field.mathematics.definitions.problem.algorithm.graph.dijkstras_algorithm import (
     DIJKSTRAS_ALGORITHM,
 )
@@ -40,7 +43,16 @@ from definit_db.data.field.mathematics.definitions.problem.algorithm.heuristic i
 from definit_db.data.field.mathematics.definitions.problem.algorithm.real_world_performance import (
     REAL_WORLD_PERFORMANCE,
 )
+from definit_db.data.field.mathematics.definitions.problem.algorithm.searching.bidirectional_search import (
+    BIDIRECTIONAL_SEARCH,
+)
 from definit_db.data.field.mathematics.definitions.problem.algorithm.searching.binary_search import BINARY_SEARCH
+from definit_db.data.field.mathematics.definitions.problem.algorithm.searching.breadth_first_search import (
+    BREADTH_FIRST_SEARCH,
+)
+from definit_db.data.field.mathematics.definitions.problem.algorithm.searching.depth_first_search import (
+    DEPTH_FIRST_SEARCH,
+)
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.bubble_sort import BUBBLE_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.bucket_sort import BUCKET_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.heap_sort import HEAP_SORT
@@ -58,11 +70,13 @@ from definit_db.data.field.mathematics.definitions.problem.algorithm.strategy.ha
     HALF_AND_HALF_APPROACH,
 )
 from definit_db.data.field.mathematics.definitions.problem.algorithm.strategy.top_down_approach import TOP_DOWN_APPROACH
-from definit_db.data.field.mathematics.definitions.problem.algorithm.subproblem import SUBPROBLEM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.time_complexity import TIME_COMPLEXITY
 from definit_db.data.field.mathematics.definitions.problem.base_case import BASE_CASE
+from definit_db.data.field.mathematics.definitions.problem.constraint import CONSTRAINT
 from definit_db.data.field.mathematics.definitions.problem.criterion import CRITERION
-from definit_db.data.field.mathematics.definitions.problem.input_data import INPUT_DATA
+from definit_db.data.field.mathematics.definitions.problem.feasible_solution import FEASIBLE_SOLUTION
+from definit_db.data.field.mathematics.definitions.problem.mathematical_programming import MATHEMATICAL_PROGRAMMING
+from definit_db.data.field.mathematics.definitions.problem.objective_function import OBJECTIVE_FUNCTION
 from definit_db.data.field.mathematics.definitions.problem.optimal_solution import OPTIMAL_SOLUTION
 from definit_db.data.field.mathematics.definitions.problem.optimal_substructure import OPTIMAL_SUBSTRUCTURE
 from definit_db.data.field.mathematics.definitions.problem.overlapping_subproblems import OVERLAPPING_SUBPROBLEMS
@@ -70,6 +84,7 @@ from definit_db.data.field.mathematics.definitions.problem.problem import PROBLE
 from definit_db.data.field.mathematics.definitions.problem.recursion import RECURSION
 from definit_db.data.field.mathematics.definitions.problem.reduction import REDUCTION
 from definit_db.data.field.mathematics.definitions.problem.solution import SOLUTION
+from definit_db.data.field.mathematics.definitions.problem.subproblem import SUBPROBLEM
 from definit_db.data.track.definitions.track_definitions_abstract import TrackDefinitionsAbstract
 from definit_db.definition.definition_key import DefinitionKey
 
@@ -81,6 +96,7 @@ _definition_keys: tuple[DefinitionKey, ...] = (
     OPTIMAL_SUBSTRUCTURE.key,
     SOLUTION.key,
     SUBPROBLEM.key,
+    PURE_FUNCTION.key,
     ALGORITHM.key,
     HEURISTIC.key,
     COMPLEXITY.key,
@@ -105,6 +121,7 @@ _definition_keys: tuple[DefinitionKey, ...] = (
     DIJKSTRAS_ALGORITHM.key,
     BELLMAN_FORD_ALGORITHM.key,
     FLOYD_WARSHALL_ALGORITHM.key,
+    CYCLE_DETECTION.key,
     DIVIDE_AND_CONQUER.key,
     RECURSION.key,
     BASE_CASE.key,
@@ -123,9 +140,16 @@ _definition_keys: tuple[DefinitionKey, ...] = (
     TOPOLOGICAL_SORT.key,
     HEAP_SORT.key,
     BINARY_SEARCH.key,
+    BIDIRECTIONAL_SEARCH.key,
+    BREADTH_FIRST_SEARCH.key,
+    DEPTH_FIRST_SEARCH.key,
     BOTTOM_UP_APPROACH.key,
     TOP_DOWN_APPROACH.key,
     HALF_AND_HALF_APPROACH.key,
+    MATHEMATICAL_PROGRAMMING.key,
+    CONSTRAINT.key,
+    OBJECTIVE_FUNCTION.key,
+    FEASIBLE_SOLUTION.key,
 )
 
 

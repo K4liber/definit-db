@@ -1,4 +1,4 @@
 pytest
 build
 twine
-import-linter==2.6
+import-linter==2.7

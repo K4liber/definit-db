@@ -3,10 +3,10 @@ from definit_db.definition.definition import Definition
 from definit_db.definition.field import Field
 from src.test.utils import get_all_definitions
 
-_field_to_index_length = {Field.COMPUTER_SCIENCE: 38, Field.MATHEMATICS: 70}
+_field_to_index_length = {Field.COMPUTER_SCIENCE: 38, Field.MATHEMATICS: 80}
 
 
-def test_indexes_load_and_length():
+def test_indexes_load_and_length() -> None:
     """By loading the index we check if there are no circular dependencies between definitions."""
     for field, index_length in _field_to_index_length.items():
         field_index = get_index(field)
@@ -16,7 +16,7 @@ def test_indexes_load_and_length():
         )
 
 
-def test_all_definitions_in_indexes():
+def test_all_definitions_in_indexes() -> None:
     all_definitions_in_indexes: set[Definition] = set()
 
     for field in _field_to_index_length.keys():

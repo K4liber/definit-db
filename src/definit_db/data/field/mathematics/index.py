@@ -1,3 +1,6 @@
+from definit_db.data.field.mathematics.definitions.fundamental.analysis.asymptotic_behavior import ASYMPTOTIC_BEHAVIOR
+from definit_db.data.field.mathematics.definitions.fundamental.analysis.bound import BOUND
+from definit_db.data.field.mathematics.definitions.fundamental.analysis.upper_bound import UPPER_BOUND
 from definit_db.data.field.mathematics.definitions.fundamental.distribution import DISTRIBUTION
 from definit_db.data.field.mathematics.definitions.fundamental.finite_sequence import FINITE_SEQUENCE
 from definit_db.data.field.mathematics.definitions.fundamental.finite_set import FINITE_SET
@@ -7,6 +10,7 @@ from definit_db.data.field.mathematics.definitions.fundamental.information impor
 from definit_db.data.field.mathematics.definitions.fundamental.instruction import INSTRUCTION
 from definit_db.data.field.mathematics.definitions.fundamental.merge import MERGE
 from definit_db.data.field.mathematics.definitions.fundamental.multiset import MULTISET
+from definit_db.data.field.mathematics.definitions.fundamental.notations.big_o_notation import BIG_O_NOTATION
 from definit_db.data.field.mathematics.definitions.fundamental.notations.label import LABEL
 from definit_db.data.field.mathematics.definitions.fundamental.object import OBJECT
 from definit_db.data.field.mathematics.definitions.fundamental.operation import OPERATION
@@ -44,7 +48,10 @@ from definit_db.data.field.mathematics.definitions.graph.tree.unbalanced_binary_
 from definit_db.data.field.mathematics.definitions.number.integer import INTEGER
 from definit_db.data.field.mathematics.definitions.number.number import NUMBER
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
+from definit_db.data.field.mathematics.definitions.problem.algorithm.brute_force import BRUTE_FORCE
+from definit_db.data.field.mathematics.definitions.problem.algorithm.complexity import COMPLEXITY
 from definit_db.data.field.mathematics.definitions.problem.algorithm.divide_and_conquer import DIVIDE_AND_CONQUER
+from definit_db.data.field.mathematics.definitions.problem.algorithm.dynamic_programming import DYNAMIC_PROGRAMMING
 from definit_db.data.field.mathematics.definitions.problem.algorithm.greedy_algorithm import GREEDY_ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.searching.binary_search import BINARY_SEARCH
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.bubble_sort import BUBBLE_SORT
@@ -56,11 +63,16 @@ from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.rad
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.selection_sort import SELECTION_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.sorting import SORTING
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.topological_sort import TOPOLOGICAL_SORT
+from definit_db.data.field.mathematics.definitions.problem.algorithm.space_complexity import SPACE_COMPLEXITY
 from definit_db.data.field.mathematics.definitions.problem.algorithm.strategy.bottom_up_approach import (
     BOTTOM_UP_APPROACH,
 )
+from definit_db.data.field.mathematics.definitions.problem.algorithm.strategy.half_and_half_approach import (
+    HALF_AND_HALF_APPROACH,
+)
 from definit_db.data.field.mathematics.definitions.problem.algorithm.strategy.top_down_approach import TOP_DOWN_APPROACH
 from definit_db.data.field.mathematics.definitions.problem.algorithm.subproblem import SUBPROBLEM
+from definit_db.data.field.mathematics.definitions.problem.algorithm.time_complexity import TIME_COMPLEXITY
 from definit_db.data.field.mathematics.definitions.problem.base_case import BASE_CASE
 from definit_db.data.field.mathematics.definitions.problem.criterion import CRITERION
 from definit_db.data.field.mathematics.definitions.problem.optimal_solution import OPTIMAL_SOLUTION
@@ -86,6 +98,10 @@ field_index: list[Definition] = [
     HASH_FUNCTION,
     MULTISET,
     LABEL,
+    ASYMPTOTIC_BEHAVIOR,
+    BOUND,
+    UPPER_BOUND,
+    BIG_O_NOTATION,
     PROBLEM,
     CRITERION,
     OPTIMAL_SOLUTION,
@@ -94,6 +110,11 @@ field_index: list[Definition] = [
     SUBPROBLEM,
     OVERLAPPING_SUBPROBLEMS,
     ALGORITHM,
+    COMPLEXITY,
+    TIME_COMPLEXITY,
+    SPACE_COMPLEXITY,
+    BRUTE_FORCE,
+    DYNAMIC_PROGRAMMING,
     GRAPH,
     NODE,
     EDGE,
@@ -143,4 +164,5 @@ field_index: list[Definition] = [
     BINARY_SEARCH,
     BOTTOM_UP_APPROACH,
     TOP_DOWN_APPROACH,
+    HALF_AND_HALF_APPROACH,
 ]

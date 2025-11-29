@@ -16,4 +16,9 @@
     },
     // other
     "editor.formatOnSave": true,
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#391E60",
+        "titleBar.activeBackground": "#502A86",
+        "titleBar.activeForeground": "#FBF9FD"
+    },
 }

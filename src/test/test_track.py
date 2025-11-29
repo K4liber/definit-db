@@ -5,7 +5,7 @@ from test.utils import get_all_definitions
 
 
 def test_get_track_list() -> None:
-    track_to_length = {Track.DATA_STRUCTURES: 73, Track.ALGORITHMS: 45}
+    track_to_length = {Track.DATA_STRUCTURES: 73, Track.ALGORITHMS: 52}
     definitions_in_tracks: set[DefinitionKey] = set()
 
     for track, expected_length in track_to_length.items():

@@ -25,7 +25,21 @@ from definit_db.data.field.mathematics.definitions.problem.algorithm.brute_force
 from definit_db.data.field.mathematics.definitions.problem.algorithm.complexity import COMPLEXITY
 from definit_db.data.field.mathematics.definitions.problem.algorithm.divide_and_conquer import DIVIDE_AND_CONQUER
 from definit_db.data.field.mathematics.definitions.problem.algorithm.dynamic_programming import DYNAMIC_PROGRAMMING
+from definit_db.data.field.mathematics.definitions.problem.algorithm.graph.a_star_algorithm import A_STAR_ALGORITHM
+from definit_db.data.field.mathematics.definitions.problem.algorithm.graph.bellman_ford_algorithm import (
+    BELLMAN_FORD_ALGORITHM,
+)
+from definit_db.data.field.mathematics.definitions.problem.algorithm.graph.dijkstras_algorithm import (
+    DIJKSTRAS_ALGORITHM,
+)
+from definit_db.data.field.mathematics.definitions.problem.algorithm.graph.floyd_warshall_algorithm import (
+    FLOYD_WARSHALL_ALGORITHM,
+)
 from definit_db.data.field.mathematics.definitions.problem.algorithm.greedy_algorithm import GREEDY_ALGORITHM
+from definit_db.data.field.mathematics.definitions.problem.algorithm.heuristic import HEURISTIC
+from definit_db.data.field.mathematics.definitions.problem.algorithm.real_world_performance import (
+    REAL_WORLD_PERFORMANCE,
+)
 from definit_db.data.field.mathematics.definitions.problem.algorithm.searching.binary_search import BINARY_SEARCH
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.bubble_sort import BUBBLE_SORT
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.bucket_sort import BUCKET_SORT
@@ -48,6 +62,7 @@ from definit_db.data.field.mathematics.definitions.problem.algorithm.subproblem 
 from definit_db.data.field.mathematics.definitions.problem.algorithm.time_complexity import TIME_COMPLEXITY
 from definit_db.data.field.mathematics.definitions.problem.base_case import BASE_CASE
 from definit_db.data.field.mathematics.definitions.problem.criterion import CRITERION
+from definit_db.data.field.mathematics.definitions.problem.input_data import INPUT_DATA
 from definit_db.data.field.mathematics.definitions.problem.optimal_solution import OPTIMAL_SOLUTION
 from definit_db.data.field.mathematics.definitions.problem.optimal_substructure import OPTIMAL_SUBSTRUCTURE
 from definit_db.data.field.mathematics.definitions.problem.overlapping_subproblems import OVERLAPPING_SUBPROBLEMS
@@ -60,15 +75,18 @@ from definit_db.definition.definition_key import DefinitionKey
 
 _definition_keys: tuple[DefinitionKey, ...] = (
     PROBLEM.key,
+    INPUT_DATA.key,
     CRITERION.key,
     OPTIMAL_SOLUTION.key,
     OPTIMAL_SUBSTRUCTURE.key,
     SOLUTION.key,
     SUBPROBLEM.key,
     ALGORITHM.key,
+    HEURISTIC.key,
     COMPLEXITY.key,
     TIME_COMPLEXITY.key,
     SPACE_COMPLEXITY.key,
+    REAL_WORLD_PERFORMANCE.key,
     ASYMPTOTIC_BEHAVIOR.key,
     BOUND.key,
     UPPER_BOUND.key,
@@ -83,6 +101,10 @@ _definition_keys: tuple[DefinitionKey, ...] = (
     BRUTE_FORCE.key,
     GREEDY_ALGORITHM.key,
     DYNAMIC_PROGRAMMING.key,
+    A_STAR_ALGORITHM.key,
+    DIJKSTRAS_ALGORITHM.key,
+    BELLMAN_FORD_ALGORITHM.key,
+    FLOYD_WARSHALL_ALGORITHM.key,
     DIVIDE_AND_CONQUER.key,
     RECURSION.key,
     BASE_CASE.key,

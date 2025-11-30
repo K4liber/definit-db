@@ -9,6 +9,7 @@ from definit_db.data.field.mathematics.definitions.fundamental.hash_function imp
 from definit_db.data.field.mathematics.definitions.fundamental.information import INFORMATION
 from definit_db.data.field.mathematics.definitions.fundamental.input_data import INPUT_DATA
 from definit_db.data.field.mathematics.definitions.fundamental.instruction import INSTRUCTION
+from definit_db.data.field.mathematics.definitions.fundamental.last_in_first_out import LAST_IN_FIRST_OUT
 from definit_db.data.field.mathematics.definitions.fundamental.merge import MERGE
 from definit_db.data.field.mathematics.definitions.fundamental.multiset import MULTISET
 from definit_db.data.field.mathematics.definitions.fundamental.notations.label import LABEL
@@ -52,6 +53,7 @@ from definit_db.data.field.mathematics.definitions.number.number import NUMBER
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.big_o_notation import BIG_O_NOTATION
 from definit_db.data.field.mathematics.definitions.problem.algorithm.brute_force import BRUTE_FORCE
+from definit_db.data.field.mathematics.definitions.problem.algorithm.bud import BUD
 from definit_db.data.field.mathematics.definitions.problem.algorithm.complexity import COMPLEXITY
 from definit_db.data.field.mathematics.definitions.problem.algorithm.divide_and_conquer import DIVIDE_AND_CONQUER
 from definit_db.data.field.mathematics.definitions.problem.algorithm.dynamic_programming import DYNAMIC_PROGRAMMING
@@ -68,6 +70,8 @@ from definit_db.data.field.mathematics.definitions.problem.algorithm.graph.floyd
 )
 from definit_db.data.field.mathematics.definitions.problem.algorithm.greedy_algorithm import GREEDY_ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.heuristic import HEURISTIC
+from definit_db.data.field.mathematics.definitions.problem.algorithm.memoization import MEMOIZATION
+from definit_db.data.field.mathematics.definitions.problem.algorithm.optimization import OPTIMIZATION
 from definit_db.data.field.mathematics.definitions.problem.algorithm.real_world_performance import (
     REAL_WORLD_PERFORMANCE,
 )
@@ -121,6 +125,7 @@ field_index: list[Definition] = [
     SEQUENCE,
     FINITE_SEQUENCE,
     INSTRUCTION,
+    LAST_IN_FIRST_OUT,
     OPERATION,
     RELATION,
     SET,
@@ -149,7 +154,10 @@ field_index: list[Definition] = [
     SPACE_COMPLEXITY,
     REAL_WORLD_PERFORMANCE,
     BRUTE_FORCE,
+    BUD,
     DYNAMIC_PROGRAMMING,
+    MEMOIZATION,
+    OPTIMIZATION,
     A_STAR_ALGORITHM,
     DIJKSTRAS_ALGORITHM,
     BELLMAN_FORD_ALGORITHM,

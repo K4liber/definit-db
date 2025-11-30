@@ -31,19 +31,33 @@ from definit_db.data.field.computer_science.definitions.data_structure.primitive
 from definit_db.data.field.computer_science.definitions.data_structure.primitive.integer import INTEGER
 from definit_db.data.field.computer_science.definitions.data_structure.primitive_data_type import PRIMITIVE_DATA_TYPE
 from definit_db.data.field.computer_science.definitions.foundamental.bit import BIT
+from definit_db.data.field.computer_science.definitions.foundamental.cache import CACHE
+from definit_db.data.field.computer_science.definitions.foundamental.call_stack import CALL_STACK
+from definit_db.data.field.computer_science.definitions.foundamental.computer import COMPUTER
+from definit_db.data.field.computer_science.definitions.foundamental.computer_memory import COMPUTER_MEMORY
 from definit_db.data.field.computer_science.definitions.foundamental.data import DATA
 from definit_db.data.field.computer_science.definitions.foundamental.data_structure import (
     DATA_STRUCTURE as CS_DATA_STRUCTURE,
 )
 from definit_db.data.field.computer_science.definitions.foundamental.data_type import DATA_TYPE
+from definit_db.data.field.computer_science.definitions.foundamental.hardware import HARDWARE
+from definit_db.data.field.computer_science.definitions.foundamental.heap_memory import HEAP_MEMORY
+from definit_db.data.field.computer_science.definitions.foundamental.heap_overflow import HEAP_OVERFLOW
+from definit_db.data.field.computer_science.definitions.foundamental.memory_allocation import MEMORY_ALLOCATION
 from definit_db.data.field.computer_science.definitions.foundamental.object import OBJECT as CS_OBJECT
 from definit_db.data.field.computer_science.definitions.foundamental.operation import OPERATION as CS_OPERATION
+from definit_db.data.field.computer_science.definitions.foundamental.program import PROGRAM
+from definit_db.data.field.computer_science.definitions.foundamental.random_access_memory import RANDOM_ACCESS_MEMORY
+from definit_db.data.field.computer_science.definitions.foundamental.stack_memory import STACK_MEMORY
+from definit_db.data.field.computer_science.definitions.foundamental.stack_overflow import STACK_OVERFLOW
+from definit_db.data.field.computer_science.definitions.foundamental.variable import VARIABLE
 from definit_db.data.field.mathematics.definitions.fundamental.finite_sequence import FINITE_SEQUENCE
 from definit_db.data.field.mathematics.definitions.fundamental.finite_set import FINITE_SET
 from definit_db.data.field.mathematics.definitions.fundamental.function import FUNCTION
 from definit_db.data.field.mathematics.definitions.fundamental.hash_function import HASH_FUNCTION
 from definit_db.data.field.mathematics.definitions.fundamental.information import INFORMATION
 from definit_db.data.field.mathematics.definitions.fundamental.instruction import INSTRUCTION
+from definit_db.data.field.mathematics.definitions.fundamental.last_in_first_out import LAST_IN_FIRST_OUT
 from definit_db.data.field.mathematics.definitions.fundamental.multiset import MULTISET
 from definit_db.data.field.mathematics.definitions.fundamental.notations.label import LABEL
 from definit_db.data.field.mathematics.definitions.fundamental.object import OBJECT
@@ -97,6 +111,7 @@ _definition_keys: tuple[DefinitionKey, ...] = (
     HASH_FUNCTION.key,
     MULTISET.key,
     LABEL.key,
+    LAST_IN_FIRST_OUT.key,
     GRAPH.key,
     NODE.key,
     EDGE.key,
@@ -128,6 +143,19 @@ _definition_keys: tuple[DefinitionKey, ...] = (
     DATA_TYPE.key,
     CS_OPERATION.key,
     BIT.key,
+    HARDWARE.key,
+    COMPUTER.key,
+    COMPUTER_MEMORY.key,
+    PROGRAM.key,
+    RANDOM_ACCESS_MEMORY.key,
+    HEAP_MEMORY.key,
+    HEAP_OVERFLOW.key,
+    STACK_MEMORY.key,
+    CALL_STACK.key,
+    CACHE.key,
+    STACK_OVERFLOW.key,
+    MEMORY_ALLOCATION.key,
+    VARIABLE.key,
     ABSTRACT_DATA_TYPE.key,
     BIT_FIELD.key,
     COLLECTION.key,

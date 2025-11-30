@@ -1,3 +1,4 @@
+from definit_db.data.field.computer_science.definitions.algorithms.bit_manipulation import BIT_MANIPULATION
 from definit_db.data.field.computer_science.definitions.algorithms.problems.graph_labeling.graph_coloring import (
     GRAPH_COLORING,
 )
@@ -44,12 +45,27 @@ from definit_db.data.field.computer_science.definitions.data_structure.map impor
 from definit_db.data.field.computer_science.definitions.data_structure.primitive.boolean import BOOLEAN
 from definit_db.data.field.computer_science.definitions.data_structure.primitive.integer import INTEGER
 from definit_db.data.field.computer_science.definitions.data_structure.primitive_data_type import PRIMITIVE_DATA_TYPE
+from definit_db.data.field.computer_science.definitions.foundamental.binary_representation import BINARY_REPRESENTATION
 from definit_db.data.field.computer_science.definitions.foundamental.bit import BIT
+from definit_db.data.field.computer_science.definitions.foundamental.bitwise_operation import BITWISE_OPERATION
+from definit_db.data.field.computer_science.definitions.foundamental.cache import CACHE
+from definit_db.data.field.computer_science.definitions.foundamental.call_stack import CALL_STACK
+from definit_db.data.field.computer_science.definitions.foundamental.computer import COMPUTER
+from definit_db.data.field.computer_science.definitions.foundamental.computer_memory import COMPUTER_MEMORY
 from definit_db.data.field.computer_science.definitions.foundamental.data import DATA
 from definit_db.data.field.computer_science.definitions.foundamental.data_structure import DATA_STRUCTURE
 from definit_db.data.field.computer_science.definitions.foundamental.data_type import DATA_TYPE
+from definit_db.data.field.computer_science.definitions.foundamental.hardware import HARDWARE
+from definit_db.data.field.computer_science.definitions.foundamental.heap_memory import HEAP_MEMORY
+from definit_db.data.field.computer_science.definitions.foundamental.heap_overflow import HEAP_OVERFLOW
+from definit_db.data.field.computer_science.definitions.foundamental.memory_allocation import MEMORY_ALLOCATION
 from definit_db.data.field.computer_science.definitions.foundamental.object import OBJECT
 from definit_db.data.field.computer_science.definitions.foundamental.operation import OPERATION
+from definit_db.data.field.computer_science.definitions.foundamental.program import PROGRAM
+from definit_db.data.field.computer_science.definitions.foundamental.random_access_memory import RANDOM_ACCESS_MEMORY
+from definit_db.data.field.computer_science.definitions.foundamental.stack_memory import STACK_MEMORY
+from definit_db.data.field.computer_science.definitions.foundamental.stack_overflow import STACK_OVERFLOW
+from definit_db.data.field.computer_science.definitions.foundamental.variable import VARIABLE
 from definit_db.definition.definition import Definition
 
 field_index: list[Definition] = [
@@ -59,6 +75,21 @@ field_index: list[Definition] = [
     DATA_TYPE,
     OPERATION,
     BIT,
+    BINARY_REPRESENTATION,
+    BITWISE_OPERATION,
+    HARDWARE,
+    COMPUTER,
+    COMPUTER_MEMORY,
+    PROGRAM,
+    RANDOM_ACCESS_MEMORY,
+    HEAP_MEMORY,
+    HEAP_OVERFLOW,
+    STACK_MEMORY,
+    CALL_STACK,
+    CACHE,
+    STACK_OVERFLOW,
+    MEMORY_ALLOCATION,
+    VARIABLE,
     ABSTRACT_DATA_TYPE,
     BIT_FIELD,
     COLLECTION,
@@ -91,4 +122,5 @@ field_index: list[Definition] = [
     HASH_COLLISION,
     ROLLING_HASH,
     RABIN_KARP_ALGORITHM,
+    BIT_MANIPULATION,
 ]

@@ -1,4 +1,5 @@
 from definit_db.data.field.mathematics.definitions.fundamental.function import FUNCTION
+from definit_db.data.field.mathematics.definitions.problem.algorithm.optimization import OPTIMIZATION
 from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
 from definit_db.definition.definition import Definition
 from definit_db.definition.definition_key import DefinitionKey
@@ -12,7 +13,7 @@ class _ObjectiveFunction(Definition):
     def _get_content(self) -> str:
         return f"""
 {self.key.get_reference()} is a {FUNCTION.key.get_reference()} that represents the goal or objective 
-to be optimized in a {PROBLEM.key.get_reference()}. The objective function is either maximized or minimized 
+to be {OPTIMIZATION.key.get_reference("optimized")} in a {PROBLEM.key.get_reference()}. The objective function is either maximized or minimized 
 to find the best solution, and its value determines the quality of any given solution.
 """
 

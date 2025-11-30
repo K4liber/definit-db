@@ -1,3 +1,4 @@
+from definit_db.data.field.computer_science.definitions.algorithms.bit_manipulation import BIT_MANIPULATION
 from definit_db.data.field.computer_science.definitions.algorithms.problems.graph_labeling.graph_coloring import (
     GRAPH_COLORING,
 )
@@ -12,6 +13,8 @@ from definit_db.data.field.computer_science.definitions.algorithms.problems.roll
 from definit_db.data.field.computer_science.definitions.algorithms.searching.string.rabin_karp_algorithm import (
     RABIN_KARP_ALGORITHM,
 )
+from definit_db.data.field.computer_science.definitions.foundamental.binary_representation import BINARY_REPRESENTATION
+from definit_db.data.field.computer_science.definitions.foundamental.bitwise_operation import BITWISE_OPERATION
 from definit_db.data.field.mathematics.definitions.fundamental.analysis.asymptotic_behavior import ASYMPTOTIC_BEHAVIOR
 from definit_db.data.field.mathematics.definitions.fundamental.analysis.bound import BOUND
 from definit_db.data.field.mathematics.definitions.fundamental.analysis.upper_bound import UPPER_BOUND
@@ -24,6 +27,7 @@ from definit_db.data.field.mathematics.definitions.fundamental.uniform_distribut
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.big_o_notation import BIG_O_NOTATION
 from definit_db.data.field.mathematics.definitions.problem.algorithm.brute_force import BRUTE_FORCE
+from definit_db.data.field.mathematics.definitions.problem.algorithm.bud import BUD
 from definit_db.data.field.mathematics.definitions.problem.algorithm.complexity import COMPLEXITY
 from definit_db.data.field.mathematics.definitions.problem.algorithm.divide_and_conquer import DIVIDE_AND_CONQUER
 from definit_db.data.field.mathematics.definitions.problem.algorithm.dynamic_programming import DYNAMIC_PROGRAMMING
@@ -40,6 +44,8 @@ from definit_db.data.field.mathematics.definitions.problem.algorithm.graph.floyd
 )
 from definit_db.data.field.mathematics.definitions.problem.algorithm.greedy_algorithm import GREEDY_ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.heuristic import HEURISTIC
+from definit_db.data.field.mathematics.definitions.problem.algorithm.memoization import MEMOIZATION
+from definit_db.data.field.mathematics.definitions.problem.algorithm.optimization import OPTIMIZATION
 from definit_db.data.field.mathematics.definitions.problem.algorithm.real_world_performance import (
     REAL_WORLD_PERFORMANCE,
 )
@@ -106,6 +112,8 @@ _definition_keys: tuple[DefinitionKey, ...] = (
     ASYMPTOTIC_BEHAVIOR.key,
     BOUND.key,
     UPPER_BOUND.key,
+    BINARY_REPRESENTATION.key,
+    BITWISE_OPERATION.key,
     BIG_O_NOTATION.key,
     GRAPH_LABELING.key,
     GRAPH_COLORING.key,
@@ -114,7 +122,11 @@ _definition_keys: tuple[DefinitionKey, ...] = (
     HASH_COLLISION.key,
     ROLLING_HASH.key,
     RABIN_KARP_ALGORITHM.key,
+    BIT_MANIPULATION.key,
     BRUTE_FORCE.key,
+    BUD.key,
+    MEMOIZATION.key,
+    OPTIMIZATION.key,
     GREEDY_ALGORITHM.key,
     DYNAMIC_PROGRAMMING.key,
     A_STAR_ALGORITHM.key,

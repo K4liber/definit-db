@@ -60,6 +60,8 @@ from definit_db.data.field.mathematics.definitions.fundamental.instruction impor
 from definit_db.data.field.mathematics.definitions.fundamental.last_in_first_out import LAST_IN_FIRST_OUT
 from definit_db.data.field.mathematics.definitions.fundamental.multiset import MULTISET
 from definit_db.data.field.mathematics.definitions.fundamental.notations.label import LABEL
+from definit_db.data.field.mathematics.definitions.fundamental.number.integer import INTEGER as INTEGER_MATH
+from definit_db.data.field.mathematics.definitions.fundamental.number.number import NUMBER
 from definit_db.data.field.mathematics.definitions.fundamental.object import OBJECT
 from definit_db.data.field.mathematics.definitions.fundamental.operation import OPERATION
 from definit_db.data.field.mathematics.definitions.fundamental.radix import RADIX
@@ -92,8 +94,6 @@ from definit_db.data.field.mathematics.definitions.graph.tree.subtree import SUB
 from definit_db.data.field.mathematics.definitions.graph.tree.tree import TREE
 from definit_db.data.field.mathematics.definitions.graph.tree.unbalanced_binary_tree import UNBALANCED_BINARY_TREE
 from definit_db.data.field.mathematics.definitions.graph.weighted_graph import WEIGHTED_GRAPH
-from definit_db.data.field.mathematics.definitions.number.integer import INTEGER as INTEGER_MATH
-from definit_db.data.field.mathematics.definitions.number.number import NUMBER
 from definit_db.data.track.definitions.track_definitions_abstract import TrackDefinitionsAbstract
 from definit_db.definition.definition_key import DefinitionKey
 

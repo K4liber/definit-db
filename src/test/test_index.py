@@ -3,7 +3,7 @@ from definit_db.definition.definition import Definition
 from definit_db.definition.field import Field
 from test.utils import get_all_definitions
 
-_field_to_index_length = {Field.COMPUTER_SCIENCE: 54, Field.MATHEMATICS: 101}
+_field_to_index_length = {Field.COMPUTER_SCIENCE: 58, Field.MATHEMATICS: 105}
 
 
 def test_indexes_load_and_length() -> None:

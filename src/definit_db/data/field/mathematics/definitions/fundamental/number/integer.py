@@ -1,4 +1,4 @@
-from definit_db.data.field.mathematics.definitions.number.number import NUMBER
+from definit_db.data.field.mathematics.definitions.fundamental.number.number import NUMBER
 from definit_db.definition.definition import Definition
 from definit_db.definition.definition_key import DefinitionKey
 from definit_db.definition.field import Field

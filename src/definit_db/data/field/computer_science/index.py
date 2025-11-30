@@ -52,6 +52,8 @@ from definit_db.data.field.computer_science.definitions.foundamental.cache impor
 from definit_db.data.field.computer_science.definitions.foundamental.call_stack import CALL_STACK
 from definit_db.data.field.computer_science.definitions.foundamental.computer import COMPUTER
 from definit_db.data.field.computer_science.definitions.foundamental.computer_memory import COMPUTER_MEMORY
+from definit_db.data.field.computer_science.definitions.foundamental.concurrency import CONCURRENCY
+from definit_db.data.field.computer_science.definitions.foundamental.core import CORE
 from definit_db.data.field.computer_science.definitions.foundamental.data import DATA
 from definit_db.data.field.computer_science.definitions.foundamental.data_structure import DATA_STRUCTURE
 from definit_db.data.field.computer_science.definitions.foundamental.data_type import DATA_TYPE
@@ -61,6 +63,8 @@ from definit_db.data.field.computer_science.definitions.foundamental.heap_overfl
 from definit_db.data.field.computer_science.definitions.foundamental.memory_allocation import MEMORY_ALLOCATION
 from definit_db.data.field.computer_science.definitions.foundamental.object import OBJECT
 from definit_db.data.field.computer_science.definitions.foundamental.operation import OPERATION
+from definit_db.data.field.computer_science.definitions.foundamental.parallelism import PARALLELISM
+from definit_db.data.field.computer_science.definitions.foundamental.processor import PROCESSOR
 from definit_db.data.field.computer_science.definitions.foundamental.program import PROGRAM
 from definit_db.data.field.computer_science.definitions.foundamental.random_access_memory import RANDOM_ACCESS_MEMORY
 from definit_db.data.field.computer_science.definitions.foundamental.stack_memory import STACK_MEMORY
@@ -80,6 +84,10 @@ field_index: list[Definition] = [
     HARDWARE,
     COMPUTER,
     COMPUTER_MEMORY,
+    CONCURRENCY,
+    CORE,
+    PARALLELISM,
+    PROCESSOR,
     PROGRAM,
     RANDOM_ACCESS_MEMORY,
     HEAP_MEMORY,

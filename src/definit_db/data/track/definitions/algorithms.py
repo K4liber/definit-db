@@ -15,16 +15,25 @@ from definit_db.data.field.computer_science.definitions.algorithms.searching.str
 )
 from definit_db.data.field.computer_science.definitions.foundamental.binary_representation import BINARY_REPRESENTATION
 from definit_db.data.field.computer_science.definitions.foundamental.bitwise_operation import BITWISE_OPERATION
+from definit_db.data.field.computer_science.definitions.foundamental.concurrency import CONCURRENCY
+from definit_db.data.field.computer_science.definitions.foundamental.core import CORE
+from definit_db.data.field.computer_science.definitions.foundamental.parallelism import PARALLELISM
+from definit_db.data.field.computer_science.definitions.foundamental.processor import PROCESSOR
 from definit_db.data.field.mathematics.definitions.fundamental.analysis.asymptotic_behavior import ASYMPTOTIC_BEHAVIOR
 from definit_db.data.field.mathematics.definitions.fundamental.analysis.bound import BOUND
 from definit_db.data.field.mathematics.definitions.fundamental.analysis.upper_bound import UPPER_BOUND
 from definit_db.data.field.mathematics.definitions.fundamental.distribution import DISTRIBUTION
+from definit_db.data.field.mathematics.definitions.fundamental.index import INDEX
 from definit_db.data.field.mathematics.definitions.fundamental.input_data import INPUT_DATA
+from definit_db.data.field.mathematics.definitions.fundamental.loop import LOOP
 from definit_db.data.field.mathematics.definitions.fundamental.merge import MERGE
 from definit_db.data.field.mathematics.definitions.fundamental.probability import PROBABILITY
 from definit_db.data.field.mathematics.definitions.fundamental.pure_function import PURE_FUNCTION
 from definit_db.data.field.mathematics.definitions.fundamental.uniform_distribution import UNIFORM_DISTRIBUTION
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
+from definit_db.data.field.mathematics.definitions.problem.algorithm.best_conceivable_runtime import (
+    BEST_CONCEIVABLE_RUNTIME,
+)
 from definit_db.data.field.mathematics.definitions.problem.algorithm.big_o_notation import BIG_O_NOTATION
 from definit_db.data.field.mathematics.definitions.problem.algorithm.brute_force import BRUTE_FORCE
 from definit_db.data.field.mathematics.definitions.problem.algorithm.bud import BUD
@@ -83,6 +92,7 @@ from definit_db.data.field.mathematics.definitions.problem.criterion import CRIT
 from definit_db.data.field.mathematics.definitions.problem.feasible_solution import FEASIBLE_SOLUTION
 from definit_db.data.field.mathematics.definitions.problem.mathematical_programming import MATHEMATICAL_PROGRAMMING
 from definit_db.data.field.mathematics.definitions.problem.objective_function import OBJECTIVE_FUNCTION
+from definit_db.data.field.mathematics.definitions.problem.off_by_one import OFF_BY_ONE
 from definit_db.data.field.mathematics.definitions.problem.optimal_solution import OPTIMAL_SOLUTION
 from definit_db.data.field.mathematics.definitions.problem.optimal_substructure import OPTIMAL_SUBSTRUCTURE
 from definit_db.data.field.mathematics.definitions.problem.overlapping_subproblems import OVERLAPPING_SUBPROBLEMS
@@ -97,6 +107,8 @@ from definit_db.definition.definition_key import DefinitionKey
 _definition_keys: tuple[DefinitionKey, ...] = (
     PROBLEM.key,
     INPUT_DATA.key,
+    INDEX.key,
+    LOOP.key,
     CRITERION.key,
     OPTIMAL_SOLUTION.key,
     OPTIMAL_SUBSTRUCTURE.key,
@@ -109,11 +121,16 @@ _definition_keys: tuple[DefinitionKey, ...] = (
     TIME_COMPLEXITY.key,
     SPACE_COMPLEXITY.key,
     REAL_WORLD_PERFORMANCE.key,
+    BEST_CONCEIVABLE_RUNTIME.key,
     ASYMPTOTIC_BEHAVIOR.key,
     BOUND.key,
     UPPER_BOUND.key,
     BINARY_REPRESENTATION.key,
     BITWISE_OPERATION.key,
+    CONCURRENCY.key,
+    CORE.key,
+    PARALLELISM.key,
+    PROCESSOR.key,
     BIG_O_NOTATION.key,
     GRAPH_LABELING.key,
     GRAPH_COLORING.key,
@@ -162,6 +179,7 @@ _definition_keys: tuple[DefinitionKey, ...] = (
     CONSTRAINT.key,
     OBJECTIVE_FUNCTION.key,
     FEASIBLE_SOLUTION.key,
+    OFF_BY_ONE.key,
 )
 
 

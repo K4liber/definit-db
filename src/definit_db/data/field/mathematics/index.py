@@ -6,13 +6,17 @@ from definit_db.data.field.mathematics.definitions.fundamental.finite_sequence i
 from definit_db.data.field.mathematics.definitions.fundamental.finite_set import FINITE_SET
 from definit_db.data.field.mathematics.definitions.fundamental.function import FUNCTION
 from definit_db.data.field.mathematics.definitions.fundamental.hash_function import HASH_FUNCTION
+from definit_db.data.field.mathematics.definitions.fundamental.index import INDEX
 from definit_db.data.field.mathematics.definitions.fundamental.information import INFORMATION
 from definit_db.data.field.mathematics.definitions.fundamental.input_data import INPUT_DATA
 from definit_db.data.field.mathematics.definitions.fundamental.instruction import INSTRUCTION
 from definit_db.data.field.mathematics.definitions.fundamental.last_in_first_out import LAST_IN_FIRST_OUT
+from definit_db.data.field.mathematics.definitions.fundamental.loop import LOOP
 from definit_db.data.field.mathematics.definitions.fundamental.merge import MERGE
 from definit_db.data.field.mathematics.definitions.fundamental.multiset import MULTISET
 from definit_db.data.field.mathematics.definitions.fundamental.notations.label import LABEL
+from definit_db.data.field.mathematics.definitions.fundamental.number.integer import INTEGER
+from definit_db.data.field.mathematics.definitions.fundamental.number.number import NUMBER
 from definit_db.data.field.mathematics.definitions.fundamental.object import OBJECT
 from definit_db.data.field.mathematics.definitions.fundamental.operation import OPERATION
 from definit_db.data.field.mathematics.definitions.fundamental.probability import PROBABILITY
@@ -48,9 +52,10 @@ from definit_db.data.field.mathematics.definitions.graph.tree.subtree import SUB
 from definit_db.data.field.mathematics.definitions.graph.tree.tree import TREE
 from definit_db.data.field.mathematics.definitions.graph.tree.unbalanced_binary_tree import UNBALANCED_BINARY_TREE
 from definit_db.data.field.mathematics.definitions.graph.weighted_graph import WEIGHTED_GRAPH
-from definit_db.data.field.mathematics.definitions.number.integer import INTEGER
-from definit_db.data.field.mathematics.definitions.number.number import NUMBER
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
+from definit_db.data.field.mathematics.definitions.problem.algorithm.best_conceivable_runtime import (
+    BEST_CONCEIVABLE_RUNTIME,
+)
 from definit_db.data.field.mathematics.definitions.problem.algorithm.big_o_notation import BIG_O_NOTATION
 from definit_db.data.field.mathematics.definitions.problem.algorithm.brute_force import BRUTE_FORCE
 from definit_db.data.field.mathematics.definitions.problem.algorithm.bud import BUD
@@ -109,6 +114,7 @@ from definit_db.data.field.mathematics.definitions.problem.criterion import CRIT
 from definit_db.data.field.mathematics.definitions.problem.feasible_solution import FEASIBLE_SOLUTION
 from definit_db.data.field.mathematics.definitions.problem.mathematical_programming import MATHEMATICAL_PROGRAMMING
 from definit_db.data.field.mathematics.definitions.problem.objective_function import OBJECTIVE_FUNCTION
+from definit_db.data.field.mathematics.definitions.problem.off_by_one import OFF_BY_ONE
 from definit_db.data.field.mathematics.definitions.problem.optimal_solution import OPTIMAL_SOLUTION
 from definit_db.data.field.mathematics.definitions.problem.optimal_substructure import OPTIMAL_SUBSTRUCTURE
 from definit_db.data.field.mathematics.definitions.problem.overlapping_subproblems import OVERLAPPING_SUBPROBLEMS
@@ -125,6 +131,8 @@ field_index: list[Definition] = [
     SEQUENCE,
     FINITE_SEQUENCE,
     INSTRUCTION,
+    INDEX,
+    LOOP,
     LAST_IN_FIRST_OUT,
     OPERATION,
     RELATION,
@@ -153,6 +161,7 @@ field_index: list[Definition] = [
     TIME_COMPLEXITY,
     SPACE_COMPLEXITY,
     REAL_WORLD_PERFORMANCE,
+    BEST_CONCEIVABLE_RUNTIME,
     BRUTE_FORCE,
     BUD,
     DYNAMIC_PROGRAMMING,
@@ -221,4 +230,5 @@ field_index: list[Definition] = [
     CONSTRAINT,
     OBJECTIVE_FUNCTION,
     FEASIBLE_SOLUTION,
+    OFF_BY_ONE,
 ]

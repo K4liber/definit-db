@@ -1,0 +1,20 @@
+from definit_db.data.field.mathematics.definitions.fundamental.number.integer import INTEGER
+from definit_db.data.field.mathematics.definitions.fundamental.sequence import SEQUENCE
+from definit_db.definition.definition import Definition
+from definit_db.definition.definition_key import DefinitionKey
+from definit_db.definition.field import Field
+
+
+class _Index(Definition):
+    def __init__(self, key: DefinitionKey) -> None:
+        super().__init__(key)
+
+    def _get_content(self) -> str:
+        return f"""
+{self.key.get_reference()} is an {INTEGER.key.get_reference()} value that identifies the position of an element 
+within a {SEQUENCE.key.get_reference()}. Indices are used to access, modify, or reference specific 
+elements, and can be zero-based (starting at 0) or one-based (starting at 1) depending on the context.
+"""
+
+
+INDEX = _Index(DefinitionKey(name="index", field=Field.MATHEMATICS))

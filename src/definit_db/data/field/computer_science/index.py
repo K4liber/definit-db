@@ -35,6 +35,9 @@ from definit_db.data.field.computer_science.definitions.data_structure.collectio
 from definit_db.data.field.computer_science.definitions.data_structure.collection.string.extended_ascii import (
     EXTENDED_ASCII,
 )
+from definit_db.data.field.computer_science.definitions.data_structure.collection.string.regular_expression import (
+    REGULAR_EXPRESSION,
+)
 from definit_db.data.field.computer_science.definitions.data_structure.collection.string.string import STRING
 from definit_db.data.field.computer_science.definitions.data_structure.collection.string.substring import SUBSTRING
 from definit_db.data.field.computer_science.definitions.data_structure.collection.string.unicode import UNICODE
@@ -45,6 +48,10 @@ from definit_db.data.field.computer_science.definitions.data_structure.map impor
 from definit_db.data.field.computer_science.definitions.data_structure.primitive.boolean import BOOLEAN
 from definit_db.data.field.computer_science.definitions.data_structure.primitive.integer import INTEGER
 from definit_db.data.field.computer_science.definitions.data_structure.primitive_data_type import PRIMITIVE_DATA_TYPE
+from definit_db.data.field.computer_science.definitions.foundamental.arithmetic_right_shift import (
+    ARITHMETIC_RIGHT_SHIFT,
+)
+from definit_db.data.field.computer_science.definitions.foundamental.binary_fractions import BINARY_FRACTIONS
 from definit_db.data.field.computer_science.definitions.foundamental.binary_representation import BINARY_REPRESENTATION
 from definit_db.data.field.computer_science.definitions.foundamental.bit import BIT
 from definit_db.data.field.computer_science.definitions.foundamental.bitwise_operation import BITWISE_OPERATION
@@ -60,6 +67,7 @@ from definit_db.data.field.computer_science.definitions.foundamental.data_type i
 from definit_db.data.field.computer_science.definitions.foundamental.hardware import HARDWARE
 from definit_db.data.field.computer_science.definitions.foundamental.heap_memory import HEAP_MEMORY
 from definit_db.data.field.computer_science.definitions.foundamental.heap_overflow import HEAP_OVERFLOW
+from definit_db.data.field.computer_science.definitions.foundamental.logical_right_shift import LOGICAL_RIGHT_SHIFT
 from definit_db.data.field.computer_science.definitions.foundamental.memory_allocation import MEMORY_ALLOCATION
 from definit_db.data.field.computer_science.definitions.foundamental.object import OBJECT
 from definit_db.data.field.computer_science.definitions.foundamental.operation import OPERATION
@@ -67,8 +75,10 @@ from definit_db.data.field.computer_science.definitions.foundamental.parallelism
 from definit_db.data.field.computer_science.definitions.foundamental.processor import PROCESSOR
 from definit_db.data.field.computer_science.definitions.foundamental.program import PROGRAM
 from definit_db.data.field.computer_science.definitions.foundamental.random_access_memory import RANDOM_ACCESS_MEMORY
+from definit_db.data.field.computer_science.definitions.foundamental.right_shift import RIGHT_SHIFT
 from definit_db.data.field.computer_science.definitions.foundamental.stack_memory import STACK_MEMORY
 from definit_db.data.field.computer_science.definitions.foundamental.stack_overflow import STACK_OVERFLOW
+from definit_db.data.field.computer_science.definitions.foundamental.twos_complement import TWOS_COMPLEMENT
 from definit_db.data.field.computer_science.definitions.foundamental.variable import VARIABLE
 from definit_db.definition.definition import Definition
 
@@ -80,7 +90,9 @@ field_index: list[Definition] = [
     OPERATION,
     BIT,
     BINARY_REPRESENTATION,
+    BINARY_FRACTIONS,
     BITWISE_OPERATION,
+    ARITHMETIC_RIGHT_SHIFT,
     HARDWARE,
     COMPUTER,
     COMPUTER_MEMORY,
@@ -90,14 +102,17 @@ field_index: list[Definition] = [
     PROCESSOR,
     PROGRAM,
     RANDOM_ACCESS_MEMORY,
+    RIGHT_SHIFT,
     HEAP_MEMORY,
     HEAP_OVERFLOW,
+    LOGICAL_RIGHT_SHIFT,
     STACK_MEMORY,
     CALL_STACK,
     CACHE,
     STACK_OVERFLOW,
     MEMORY_ALLOCATION,
     VARIABLE,
+    TWOS_COMPLEMENT,
     ABSTRACT_DATA_TYPE,
     BIT_FIELD,
     COLLECTION,
@@ -121,6 +136,7 @@ field_index: list[Definition] = [
     UTF,
     UTF_8,
     UNICODE,
+    REGULAR_EXPRESSION,
     STRING,
     SUBSTRING,
     TRIE,

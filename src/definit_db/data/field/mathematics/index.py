@@ -1,6 +1,13 @@
 from definit_db.data.field.mathematics.definitions.fundamental.analysis.asymptotic_behavior import ASYMPTOTIC_BEHAVIOR
 from definit_db.data.field.mathematics.definitions.fundamental.analysis.bound import BOUND
 from definit_db.data.field.mathematics.definitions.fundamental.analysis.upper_bound import UPPER_BOUND
+from definit_db.data.field.mathematics.definitions.fundamental.computation.deterministic_turing_machine import (
+    DETERMINISTIC_TURING_MACHINE,
+)
+from definit_db.data.field.mathematics.definitions.fundamental.computation.nondeterministic_turing_machine import (
+    NONDETERMINISTIC_TURING_MACHINE,
+)
+from definit_db.data.field.mathematics.definitions.fundamental.computation.turing_machine import TURING_MACHINE
 from definit_db.data.field.mathematics.definitions.fundamental.distribution import DISTRIBUTION
 from definit_db.data.field.mathematics.definitions.fundamental.finite_sequence import FINITE_SEQUENCE
 from definit_db.data.field.mathematics.definitions.fundamental.finite_set import FINITE_SET
@@ -19,6 +26,7 @@ from definit_db.data.field.mathematics.definitions.fundamental.number.integer im
 from definit_db.data.field.mathematics.definitions.fundamental.number.number import NUMBER
 from definit_db.data.field.mathematics.definitions.fundamental.object import OBJECT
 from definit_db.data.field.mathematics.definitions.fundamental.operation import OPERATION
+from definit_db.data.field.mathematics.definitions.fundamental.polynomial import POLYNOMIAL
 from definit_db.data.field.mathematics.definitions.fundamental.probability import PROBABILITY
 from definit_db.data.field.mathematics.definitions.fundamental.pure_function import PURE_FUNCTION
 from definit_db.data.field.mathematics.definitions.fundamental.radix import RADIX
@@ -53,12 +61,14 @@ from definit_db.data.field.mathematics.definitions.graph.tree.tree import TREE
 from definit_db.data.field.mathematics.definitions.graph.tree.unbalanced_binary_tree import UNBALANCED_BINARY_TREE
 from definit_db.data.field.mathematics.definitions.graph.weighted_graph import WEIGHTED_GRAPH
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
+from definit_db.data.field.mathematics.definitions.problem.algorithm.amortized_time import AMORTIZED_TIME
 from definit_db.data.field.mathematics.definitions.problem.algorithm.best_conceivable_runtime import (
     BEST_CONCEIVABLE_RUNTIME,
 )
 from definit_db.data.field.mathematics.definitions.problem.algorithm.big_o_notation import BIG_O_NOTATION
 from definit_db.data.field.mathematics.definitions.problem.algorithm.brute_force import BRUTE_FORCE
 from definit_db.data.field.mathematics.definitions.problem.algorithm.bud import BUD
+from definit_db.data.field.mathematics.definitions.problem.algorithm.co_np_class import CO_NP_CLASS
 from definit_db.data.field.mathematics.definitions.problem.algorithm.complexity import COMPLEXITY
 from definit_db.data.field.mathematics.definitions.problem.algorithm.divide_and_conquer import DIVIDE_AND_CONQUER
 from definit_db.data.field.mathematics.definitions.problem.algorithm.dynamic_programming import DYNAMIC_PROGRAMMING
@@ -75,8 +85,15 @@ from definit_db.data.field.mathematics.definitions.problem.algorithm.graph.floyd
 )
 from definit_db.data.field.mathematics.definitions.problem.algorithm.greedy_algorithm import GREEDY_ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.heuristic import HEURISTIC
+from definit_db.data.field.mathematics.definitions.problem.algorithm.logarithmic_complexity import (
+    LOGARITHMIC_COMPLEXITY,
+)
 from definit_db.data.field.mathematics.definitions.problem.algorithm.memoization import MEMOIZATION
+from definit_db.data.field.mathematics.definitions.problem.algorithm.np_class import NP_CLASS
+from definit_db.data.field.mathematics.definitions.problem.algorithm.np_complete_class import NP_COMPLETE_CLASS
+from definit_db.data.field.mathematics.definitions.problem.algorithm.np_hard_class import NP_HARD_CLASS
 from definit_db.data.field.mathematics.definitions.problem.algorithm.optimization import OPTIMIZATION
+from definit_db.data.field.mathematics.definitions.problem.algorithm.p_class import P_CLASS
 from definit_db.data.field.mathematics.definitions.problem.algorithm.real_world_performance import (
     REAL_WORLD_PERFORMANCE,
 )
@@ -109,6 +126,7 @@ from definit_db.data.field.mathematics.definitions.problem.algorithm.strategy.ha
 from definit_db.data.field.mathematics.definitions.problem.algorithm.strategy.top_down_approach import TOP_DOWN_APPROACH
 from definit_db.data.field.mathematics.definitions.problem.algorithm.time_complexity import TIME_COMPLEXITY
 from definit_db.data.field.mathematics.definitions.problem.base_case import BASE_CASE
+from definit_db.data.field.mathematics.definitions.problem.complement_problem import COMPLEMENT_PROBLEM
 from definit_db.data.field.mathematics.definitions.problem.constraint import CONSTRAINT
 from definit_db.data.field.mathematics.definitions.problem.criterion import CRITERION
 from definit_db.data.field.mathematics.definitions.problem.feasible_solution import FEASIBLE_SOLUTION
@@ -119,6 +137,7 @@ from definit_db.data.field.mathematics.definitions.problem.optimal_solution impo
 from definit_db.data.field.mathematics.definitions.problem.optimal_substructure import OPTIMAL_SUBSTRUCTURE
 from definit_db.data.field.mathematics.definitions.problem.overlapping_subproblems import OVERLAPPING_SUBPROBLEMS
 from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
+from definit_db.data.field.mathematics.definitions.problem.problem_space import PROBLEM_SPACE
 from definit_db.data.field.mathematics.definitions.problem.recursion import RECURSION
 from definit_db.data.field.mathematics.definitions.problem.reduction import REDUCTION
 from definit_db.data.field.mathematics.definitions.problem.solution import SOLUTION
@@ -141,13 +160,19 @@ field_index: list[Definition] = [
     FUNCTION,
     HASH_FUNCTION,
     PURE_FUNCTION,
+    POLYNOMIAL,
     MULTISET,
     LABEL,
     ASYMPTOTIC_BEHAVIOR,
     BOUND,
     UPPER_BOUND,
     BIG_O_NOTATION,
+    TURING_MACHINE,
+    DETERMINISTIC_TURING_MACHINE,
+    NONDETERMINISTIC_TURING_MACHINE,
     PROBLEM,
+    PROBLEM_SPACE,
+    COMPLEMENT_PROBLEM,
     INPUT_DATA,
     CRITERION,
     OPTIMAL_SOLUTION,
@@ -158,15 +183,22 @@ field_index: list[Definition] = [
     ALGORITHM,
     HEURISTIC,
     COMPLEXITY,
+    AMORTIZED_TIME,
     TIME_COMPLEXITY,
     SPACE_COMPLEXITY,
+    LOGARITHMIC_COMPLEXITY,
     REAL_WORLD_PERFORMANCE,
     BEST_CONCEIVABLE_RUNTIME,
     BRUTE_FORCE,
     BUD,
     DYNAMIC_PROGRAMMING,
     MEMOIZATION,
+    CO_NP_CLASS,
+    NP_CLASS,
+    NP_COMPLETE_CLASS,
+    NP_HARD_CLASS,
     OPTIMIZATION,
+    P_CLASS,
     A_STAR_ALGORITHM,
     DIJKSTRAS_ALGORITHM,
     BELLMAN_FORD_ALGORITHM,

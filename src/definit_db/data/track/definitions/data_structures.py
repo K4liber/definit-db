@@ -20,6 +20,9 @@ from definit_db.data.field.computer_science.definitions.data_structure.collectio
 from definit_db.data.field.computer_science.definitions.data_structure.collection.string.extended_ascii import (
     EXTENDED_ASCII,
 )
+from definit_db.data.field.computer_science.definitions.data_structure.collection.string.regular_expression import (
+    REGULAR_EXPRESSION,
+)
 from definit_db.data.field.computer_science.definitions.data_structure.collection.string.string import STRING
 from definit_db.data.field.computer_science.definitions.data_structure.collection.string.substring import SUBSTRING
 from definit_db.data.field.computer_science.definitions.data_structure.collection.string.unicode import UNICODE
@@ -30,6 +33,7 @@ from definit_db.data.field.computer_science.definitions.data_structure.map impor
 from definit_db.data.field.computer_science.definitions.data_structure.primitive.boolean import BOOLEAN
 from definit_db.data.field.computer_science.definitions.data_structure.primitive.integer import INTEGER
 from definit_db.data.field.computer_science.definitions.data_structure.primitive_data_type import PRIMITIVE_DATA_TYPE
+from definit_db.data.field.computer_science.definitions.foundamental.binary_fractions import BINARY_FRACTIONS
 from definit_db.data.field.computer_science.definitions.foundamental.bit import BIT
 from definit_db.data.field.computer_science.definitions.foundamental.cache import CACHE
 from definit_db.data.field.computer_science.definitions.foundamental.call_stack import CALL_STACK
@@ -143,6 +147,7 @@ _definition_keys: tuple[DefinitionKey, ...] = (
     DATA_TYPE.key,
     CS_OPERATION.key,
     BIT.key,
+    BINARY_FRACTIONS.key,
     HARDWARE.key,
     COMPUTER.key,
     COMPUTER_MEMORY.key,
@@ -183,6 +188,7 @@ _definition_keys: tuple[DefinitionKey, ...] = (
     UTF.key,
     UTF_8.key,
     UNICODE.key,
+    REGULAR_EXPRESSION.key,
     STRING.key,
     SUBSTRING.key,
     TRIE.key,

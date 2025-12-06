@@ -29,4 +29,4 @@ of the {INPUT_DATA.key.get_reference()}. Problems in P are considered efficientl
 """
 
 
-P_CLASS = _PClass(DefinitionKey(name="P", field=Field.MATHEMATICS))
+P_CLASS = _PClass(DefinitionKey(name="P class", field=Field.MATHEMATICS))

@@ -39,7 +39,8 @@ def get_md_path(defn: Definition, field: Field) -> str:
 
     md_dir = os.path.join(_PATH_DATA_FIELD_MD, field, os.path.dirname(rel_mod))
     os.makedirs(md_dir, exist_ok=True)
-    md_path = os.path.join(md_dir, f"{defn.key.name}.md")
+    fixed_name = defn.key.name.replace(" ", "_").replace("'", "").replace("-", "_").lower()
+    md_path = os.path.join(md_dir, f"{fixed_name}.md")
     return md_path
 
 

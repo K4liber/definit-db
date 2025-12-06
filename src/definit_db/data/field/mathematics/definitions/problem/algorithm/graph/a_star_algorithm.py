@@ -33,4 +33,4 @@ finding the optimal path.
 """
 
 
-A_STAR_ALGORITHM = _AStarAlgorithm(DefinitionKey(name="A* algorithm", field=Field.MATHEMATICS))
+A_STAR_ALGORITHM = _AStarAlgorithm(DefinitionKey(name="A-star algorithm", field=Field.MATHEMATICS))

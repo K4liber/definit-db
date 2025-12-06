@@ -36,4 +36,4 @@ Equivalently, the {COMPLEMENT_PROBLEM.key.get_reference("complement")} of the pr
 """
 
 
-CO_NP_CLASS = _CoNPClass(DefinitionKey(name="Co-NP", field=Field.MATHEMATICS))
+CO_NP_CLASS = _CoNPClass(DefinitionKey(name="Co-NP class", field=Field.MATHEMATICS))

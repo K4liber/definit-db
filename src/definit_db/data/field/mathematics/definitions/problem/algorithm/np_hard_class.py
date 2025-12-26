@@ -29,4 +29,4 @@ determines the complexity of solving NP-Hard problems.
 """
 
 
-NP_HARD_CLASS = _NPHardClass(DefinitionKey(name="NP-Hard", field=FieldName.MATHEMATICS))
+NP_HARD_CLASS = _NPHardClass(DefinitionKey(name="NP-Hard class", field=FieldName.MATHEMATICS))

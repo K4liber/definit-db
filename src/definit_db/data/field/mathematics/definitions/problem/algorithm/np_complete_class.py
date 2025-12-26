@@ -33,4 +33,4 @@ computational difficulty.
 """
 
 
-NP_COMPLETE_CLASS = _NPCompleteClass(DefinitionKey(name="NP-Complete", field=FieldName.MATHEMATICS))
+NP_COMPLETE_CLASS = _NPCompleteClass(DefinitionKey(name="NP-Complete class", field=FieldName.MATHEMATICS))

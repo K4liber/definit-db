@@ -35,4 +35,4 @@ n is the size of the {INPUT_DATA.key.get_reference()}. NP stands for "Nondetermi
 """
 
 
-NP_CLASS = _NPClass(DefinitionKey(name="NP", field=FieldName.MATHEMATICS))
+NP_CLASS = _NPClass(DefinitionKey(name="NP class", field=FieldName.MATHEMATICS))

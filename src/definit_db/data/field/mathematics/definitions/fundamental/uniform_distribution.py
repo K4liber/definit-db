@@ -1,8 +1,9 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.distribution import DISTRIBUTION
 from definit_db.data.field.mathematics.definitions.fundamental.set import SET
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _UniformDistribution(Definition):
@@ -16,6 +17,6 @@ A uniform distribution is a {DISTRIBUTION.key.get_reference()} in which all elem
 UNIFORM_DISTRIBUTION = _UniformDistribution(
     key=DefinitionKey(
         name="uniform_distribution",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

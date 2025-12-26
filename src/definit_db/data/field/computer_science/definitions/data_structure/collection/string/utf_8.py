@@ -1,11 +1,12 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.data_structure.collection.string.character_encoding import (
     CHARACTER_ENCODING,
 )
 from definit_db.data.field.computer_science.definitions.data_structure.collection.string.unicode import UNICODE
 from definit_db.data.field.computer_science.definitions.data_structure.collection.string.utf import UTF
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Utf8(Definition):
@@ -20,6 +21,6 @@ backward compatible with ASCII and can represent any character in the Unicode st
 UTF_8 = _Utf8(
     key=DefinitionKey(
         name="utf_8",
-        field=Field.COMPUTER_SCIENCE,
+        field=FieldName.COMPUTER_SCIENCE,
     )
 )

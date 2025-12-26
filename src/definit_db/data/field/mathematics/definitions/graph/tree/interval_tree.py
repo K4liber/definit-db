@@ -1,10 +1,11 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.graph.node import NODE
 from definit_db.data.field.mathematics.definitions.graph.tree.balanced_binary_tree import BALANCED_BINARY_TREE
 from definit_db.data.field.mathematics.definitions.graph.tree.binary_search_tree import BINARY_SEARCH_TREE
 from definit_db.data.field.mathematics.definitions.graph.tree.tree import TREE
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _IntervalTree(Definition):
@@ -22,6 +23,6 @@ efficient search operations.
 INTERVAL_TREE = _IntervalTree(
     key=DefinitionKey(
         name="interval_tree",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

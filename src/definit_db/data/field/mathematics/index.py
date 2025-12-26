@@ -1,3 +1,5 @@
+from definit.definition.definition import Definition
+
 from definit_db.data.field.mathematics.definitions.fundamental.analysis.asymptotic_behavior import ASYMPTOTIC_BEHAVIOR
 from definit_db.data.field.mathematics.definitions.fundamental.analysis.bound import BOUND
 from definit_db.data.field.mathematics.definitions.fundamental.analysis.upper_bound import UPPER_BOUND
@@ -142,7 +144,6 @@ from definit_db.data.field.mathematics.definitions.problem.recursion import RECU
 from definit_db.data.field.mathematics.definitions.problem.reduction import REDUCTION
 from definit_db.data.field.mathematics.definitions.problem.solution import SOLUTION
 from definit_db.data.field.mathematics.definitions.problem.subproblem import SUBPROBLEM
-from definit_db.definition.definition import Definition
 
 field_index: list[Definition] = [
     OBJECT,

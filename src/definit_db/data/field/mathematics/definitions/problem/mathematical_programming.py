@@ -1,12 +1,13 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.problem.algorithm.optimization import OPTIMIZATION
 from definit_db.data.field.mathematics.definitions.problem.constraint import CONSTRAINT
 from definit_db.data.field.mathematics.definitions.problem.feasible_solution import FEASIBLE_SOLUTION
 from definit_db.data.field.mathematics.definitions.problem.objective_function import OBJECTIVE_FUNCTION
 from definit_db.data.field.mathematics.definitions.problem.optimal_solution import OPTIMAL_SOLUTION
 from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _MathematicalProgramming(Definition):
@@ -22,5 +23,5 @@ The goal is to maximize or minimize the objective function while ensuring the so
 
 
 MATHEMATICAL_PROGRAMMING = _MathematicalProgramming(
-    DefinitionKey(name="mathematical programming", field=Field.MATHEMATICS)
+    DefinitionKey(name="mathematical programming", field=FieldName.MATHEMATICS)
 )

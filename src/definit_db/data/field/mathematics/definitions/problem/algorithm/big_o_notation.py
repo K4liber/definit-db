@@ -1,11 +1,12 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.analysis.asymptotic_behavior import ASYMPTOTIC_BEHAVIOR
 from definit_db.data.field.mathematics.definitions.fundamental.analysis.upper_bound import UPPER_BOUND
 from definit_db.data.field.mathematics.definitions.fundamental.function import FUNCTION
 from definit_db.data.field.mathematics.definitions.problem.algorithm.space_complexity import SPACE_COMPLEXITY
 from definit_db.data.field.mathematics.definitions.problem.algorithm.time_complexity import TIME_COMPLEXITY
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _BigONotation(Definition):
@@ -22,6 +23,6 @@ independent of implementation details.
 BIG_O_NOTATION = _BigONotation(
     key=DefinitionKey(
         name="big_o_notation",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

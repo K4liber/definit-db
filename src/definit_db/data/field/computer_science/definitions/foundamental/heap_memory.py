@@ -1,10 +1,11 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.computer_memory import COMPUTER_MEMORY
 from definit_db.data.field.computer_science.definitions.foundamental.data import DATA
 from definit_db.data.field.computer_science.definitions.foundamental.memory_allocation import MEMORY_ALLOCATION
 from definit_db.data.field.computer_science.definitions.foundamental.program import PROGRAM
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _HeapMemory(Definition):
@@ -20,4 +21,4 @@ memory blocks can be allocated in any order and freed in any order.
 """
 
 
-HEAP_MEMORY = _HeapMemory(DefinitionKey(name="heap memory", field=Field.COMPUTER_SCIENCE))
+HEAP_MEMORY = _HeapMemory(DefinitionKey(name="heap memory", field=FieldName.COMPUTER_SCIENCE))

@@ -1,10 +1,11 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.graph.edge import EDGE
 from definit_db.data.field.mathematics.definitions.graph.graph import GRAPH
 from definit_db.data.field.mathematics.definitions.graph.node import NODE
 from definit_db.data.field.mathematics.definitions.graph.tree.tree import TREE
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _MinimumSpanningTree(Definition):
@@ -20,6 +21,6 @@ that the sum of the weights of the edges is minimized.
 MINIMUM_SPANNING_TREE = _MinimumSpanningTree(
     key=DefinitionKey(
         name="minimum_spanning_tree",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

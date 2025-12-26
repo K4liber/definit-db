@@ -1,7 +1,8 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.set import SET
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Relation(Definition):
@@ -15,6 +16,6 @@ A relation (also called relationship) describes a connection or association betw
 RELATION = _Relation(
     key=DefinitionKey(
         name="relation",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

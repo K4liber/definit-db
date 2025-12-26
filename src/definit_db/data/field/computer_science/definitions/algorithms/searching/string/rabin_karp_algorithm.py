@@ -1,11 +1,12 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.algorithms.problems.rolling_hash import ROLLING_HASH
 from definit_db.data.field.computer_science.definitions.data_structure.collection.string.string import STRING
 from definit_db.data.field.computer_science.definitions.data_structure.collection.string.substring import SUBSTRING
 from definit_db.data.field.mathematics.definitions.fundamental.hash_function import HASH_FUNCTION
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _RabinKarpAlgorithm(Definition):
@@ -21,6 +22,6 @@ It computes the {HASH_FUNCTION.key.get_reference(phrase="hash")} of the pattern 
 RABIN_KARP_ALGORITHM = _RabinKarpAlgorithm(
     key=DefinitionKey(
         name="rabin_karp_algorithm",
-        field=Field.COMPUTER_SCIENCE,
+        field=FieldName.COMPUTER_SCIENCE,
     )
 )

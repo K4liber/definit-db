@@ -1,10 +1,11 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.algorithms.problems.graph_labeling.graph_coloring import (
     GRAPH_COLORING,
 )
 from definit_db.data.field.mathematics.definitions.graph.node import NODE
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _VertexColoring(Definition):
@@ -18,6 +19,6 @@ no two connected {NODE.key.get_reference(phrase="nodes")} share the same color.
 VERTEX_COLORING = _VertexColoring(
     key=DefinitionKey(
         name="vertex_coloring",
-        field=Field.COMPUTER_SCIENCE,
+        field=FieldName.COMPUTER_SCIENCE,
     )
 )

@@ -1,12 +1,13 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.call_stack import CALL_STACK
 from definit_db.data.field.computer_science.definitions.foundamental.program import PROGRAM
 from definit_db.data.field.computer_science.definitions.foundamental.stack_memory import STACK_MEMORY
 from definit_db.data.field.computer_science.definitions.foundamental.variable import VARIABLE
 from definit_db.data.field.mathematics.definitions.fundamental.function import FUNCTION
 from definit_db.data.field.mathematics.definitions.problem.recursion import RECURSION
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _StackOverflow(Definition):
@@ -22,4 +23,4 @@ the program usually terminates with an error.
 """
 
 
-STACK_OVERFLOW = _StackOverflow(DefinitionKey(name="stack overflow", field=Field.COMPUTER_SCIENCE))
+STACK_OVERFLOW = _StackOverflow(DefinitionKey(name="stack overflow", field=FieldName.COMPUTER_SCIENCE))

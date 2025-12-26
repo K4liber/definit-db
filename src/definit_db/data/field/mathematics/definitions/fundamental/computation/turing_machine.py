@@ -1,8 +1,9 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.instruction import INSTRUCTION
 from definit_db.data.field.mathematics.definitions.fundamental.sequence import SEQUENCE
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _TuringMachine(Definition):
@@ -20,4 +21,4 @@ and the symbol being read.
 """
 
 
-TURING_MACHINE = _TuringMachine(DefinitionKey(name="Turing machine", field=Field.MATHEMATICS))
+TURING_MACHINE = _TuringMachine(DefinitionKey(name="Turing machine", field=FieldName.MATHEMATICS))

@@ -2,7 +2,7 @@
     // python testing
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
-    "python.testing.cwd": "${workspaceFolder}/src",
+    "python.testing.cwd": "${workspaceFolder}",
     // python general
     "[python]": {
         "editor.codeActionsOnSave": {
@@ -21,4 +21,7 @@
         "titleBar.activeBackground": "#502A86",
         "titleBar.activeForeground": "#FBF9FD"
     },
+    "python.analysis.extraPaths": [
+        "./src"
+    ],
 }

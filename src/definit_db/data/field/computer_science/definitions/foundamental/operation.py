@@ -1,7 +1,8 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.object import OBJECT
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Operation(Definition):
@@ -15,6 +16,6 @@ action performed on at least one {OBJECT.key.get_reference(phrase="object")}.
 OPERATION = _Operation(
     key=DefinitionKey(
         name="operation",
-        field=Field.COMPUTER_SCIENCE,
+        field=FieldName.COMPUTER_SCIENCE,
     )
 )

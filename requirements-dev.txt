@@ -1,4 +1,0 @@
-pytest
-build
-twine
-import-linter==2.7

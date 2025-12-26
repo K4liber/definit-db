@@ -1,11 +1,12 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.computer_memory import COMPUTER_MEMORY
 from definit_db.data.field.computer_science.definitions.foundamental.data import DATA
 from definit_db.data.field.computer_science.definitions.foundamental.operation import OPERATION
 from definit_db.data.field.computer_science.definitions.foundamental.program import PROGRAM
 from definit_db.data.field.mathematics.definitions.fundamental.information import INFORMATION
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _MemoryAllocation(Definition):
@@ -20,4 +21,4 @@ is reserved for storing {INFORMATION.key.get_reference()} during program executi
 """
 
 
-MEMORY_ALLOCATION = _MemoryAllocation(DefinitionKey(name="memory allocation", field=Field.COMPUTER_SCIENCE))
+MEMORY_ALLOCATION = _MemoryAllocation(DefinitionKey(name="memory allocation", field=FieldName.COMPUTER_SCIENCE))

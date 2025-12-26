@@ -1,10 +1,11 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.binary_representation import BINARY_REPRESENTATION
 from definit_db.data.field.computer_science.definitions.foundamental.bit import BIT
 from definit_db.data.field.computer_science.definitions.foundamental.bitwise_operation import BITWISE_OPERATION
 from definit_db.data.field.mathematics.definitions.fundamental.number.integer import INTEGER
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _RightShift(Definition):
@@ -21,4 +22,4 @@ specified number of positions. Right shift by one position is equivalent to
 """
 
 
-RIGHT_SHIFT = _RightShift(DefinitionKey(name="right shift", field=Field.COMPUTER_SCIENCE))
+RIGHT_SHIFT = _RightShift(DefinitionKey(name="right shift", field=FieldName.COMPUTER_SCIENCE))

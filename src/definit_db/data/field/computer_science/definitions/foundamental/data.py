@@ -1,7 +1,8 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.information import INFORMATION
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Data(Definition):
@@ -16,6 +17,6 @@ that may be further interpreted formally.
 DATA = _Data(
     key=DefinitionKey(
         name="data",
-        field=Field.COMPUTER_SCIENCE,
+        field=FieldName.COMPUTER_SCIENCE,
     )
 )

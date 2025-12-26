@@ -1,12 +1,13 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.function import FUNCTION
 from definit_db.data.field.mathematics.definitions.problem.algorithm.optimization import OPTIMIZATION
 from definit_db.data.field.mathematics.definitions.problem.overlapping_subproblems import OVERLAPPING_SUBPROBLEMS
 from definit_db.data.field.mathematics.definitions.problem.recursion import RECURSION
 from definit_db.data.field.mathematics.definitions.problem.solution import SOLUTION
 from definit_db.data.field.mathematics.definitions.problem.subproblem import SUBPROBLEM
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Memoization(Definition):
@@ -24,6 +25,6 @@ improves performance.
 MEMOIZATION = _Memoization(
     key=DefinitionKey(
         name="memoization",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

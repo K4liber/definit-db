@@ -1,9 +1,10 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.data_structure.collection.string.character_encoding import (
     CHARACTER_ENCODING,
 )
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _String(Definition):
@@ -17,6 +18,6 @@ text. Strings can be of variable length and can contain letters, numbers, symbol
 STRING = _String(
     key=DefinitionKey(
         name="string",
-        field=Field.COMPUTER_SCIENCE,
+        field=FieldName.COMPUTER_SCIENCE,
     )
 )

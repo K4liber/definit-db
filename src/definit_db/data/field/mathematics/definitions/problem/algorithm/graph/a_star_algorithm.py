@@ -1,3 +1,7 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.graph.graph import GRAPH
 from definit_db.data.field.mathematics.definitions.graph.graph_distance import GRAPH_DISTANCE
 from definit_db.data.field.mathematics.definitions.graph.node import NODE
@@ -8,9 +12,6 @@ from definit_db.data.field.mathematics.definitions.problem.algorithm.graph.dijks
 )
 from definit_db.data.field.mathematics.definitions.problem.algorithm.greedy_algorithm import GREEDY_ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.heuristic import HEURISTIC
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _AStarAlgorithm(Definition):
@@ -33,4 +34,4 @@ finding the optimal path.
 """
 
 
-A_STAR_ALGORITHM = _AStarAlgorithm(DefinitionKey(name="A* algorithm", field=Field.MATHEMATICS))
+A_STAR_ALGORITHM = _AStarAlgorithm(DefinitionKey(name="A-star algorithm", field=FieldName.MATHEMATICS))

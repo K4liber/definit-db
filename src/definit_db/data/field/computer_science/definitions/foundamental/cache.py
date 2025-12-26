@@ -1,8 +1,9 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.computer_memory import COMPUTER_MEMORY
 from definit_db.data.field.computer_science.definitions.foundamental.data import DATA
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Cache(Definition):
@@ -19,4 +20,4 @@ and may be stored in the cache for future use.
 """
 
 
-CACHE = _Cache(DefinitionKey(name="cache", field=Field.COMPUTER_SCIENCE))
+CACHE = _Cache(DefinitionKey(name="cache", field=FieldName.COMPUTER_SCIENCE))

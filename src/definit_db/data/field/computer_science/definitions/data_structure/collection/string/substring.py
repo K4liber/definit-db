@@ -1,7 +1,8 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.data_structure.collection.string.string import STRING
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Substring(Definition):
@@ -15,6 +16,6 @@ A contiguous sequence of characters within a {STRING.key.get_reference(phrase="s
 SUBSTRING = _Substring(
     key=DefinitionKey(
         name="substring",
-        field=Field.COMPUTER_SCIENCE,
+        field=FieldName.COMPUTER_SCIENCE,
     )
 )

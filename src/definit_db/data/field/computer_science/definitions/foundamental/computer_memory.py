@@ -1,11 +1,12 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.computer import COMPUTER
 from definit_db.data.field.computer_science.definitions.foundamental.data import DATA
 from definit_db.data.field.computer_science.definitions.foundamental.hardware import HARDWARE
 from definit_db.data.field.computer_science.definitions.foundamental.operation import OPERATION
 from definit_db.data.field.mathematics.definitions.fundamental.instruction import INSTRUCTION
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _ComputerMemory(Definition):
@@ -20,4 +21,4 @@ enabling the computer to perform {OPERATION.key.get_reference("operations")} eff
 """
 
 
-COMPUTER_MEMORY = _ComputerMemory(DefinitionKey(name="computer memory", field=Field.COMPUTER_SCIENCE))
+COMPUTER_MEMORY = _ComputerMemory(DefinitionKey(name="computer memory", field=FieldName.COMPUTER_SCIENCE))

@@ -1,7 +1,8 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.set import SET
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _FiniteSet(Definition):
@@ -16,6 +17,6 @@ For example, {{2,4,6,8,10}}  is a finite set with five elements.
 FINITE_SET = _FiniteSet(
     key=DefinitionKey(
         name="finite_set",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

@@ -1,8 +1,9 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.data_structure.collection.collection import COLLECTION
 from definit_db.data.field.computer_science.definitions.foundamental.data_type import DATA_TYPE
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _List(Definition):
@@ -16,6 +17,6 @@ pop any element from the list. List can store elements of different {DATA_TYPE.k
 LIST = _List(
     key=DefinitionKey(
         name="list",
-        field=Field.COMPUTER_SCIENCE,
+        field=FieldName.COMPUTER_SCIENCE,
     )
 )

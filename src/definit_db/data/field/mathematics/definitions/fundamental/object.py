@@ -1,6 +1,7 @@
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 
 
 class _Object(Definition):
@@ -14,6 +15,6 @@ Typically, a mathematical object can be a value that can be assigned to a symbol
 OBJECT = _Object(
     key=DefinitionKey(
         name="object",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

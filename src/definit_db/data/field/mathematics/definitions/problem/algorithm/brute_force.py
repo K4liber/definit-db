@@ -1,11 +1,12 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.optimization import OPTIMIZATION
 from definit_db.data.field.mathematics.definitions.problem.optimal_solution import OPTIMAL_SOLUTION
 from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
 from definit_db.data.field.mathematics.definitions.problem.solution import SOLUTION
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _BruteForce(Definition):
@@ -21,6 +22,6 @@ but they can be computationally expensive for large problem spaces as they do no
 BRUTE_FORCE = _BruteForce(
     key=DefinitionKey(
         name="brute_force",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

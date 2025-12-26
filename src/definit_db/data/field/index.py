@@ -1,12 +1,14 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+from definit.definition.field import Field
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science import computer_science_index
 from definit_db.data.field.mathematics import mathematics_index
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 _field_to_index: dict[Field, dict[DefinitionKey, Definition]] = {
-    Field.COMPUTER_SCIENCE: {definition.key: definition for definition in computer_science_index},
-    Field.MATHEMATICS: {definition.key: definition for definition in mathematics_index},
+    FieldName.COMPUTER_SCIENCE: {definition.key: definition for definition in computer_science_index},
+    FieldName.MATHEMATICS: {definition.key: definition for definition in mathematics_index},
 }
 
 

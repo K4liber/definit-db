@@ -1,9 +1,10 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.function import FUNCTION
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Complexity(Definition):
@@ -19,6 +20,6 @@ and compare algorithm efficiency.
 COMPLEXITY = _Complexity(
     key=DefinitionKey(
         name="complexity",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

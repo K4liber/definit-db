@@ -1,3 +1,7 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.optimal_solution import OPTIMAL_SOLUTION
 from definit_db.data.field.mathematics.definitions.problem.optimal_substructure import OPTIMAL_SUBSTRUCTURE
@@ -5,9 +9,6 @@ from definit_db.data.field.mathematics.definitions.problem.overlapping_subproble
 from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
 from definit_db.data.field.mathematics.definitions.problem.solution import SOLUTION
 from definit_db.data.field.mathematics.definitions.problem.subproblem import SUBPROBLEM
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _DynamicProgramming(Definition):
@@ -24,6 +25,6 @@ construction of an {OPTIMAL_SOLUTION.key.get_reference("optimal solution")} by r
 DYNAMIC_PROGRAMMING = _DynamicProgramming(
     key=DefinitionKey(
         name="dynamic_programming",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

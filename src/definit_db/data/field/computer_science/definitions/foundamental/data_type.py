@@ -1,8 +1,9 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.data import DATA
 from definit_db.data.field.mathematics.definitions.fundamental.set import SET
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _DataType(Definition):
@@ -17,6 +18,6 @@ operations on these values, and/or a representation of these values as machine t
 DATA_TYPE = _DataType(
     key=DefinitionKey(
         name="data_type",
-        field=Field.COMPUTER_SCIENCE,
+        field=FieldName.COMPUTER_SCIENCE,
     )
 )

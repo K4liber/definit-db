@@ -1,12 +1,13 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.bit import BIT
 from definit_db.data.field.computer_science.definitions.foundamental.bitwise_operation import BITWISE_OPERATION
 from definit_db.data.field.computer_science.definitions.foundamental.operation import OPERATION
 from definit_db.data.field.computer_science.definitions.foundamental.right_shift import RIGHT_SHIFT
 from definit_db.data.field.computer_science.definitions.foundamental.twos_complement import TWOS_COMPLEMENT
 from definit_db.data.field.mathematics.definitions.fundamental.number.integer import INTEGER
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _ArithmeticRightShift(Definition):
@@ -26,5 +27,5 @@ division by powers of 2.
 
 
 ARITHMETIC_RIGHT_SHIFT = _ArithmeticRightShift(
-    DefinitionKey(name="arithmetic right shift", field=Field.COMPUTER_SCIENCE)
+    DefinitionKey(name="arithmetic right shift", field=FieldName.COMPUTER_SCIENCE)
 )

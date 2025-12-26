@@ -1,8 +1,9 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.graph.node import NODE
 from definit_db.data.field.mathematics.definitions.graph.tree.binary_tree import BINARY_TREE
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _BalancedBinaryTree(Definition):
@@ -17,6 +18,6 @@ tree, the height of its left and right subtrees can differ by at most one.
 BALANCED_BINARY_TREE = _BalancedBinaryTree(
     key=DefinitionKey(
         name="balanced_binary_tree",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

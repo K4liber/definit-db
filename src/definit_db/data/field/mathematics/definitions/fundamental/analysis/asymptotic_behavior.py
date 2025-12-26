@@ -1,7 +1,8 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.function import FUNCTION
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _AsymptoticBehavior(Definition):
@@ -16,6 +17,6 @@ ignoring lower-order terms and constant factors.
 ASYMPTOTIC_BEHAVIOR = _AsymptoticBehavior(
     key=DefinitionKey(
         name="asymptotic_behavior",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

@@ -1,8 +1,9 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.problem.criterion import CRITERION
 from definit_db.data.field.mathematics.definitions.problem.solution import SOLUTION
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _OptimalSolution(Definition):
@@ -16,6 +17,6 @@ of a specific {CRITERION.key.get_reference(phrase="criterion")}.
 OPTIMAL_SOLUTION = _OptimalSolution(
     key=DefinitionKey(
         name="optimal_solution",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

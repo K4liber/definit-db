@@ -1,9 +1,10 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.index import INDEX
 from definit_db.data.field.mathematics.definitions.fundamental.loop import LOOP
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _OffByOne(Definition):
@@ -19,4 +20,4 @@ or missing the first or last element of a sequence.
 """
 
 
-OFF_BY_ONE = _OffByOne(DefinitionKey(name="off-by-one", field=Field.MATHEMATICS))
+OFF_BY_ONE = _OffByOne(DefinitionKey(name="off-by-one", field=FieldName.MATHEMATICS))

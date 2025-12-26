@@ -1,10 +1,11 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.data_structure.collection.associative_array import (
     ASSOCIATIVE_ARRAY,
 )
 from definit_db.data.field.mathematics.definitions.fundamental.hash_function import HASH_FUNCTION
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _HashTable(Definition):
@@ -20,6 +21,6 @@ function to map keys to indices in an array.
 HASH_TABLE = _HashTable(
     key=DefinitionKey(
         name="hash_table",
-        field=Field.COMPUTER_SCIENCE,
+        field=FieldName.COMPUTER_SCIENCE,
     )
 )

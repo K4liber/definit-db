@@ -1,7 +1,8 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.object import OBJECT
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Operation(Definition):
@@ -14,6 +15,6 @@ A mathematical action performed on one or more {OBJECT.key.get_reference(phrase=
 OPERATION = _Operation(
     key=DefinitionKey(
         name="operation",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

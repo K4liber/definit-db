@@ -20,7 +20,9 @@ Upgrade version in `pyproject.toml` and `src/definit_db/__init__.py` before runn
 
 (optional cleanup) rm -rf dist/ build/ src/*.egg-info/
 
-python -m build
+uv sync --index https://pypi.org/simple/ --extra dev
+
+uv build
 
 python -m twine upload dist/*
 ```

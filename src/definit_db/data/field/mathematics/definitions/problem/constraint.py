@@ -1,10 +1,11 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.analysis.bound import BOUND
 from definit_db.data.field.mathematics.definitions.problem.criterion import CRITERION
 from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
 from definit_db.data.field.mathematics.definitions.problem.solution import SOLUTION
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Constraint(Definition):
@@ -19,4 +20,4 @@ and limitations within which a solution must operate, determining which solution
 """
 
 
-CONSTRAINT = _Constraint(DefinitionKey(name="constraint", field=Field.MATHEMATICS))
+CONSTRAINT = _Constraint(DefinitionKey(name="constraint", field=FieldName.MATHEMATICS))

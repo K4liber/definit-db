@@ -1,9 +1,10 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.relation import RELATION
 from definit_db.data.field.mathematics.definitions.graph.edge import EDGE
 from definit_db.data.field.mathematics.definitions.graph.graph import GRAPH
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _WeightedGraph(Definition):
@@ -19,4 +20,4 @@ algorithms where the {RELATION.key.get_reference("relationship")} between nodes 
 """
 
 
-WEIGHTED_GRAPH = _WeightedGraph(DefinitionKey(name="weighted graph", field=Field.MATHEMATICS))
+WEIGHTED_GRAPH = _WeightedGraph(DefinitionKey(name="weighted graph", field=FieldName.MATHEMATICS))

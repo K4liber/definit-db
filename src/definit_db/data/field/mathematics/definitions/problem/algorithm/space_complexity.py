@@ -1,9 +1,10 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.function import FUNCTION
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.complexity import COMPLEXITY
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _SpaceComplexity(Definition):
@@ -18,6 +19,6 @@ Space complexity describes how the memory requirements grow with increasing inpu
 SPACE_COMPLEXITY = _SpaceComplexity(
     key=DefinitionKey(
         name="space_complexity",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

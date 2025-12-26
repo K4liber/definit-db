@@ -1,11 +1,12 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.concurrency import CONCURRENCY
 from definit_db.data.field.computer_science.definitions.foundamental.core import CORE
 from definit_db.data.field.computer_science.definitions.foundamental.operation import OPERATION
 from definit_db.data.field.computer_science.definitions.foundamental.processor import PROCESSOR
 from definit_db.data.field.computer_science.definitions.foundamental.program import PROGRAM
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Parallelism(Definition):
@@ -22,4 +23,4 @@ Unlike {CONCURRENCY.key.get_reference()}, which is about managing multiple tasks
 """
 
 
-PARALLELISM = _Parallelism(DefinitionKey(name="parallelism", field=Field.COMPUTER_SCIENCE))
+PARALLELISM = _Parallelism(DefinitionKey(name="parallelism", field=FieldName.COMPUTER_SCIENCE))

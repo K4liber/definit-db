@@ -1,10 +1,11 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.program import PROGRAM
 from definit_db.data.field.computer_science.definitions.foundamental.stack_memory import STACK_MEMORY
 from definit_db.data.field.mathematics.definitions.fundamental.function import FUNCTION
 from definit_db.data.field.mathematics.definitions.fundamental.information import INFORMATION
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _CallStack(Definition):
@@ -21,4 +22,4 @@ and when it returns, that information is removed.
 """
 
 
-CALL_STACK = _CallStack(DefinitionKey(name="call stack", field=Field.COMPUTER_SCIENCE))
+CALL_STACK = _CallStack(DefinitionKey(name="call stack", field=FieldName.COMPUTER_SCIENCE))

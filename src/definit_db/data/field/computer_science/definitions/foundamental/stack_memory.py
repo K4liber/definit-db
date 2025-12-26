@@ -1,3 +1,7 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.computer_memory import COMPUTER_MEMORY
 from definit_db.data.field.computer_science.definitions.foundamental.data import DATA
 from definit_db.data.field.computer_science.definitions.foundamental.memory_allocation import MEMORY_ALLOCATION
@@ -5,9 +9,6 @@ from definit_db.data.field.computer_science.definitions.foundamental.program imp
 from definit_db.data.field.computer_science.definitions.foundamental.variable import VARIABLE
 from definit_db.data.field.mathematics.definitions.fundamental.function import FUNCTION
 from definit_db.data.field.mathematics.definitions.fundamental.last_in_first_out import LAST_IN_FIRST_OUT
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _StackMemory(Definition):
@@ -23,4 +24,4 @@ automatically allocating and deallocating memory as {FUNCTION.key.get_reference(
 """
 
 
-STACK_MEMORY = _StackMemory(DefinitionKey(name="stack memory", field=Field.COMPUTER_SCIENCE))
+STACK_MEMORY = _StackMemory(DefinitionKey(name="stack memory", field=FieldName.COMPUTER_SCIENCE))

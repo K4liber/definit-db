@@ -1,12 +1,13 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.graph.edge import EDGE
 from definit_db.data.field.mathematics.definitions.graph.graph import GRAPH
 from definit_db.data.field.mathematics.definitions.graph.node import NODE
 from definit_db.data.field.mathematics.definitions.graph.path import PATH
 from definit_db.data.field.mathematics.definitions.graph.weighted_graph import WEIGHTED_GRAPH
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _BreadthFirstSearch(Definition):
@@ -24,4 +25,4 @@ and so on. This level-by-level exploration ensures that the shortest {PATH.key.g
 """
 
 
-BREADTH_FIRST_SEARCH = _BreadthFirstSearch(DefinitionKey(name="breadth-first search", field=Field.MATHEMATICS))
+BREADTH_FIRST_SEARCH = _BreadthFirstSearch(DefinitionKey(name="breadth-first search", field=FieldName.MATHEMATICS))

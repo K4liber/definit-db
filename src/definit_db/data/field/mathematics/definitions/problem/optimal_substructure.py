@@ -1,9 +1,10 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.problem.optimal_solution import OPTIMAL_SOLUTION
 from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
 from definit_db.data.field.mathematics.definitions.problem.subproblem import SUBPROBLEM
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _OptimalSubstructure(Definition):
@@ -18,6 +19,6 @@ A {PROBLEM.key.get_reference(phrase="problem")} is said to have optimal substruc
 OPTIMAL_SUBSTRUCTURE = _OptimalSubstructure(
     key=DefinitionKey(
         name="optimal_substructure",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

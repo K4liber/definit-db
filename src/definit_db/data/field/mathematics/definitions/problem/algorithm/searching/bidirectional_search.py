@@ -1,3 +1,7 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.graph.graph import GRAPH
 from definit_db.data.field.mathematics.definitions.graph.node import NODE
 from definit_db.data.field.mathematics.definitions.graph.path import PATH
@@ -5,9 +9,6 @@ from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm i
 from definit_db.data.field.mathematics.definitions.problem.algorithm.searching.breadth_first_search import (
     BREADTH_FIRST_SEARCH,
 )
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _BidirectionalSearch(Definition):
@@ -25,4 +26,4 @@ efficiently than searching in only one direction.
 """
 
 
-BIDIRECTIONAL_SEARCH = _BidirectionalSearch(DefinitionKey(name="bidirectional search", field=Field.MATHEMATICS))
+BIDIRECTIONAL_SEARCH = _BidirectionalSearch(DefinitionKey(name="bidirectional search", field=FieldName.MATHEMATICS))

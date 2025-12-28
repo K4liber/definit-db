@@ -1,7 +1,8 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.information import INFORMATION
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Instruction(Definition):
@@ -14,6 +15,6 @@ A detailed {INFORMATION.key.get_reference(phrase="information")} about how somet
 INSTRUCTION = _Instruction(
     key=DefinitionKey(
         name="instruction",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

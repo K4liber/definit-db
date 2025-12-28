@@ -1,7 +1,8 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.number.number import NUMBER
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Integer(Definition):
@@ -16,6 +17,6 @@ natural numbers are referred to as negative integers.
 INTEGER = _Integer(
     key=DefinitionKey(
         name="integer",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

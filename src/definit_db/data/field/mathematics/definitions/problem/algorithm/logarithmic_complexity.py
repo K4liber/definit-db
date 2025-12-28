@@ -1,12 +1,13 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.input_data import INPUT_DATA
 from definit_db.data.field.mathematics.definitions.fundamental.operation import OPERATION
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.big_o_notation import BIG_O_NOTATION
 from definit_db.data.field.mathematics.definitions.problem.algorithm.time_complexity import TIME_COMPLEXITY
 from definit_db.data.field.mathematics.definitions.problem.problem_space import PROBLEM_SPACE
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _LogarithmicComplexity(Definition):
@@ -26,4 +27,6 @@ the {INPUT_DATA.key.get_reference("input")} size only adds one additional {OPERA
 """
 
 
-LOGARITHMIC_COMPLEXITY = _LogarithmicComplexity(DefinitionKey(name="logarithmic complexity", field=Field.MATHEMATICS))
+LOGARITHMIC_COMPLEXITY = _LogarithmicComplexity(
+    DefinitionKey(name="logarithmic complexity", field=FieldName.MATHEMATICS)
+)

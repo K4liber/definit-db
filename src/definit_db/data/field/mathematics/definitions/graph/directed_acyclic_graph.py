@@ -1,8 +1,9 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.graph.cycle import CYCLE
 from definit_db.data.field.mathematics.definitions.graph.directed_graph import DIRECTED_GRAPH
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _DirectedAcyclicGraph(Definition):
@@ -16,6 +17,6 @@ A directed acyclic graph is a {DIRECTED_GRAPH.key.get_reference(phrase="directed
 DIRECTED_ACYCLIC_GRAPH = _DirectedAcyclicGraph(
     key=DefinitionKey(
         name="directed_acyclic_graph",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

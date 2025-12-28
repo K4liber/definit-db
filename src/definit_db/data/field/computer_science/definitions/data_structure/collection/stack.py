@@ -1,11 +1,12 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.data_structure.collection.collection import COLLECTION
 from definit_db.data.field.computer_science.definitions.data_structure.collection.queue import QUEUE
 from definit_db.data.field.computer_science.definitions.foundamental.data_structure import DATA_STRUCTURE
 from definit_db.data.field.computer_science.definitions.foundamental.operation import OPERATION
 from definit_db.data.field.mathematics.definitions.fundamental.set import SET
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Stack(Definition):
@@ -26,6 +27,6 @@ physical items stacked one atop another, such as a stack of plates.
 STACK = _Stack(
     key=DefinitionKey(
         name="stack",
-        field=Field.COMPUTER_SCIENCE,
+        field=FieldName.COMPUTER_SCIENCE,
     )
 )

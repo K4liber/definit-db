@@ -1,8 +1,9 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.instruction import INSTRUCTION
 from definit_db.data.field.mathematics.definitions.fundamental.sequence import SEQUENCE
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Loop(Definition):
@@ -17,4 +18,4 @@ execution of repetitive tasks and are fundamental to iterating over data structu
 """
 
 
-LOOP = _Loop(DefinitionKey(name="loop", field=Field.MATHEMATICS))
+LOOP = _Loop(DefinitionKey(name="loop", field=FieldName.MATHEMATICS))

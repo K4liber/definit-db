@@ -1,3 +1,7 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.analysis.asymptotic_behavior import ASYMPTOTIC_BEHAVIOR
 from definit_db.data.field.mathematics.definitions.fundamental.analysis.bound import BOUND
 from definit_db.data.field.mathematics.definitions.fundamental.input_data import INPUT_DATA
@@ -5,9 +9,6 @@ from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm i
 from definit_db.data.field.mathematics.definitions.problem.algorithm.complexity import COMPLEXITY
 from definit_db.data.field.mathematics.definitions.problem.algorithm.space_complexity import SPACE_COMPLEXITY
 from definit_db.data.field.mathematics.definitions.problem.algorithm.time_complexity import TIME_COMPLEXITY
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _RealWorldPerformance(Definition):
@@ -27,4 +28,6 @@ theoretical complexity may perform worse in practice, and vice versa.
 """
 
 
-REAL_WORLD_PERFORMANCE = _RealWorldPerformance(DefinitionKey(name="real-world performance", field=Field.MATHEMATICS))
+REAL_WORLD_PERFORMANCE = _RealWorldPerformance(
+    DefinitionKey(name="real-world performance", field=FieldName.MATHEMATICS)
+)

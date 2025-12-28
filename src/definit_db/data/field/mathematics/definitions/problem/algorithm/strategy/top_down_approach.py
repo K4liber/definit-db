@@ -1,11 +1,12 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.overlapping_subproblems import OVERLAPPING_SUBPROBLEMS
 from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
 from definit_db.data.field.mathematics.definitions.problem.recursion import RECURSION
 from definit_db.data.field.mathematics.definitions.problem.subproblem import SUBPROBLEM
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _TopDownApproach(Definition):
@@ -22,6 +23,6 @@ from those stored results.
 TOP_DOWN_APPROACH = _TopDownApproach(
     key=DefinitionKey(
         name="top_down_approach",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

@@ -1,12 +1,13 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.data_structure.collection.string.character_encoding import (
     CHARACTER_ENCODING,
 )
 from definit_db.data.field.computer_science.definitions.data_structure.collection.string.string import STRING
 from definit_db.data.field.mathematics.definitions.fundamental.notations.label import LABEL
 from definit_db.data.field.mathematics.definitions.fundamental.sequence import SEQUENCE
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _RegularExpression(Definition):
@@ -26,4 +27,4 @@ can also use groups and {LABEL.key.get_reference("labels")} to capture and refer
 """
 
 
-REGULAR_EXPRESSION = _RegularExpression(DefinitionKey(name="regular expression", field=Field.COMPUTER_SCIENCE))
+REGULAR_EXPRESSION = _RegularExpression(DefinitionKey(name="regular expression", field=FieldName.COMPUTER_SCIENCE))

@@ -1,10 +1,11 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.binary_representation import BINARY_REPRESENTATION
 from definit_db.data.field.computer_science.definitions.foundamental.bit import BIT
 from definit_db.data.field.computer_science.definitions.foundamental.bitwise_operation import BITWISE_OPERATION
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _BitManipulation(Definition):
@@ -20,4 +21,4 @@ or checking specific bits, as well as performing efficient computations.
 """
 
 
-BIT_MANIPULATION = _BitManipulation(DefinitionKey(name="bit manipulation", field=Field.COMPUTER_SCIENCE))
+BIT_MANIPULATION = _BitManipulation(DefinitionKey(name="bit manipulation", field=FieldName.COMPUTER_SCIENCE))

@@ -1,8 +1,9 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.operation import OPERATION
 from definit_db.data.field.computer_science.definitions.foundamental.program import PROGRAM
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Concurrency(Definition):
@@ -19,4 +20,4 @@ background processing at the same time.
 """
 
 
-CONCURRENCY = _Concurrency(DefinitionKey(name="concurrency", field=Field.COMPUTER_SCIENCE))
+CONCURRENCY = _Concurrency(DefinitionKey(name="concurrency", field=FieldName.COMPUTER_SCIENCE))

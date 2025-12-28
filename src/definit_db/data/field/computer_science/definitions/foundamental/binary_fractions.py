@@ -1,9 +1,10 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.binary_representation import BINARY_REPRESENTATION
 from definit_db.data.field.computer_science.definitions.foundamental.bit import BIT
 from definit_db.data.field.mathematics.definitions.fundamental.number.number import NUMBER
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _BinaryFractions(Definition):
@@ -20,4 +21,4 @@ negative powers of 10. For example, the binary fraction 0.101 represents 1/2 + 0
 """
 
 
-BINARY_FRACTIONS = _BinaryFractions(DefinitionKey(name="binary fractions", field=Field.COMPUTER_SCIENCE))
+BINARY_FRACTIONS = _BinaryFractions(DefinitionKey(name="binary fractions", field=FieldName.COMPUTER_SCIENCE))

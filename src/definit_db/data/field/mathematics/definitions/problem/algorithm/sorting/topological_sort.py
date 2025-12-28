@@ -1,9 +1,10 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.graph.directed_acyclic_graph import DIRECTED_ACYCLIC_GRAPH
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.sorting import SORTING
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _TopologicalSort(Definition):
@@ -18,6 +19,6 @@ of the graph's vertices such that for every directed edge (u, v), u comes before
 TOPOLOGICAL_SORT = _TopologicalSort(
     key=DefinitionKey(
         name="topological_sort",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

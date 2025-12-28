@@ -1,8 +1,9 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
 from definit_db.data.field.mathematics.definitions.problem.subproblem import SUBPROBLEM
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _OverlappingSubProblems(Definition):
@@ -17,6 +18,6 @@ simpler subproblems that are reused several times.
 OVERLAPPING_SUBPROBLEMS = _OverlappingSubProblems(
     key=DefinitionKey(
         name="overlapping_subproblems",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

@@ -1,10 +1,11 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.relation import RELATION
 from definit_db.data.field.mathematics.definitions.fundamental.sequence import SEQUENCE
 from definit_db.data.field.mathematics.definitions.fundamental.set import SET
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Sorting(Definition):
@@ -20,6 +21,6 @@ descending).
 SORTING = _Sorting(
     key=DefinitionKey(
         name="sorting",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

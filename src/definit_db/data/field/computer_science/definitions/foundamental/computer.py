@@ -1,8 +1,9 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.data import DATA
 from definit_db.data.field.mathematics.definitions.fundamental.instruction import INSTRUCTION
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Computer(Definition):
@@ -17,4 +18,4 @@ data according to instructions.
 """
 
 
-COMPUTER = _Computer(DefinitionKey(name="computer", field=Field.COMPUTER_SCIENCE))
+COMPUTER = _Computer(DefinitionKey(name="computer", field=FieldName.COMPUTER_SCIENCE))

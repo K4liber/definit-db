@@ -1,8 +1,9 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.object import OBJECT
 from definit_db.data.field.mathematics.definitions.fundamental.set import SET
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Probability(Definition):
@@ -17,6 +18,6 @@ typically expressed as a number between 0 and 1. Probabilities indicate how like
 PROBABILITY = _Probability(
     key=DefinitionKey(
         name="probability",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

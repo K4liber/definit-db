@@ -1,9 +1,10 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.data import DATA
 from definit_db.data.field.computer_science.definitions.foundamental.data_type import DATA_TYPE
 from definit_db.data.field.computer_science.definitions.foundamental.operation import OPERATION
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _AbstractDataType(Definition):
@@ -20,6 +21,6 @@ of possible values, possible {OPERATION.key.get_reference(phrase="operations")} 
 ABSTRACT_DATA_TYPE = _AbstractDataType(
     key=DefinitionKey(
         name="abstract_data_type",
-        field=Field.COMPUTER_SCIENCE,
+        field=FieldName.COMPUTER_SCIENCE,
     )
 )

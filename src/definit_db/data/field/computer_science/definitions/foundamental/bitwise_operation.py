@@ -1,10 +1,11 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.binary_representation import BINARY_REPRESENTATION
 from definit_db.data.field.computer_science.definitions.foundamental.bit import BIT
 from definit_db.data.field.computer_science.definitions.foundamental.data import DATA
 from definit_db.data.field.computer_science.definitions.foundamental.operation import OPERATION
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _BitwiseOperation(Definition):
@@ -19,4 +20,4 @@ allowing for efficient manipulation and comparison at the lowest level of repres
 """
 
 
-BITWISE_OPERATION = _BitwiseOperation(DefinitionKey(name="bitwise operation", field=Field.COMPUTER_SCIENCE))
+BITWISE_OPERATION = _BitwiseOperation(DefinitionKey(name="bitwise operation", field=FieldName.COMPUTER_SCIENCE))

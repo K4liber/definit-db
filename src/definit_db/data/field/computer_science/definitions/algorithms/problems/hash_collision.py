@@ -1,9 +1,10 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.data_structure.collection.hash_table import HASH_TABLE
 from definit_db.data.field.computer_science.definitions.foundamental.data import DATA
 from definit_db.data.field.mathematics.definitions.fundamental.hash_function import HASH_FUNCTION
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _HashCollision(Definition):
@@ -19,6 +20,6 @@ A situation in which two different inputs produce the same hash value when proce
 HASH_COLLISION = _HashCollision(
     key=DefinitionKey(
         name="hash_collision",
-        field=Field.COMPUTER_SCIENCE,
+        field=FieldName.COMPUTER_SCIENCE,
     )
 )

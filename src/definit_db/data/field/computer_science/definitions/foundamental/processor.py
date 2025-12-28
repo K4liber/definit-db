@@ -1,11 +1,12 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.computer import COMPUTER
 from definit_db.data.field.computer_science.definitions.foundamental.hardware import HARDWARE
 from definit_db.data.field.computer_science.definitions.foundamental.operation import OPERATION
 from definit_db.data.field.computer_science.definitions.foundamental.program import PROGRAM
 from definit_db.data.field.mathematics.definitions.fundamental.instruction import INSTRUCTION
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Processor(Definition):
@@ -21,4 +22,4 @@ often referred to as the central processing unit (CPU).
 """
 
 
-PROCESSOR = _Processor(DefinitionKey(name="processor", field=Field.COMPUTER_SCIENCE))
+PROCESSOR = _Processor(DefinitionKey(name="processor", field=FieldName.COMPUTER_SCIENCE))

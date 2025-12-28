@@ -1,8 +1,9 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.hash_function import HASH_FUNCTION
 from definit_db.data.field.mathematics.definitions.fundamental.sequence import SEQUENCE
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _RollingHash(Definition):
@@ -17,6 +18,6 @@ a window of fixed size moves over a {SEQUENCE.key.get_reference()}.
 ROLLING_HASH = _RollingHash(
     key=DefinitionKey(
         name="rolling_hash",
-        field=Field.COMPUTER_SCIENCE,
+        field=FieldName.COMPUTER_SCIENCE,
     )
 )

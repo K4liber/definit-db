@@ -1,11 +1,12 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.sequence import SEQUENCE
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.divide_and_conquer import DIVIDE_AND_CONQUER
 from definit_db.data.field.mathematics.definitions.problem.algorithm.sorting.sorting import SORTING
 from definit_db.data.field.mathematics.definitions.problem.recursion import RECURSION
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _MergeSort(Definition):
@@ -21,6 +22,6 @@ half, and then merges the two sorted halves into a single sorted {SEQUENCE.key.g
 MERGE_SORT = _MergeSort(
     key=DefinitionKey(
         name="merge_sort",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

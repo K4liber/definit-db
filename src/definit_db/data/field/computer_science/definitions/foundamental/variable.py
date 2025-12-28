@@ -1,8 +1,9 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.data import DATA
 from definit_db.data.field.mathematics.definitions.fundamental.notations.label import LABEL
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Variable(Definition):
@@ -17,4 +18,4 @@ A variable associates a name with a value that can change over time.
 """
 
 
-VARIABLE = _Variable(DefinitionKey(name="variable", field=Field.COMPUTER_SCIENCE))
+VARIABLE = _Variable(DefinitionKey(name="variable", field=FieldName.COMPUTER_SCIENCE))

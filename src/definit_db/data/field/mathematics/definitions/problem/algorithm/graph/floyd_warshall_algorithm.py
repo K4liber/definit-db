@@ -1,3 +1,7 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.graph.cycle import CYCLE
 from definit_db.data.field.mathematics.definitions.graph.edge import EDGE
 from definit_db.data.field.mathematics.definitions.graph.graph import GRAPH
@@ -7,9 +11,6 @@ from definit_db.data.field.mathematics.definitions.graph.path import PATH
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.dynamic_programming import DYNAMIC_PROGRAMMING
 from definit_db.data.field.mathematics.definitions.problem.algorithm.time_complexity import TIME_COMPLEXITY
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _FloydWarshallAlgorithm(Definition):
@@ -30,5 +31,5 @@ of O(V³) where V is the number of nodes, making it efficient for dense graphs o
 
 
 FLOYD_WARSHALL_ALGORITHM = _FloydWarshallAlgorithm(
-    DefinitionKey(name="Floyd-Warshall algorithm", field=Field.MATHEMATICS)
+    DefinitionKey(name="Floyd-Warshall algorithm", field=FieldName.MATHEMATICS)
 )

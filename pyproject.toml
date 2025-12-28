@@ -1,15 +1,32 @@
 [project]
 name = "definit-db"
-version = "0.6.7"
+version = "0.6.8"
 description = "DefinIT database"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "definit==0.4.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "import-linter>=2.9",
+    "ruff",
+]
 
 [tool.setuptools]
 package-dir = {"" = "src"}
 packages = ["definit_db"]
 include-package-data = true
 
+[[tool.uv.index]]
+url = "https://pypi.org/simple"
+default = true
+
 [tool.setuptools.package-data]
 "definit_db" = ["*.py", "data_md/**/*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["test"]

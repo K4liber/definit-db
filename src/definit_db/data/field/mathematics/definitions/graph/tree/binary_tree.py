@@ -1,8 +1,9 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.graph.tree.k_ary_tree import K_ARY_TREE
 from definit_db.data.field.mathematics.definitions.graph.tree.tree import TREE
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _BinaryTree(Definition):
@@ -17,6 +18,6 @@ where k = 2.
 BINARY_TREE = _BinaryTree(
     key=DefinitionKey(
         name="binary_tree",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

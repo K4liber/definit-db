@@ -1,10 +1,11 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.algorithms.problems.graph_labeling.graph_labeling import (
     GRAPH_LABELING,
 )
 from definit_db.data.field.mathematics.definitions.fundamental.notations.label import LABEL
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _GraphColoring(Definition):
@@ -18,6 +19,6 @@ A special case of {GRAPH_LABELING.key.get_reference(phrase="graph labeling")} wh
 GRAPH_COLORING = _GraphColoring(
     key=DefinitionKey(
         name="graph_coloring",
-        field=Field.COMPUTER_SCIENCE,
+        field=FieldName.COMPUTER_SCIENCE,
     )
 )

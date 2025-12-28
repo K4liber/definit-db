@@ -1,11 +1,12 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.graph.edge import EDGE
 from definit_db.data.field.mathematics.definitions.graph.graph import GRAPH
 from definit_db.data.field.mathematics.definitions.graph.node import NODE
 from definit_db.data.field.mathematics.definitions.graph.path import PATH
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _DepthFirstSearch(Definition):
@@ -23,4 +24,4 @@ This approach goes deep into the graph structure before exploring other paths.
 """
 
 
-DEPTH_FIRST_SEARCH = _DepthFirstSearch(DefinitionKey(name="depth-first search", field=Field.MATHEMATICS))
+DEPTH_FIRST_SEARCH = _DepthFirstSearch(DefinitionKey(name="depth-first search", field=FieldName.MATHEMATICS))

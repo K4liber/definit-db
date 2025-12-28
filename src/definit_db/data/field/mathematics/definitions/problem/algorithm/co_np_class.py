@@ -1,3 +1,7 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.computation.deterministic_turing_machine import (
     DETERMINISTIC_TURING_MACHINE,
 )
@@ -12,9 +16,6 @@ from definit_db.data.field.mathematics.definitions.problem.algorithm.np_class im
 from definit_db.data.field.mathematics.definitions.problem.algorithm.time_complexity import TIME_COMPLEXITY
 from definit_db.data.field.mathematics.definitions.problem.complement_problem import COMPLEMENT_PROBLEM
 from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _CoNPClass(Definition):
@@ -36,4 +37,4 @@ Equivalently, the {COMPLEMENT_PROBLEM.key.get_reference("complement")} of the pr
 """
 
 
-CO_NP_CLASS = _CoNPClass(DefinitionKey(name="Co-NP class", field=Field.MATHEMATICS))
+CO_NP_CLASS = _CoNPClass(DefinitionKey(name="Co-NP class", field=FieldName.MATHEMATICS))

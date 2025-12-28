@@ -1,12 +1,13 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.analysis.bound import BOUND
 from definit_db.data.field.mathematics.definitions.fundamental.input_data import INPUT_DATA
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.time_complexity import TIME_COMPLEXITY
 from definit_db.data.field.mathematics.definitions.problem.constraint import CONSTRAINT
 from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _BestConceivableRuntime(Definition):
@@ -24,5 +25,5 @@ an algorithm can be further optimized or if it has already achieved the best pos
 
 
 BEST_CONCEIVABLE_RUNTIME = _BestConceivableRuntime(
-    DefinitionKey(name="best conceivable runtime", field=Field.MATHEMATICS)
+    DefinitionKey(name="best conceivable runtime", field=FieldName.MATHEMATICS)
 )

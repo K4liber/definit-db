@@ -1,9 +1,10 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.problem.constraint import CONSTRAINT
 from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
 from definit_db.data.field.mathematics.definitions.problem.solution import SOLUTION
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _FeasibleSolution(Definition):
@@ -18,4 +19,4 @@ but it meets all the requirements and restrictions of the problem.
 """
 
 
-FEASIBLE_SOLUTION = _FeasibleSolution(DefinitionKey(name="feasible solution", field=Field.MATHEMATICS))
+FEASIBLE_SOLUTION = _FeasibleSolution(DefinitionKey(name="feasible solution", field=FieldName.MATHEMATICS))

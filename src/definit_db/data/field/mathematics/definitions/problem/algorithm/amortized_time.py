@@ -1,11 +1,12 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.analysis.bound import BOUND
 from definit_db.data.field.mathematics.definitions.fundamental.operation import OPERATION
 from definit_db.data.field.mathematics.definitions.fundamental.sequence import SEQUENCE
 from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm import ALGORITHM
 from definit_db.data.field.mathematics.definitions.problem.algorithm.time_complexity import TIME_COMPLEXITY
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _AmortizedTime(Definition):
@@ -24,4 +25,4 @@ even though individual operations may occasionally be costly.
 """
 
 
-AMORTIZED_TIME = _AmortizedTime(DefinitionKey(name="amortized time", field=Field.MATHEMATICS))
+AMORTIZED_TIME = _AmortizedTime(DefinitionKey(name="amortized time", field=FieldName.MATHEMATICS))

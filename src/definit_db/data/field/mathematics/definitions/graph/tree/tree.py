@@ -1,8 +1,9 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.graph.directed_acyclic_graph import DIRECTED_ACYCLIC_GRAPH
 from definit_db.data.field.mathematics.definitions.graph.node import NODE
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Tree(Definition):
@@ -18,6 +19,6 @@ node, except for the root node, which has no parent.
 TREE = _Tree(
     key=DefinitionKey(
         name="tree",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

@@ -1,10 +1,11 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.binary_representation import BINARY_REPRESENTATION
 from definit_db.data.field.computer_science.definitions.foundamental.bit import BIT
 from definit_db.data.field.mathematics.definitions.fundamental.number.integer import INTEGER
 from definit_db.data.field.mathematics.definitions.fundamental.number.number import NUMBER
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _TwosComplement(Definition):
@@ -25,4 +26,4 @@ representing signed integers.
 """
 
 
-TWOS_COMPLEMENT = _TwosComplement(DefinitionKey(name="two's complement", field=Field.COMPUTER_SCIENCE))
+TWOS_COMPLEMENT = _TwosComplement(DefinitionKey(name="two's complement", field=FieldName.COMPUTER_SCIENCE))

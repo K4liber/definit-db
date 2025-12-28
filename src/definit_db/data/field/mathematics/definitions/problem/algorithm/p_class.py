@@ -1,3 +1,7 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.computation.deterministic_turing_machine import (
     DETERMINISTIC_TURING_MACHINE,
 )
@@ -8,9 +12,6 @@ from definit_db.data.field.mathematics.definitions.problem.algorithm.big_o_notat
 from definit_db.data.field.mathematics.definitions.problem.algorithm.complexity import COMPLEXITY
 from definit_db.data.field.mathematics.definitions.problem.algorithm.time_complexity import TIME_COMPLEXITY
 from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _PClass(Definition):
@@ -29,4 +30,4 @@ of the {INPUT_DATA.key.get_reference()}. Problems in P are considered efficientl
 """
 
 
-P_CLASS = _PClass(DefinitionKey(name="P class", field=Field.MATHEMATICS))
+P_CLASS = _PClass(DefinitionKey(name="P class", field=FieldName.MATHEMATICS))

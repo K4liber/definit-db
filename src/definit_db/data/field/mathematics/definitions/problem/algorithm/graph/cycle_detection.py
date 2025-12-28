@@ -1,3 +1,7 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.graph.cycle import CYCLE
 from definit_db.data.field.mathematics.definitions.graph.directed_graph import DIRECTED_GRAPH
 from definit_db.data.field.mathematics.definitions.graph.graph import GRAPH
@@ -7,9 +11,6 @@ from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm i
 from definit_db.data.field.mathematics.definitions.problem.algorithm.searching.depth_first_search import (
     DEPTH_FIRST_SEARCH,
 )
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _CycleDetection(Definition):
@@ -27,4 +28,4 @@ that is already in the current path, a cycle has been detected. Different approa
 """
 
 
-CYCLE_DETECTION = _CycleDetection(DefinitionKey(name="cycle detection", field=Field.MATHEMATICS))
+CYCLE_DETECTION = _CycleDetection(DefinitionKey(name="cycle detection", field=FieldName.MATHEMATICS))

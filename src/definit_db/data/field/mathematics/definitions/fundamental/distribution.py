@@ -1,9 +1,10 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.object import OBJECT
 from definit_db.data.field.mathematics.definitions.fundamental.probability import PROBABILITY
 from definit_db.data.field.mathematics.definitions.fundamental.set import SET
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Distribution(Definition):
@@ -19,6 +20,6 @@ A distribution describes how values (or outcomes) are spread over a domain. Typi
 DISTRIBUTION = _Distribution(
     key=DefinitionKey(
         name="distribution",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

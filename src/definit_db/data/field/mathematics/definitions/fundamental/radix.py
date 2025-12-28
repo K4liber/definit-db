@@ -1,6 +1,7 @@
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 
 
 class _Radix(Definition):
@@ -14,6 +15,6 @@ used to represent numbers. For example, base-10 (decimal) has radix 10.
 RADIX = _Radix(
     key=DefinitionKey(
         name="radix",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

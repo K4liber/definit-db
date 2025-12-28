@@ -1,10 +1,11 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.set import SET
 from definit_db.data.field.mathematics.definitions.graph.edge import EDGE
 from definit_db.data.field.mathematics.definitions.graph.graph import GRAPH
 from definit_db.data.field.mathematics.definitions.graph.node import NODE
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _BipartiteGraph(Definition):
@@ -20,6 +21,6 @@ within the same set.
 BIPARTITE_GRAPH = _BipartiteGraph(
     key=DefinitionKey(
         name="bipartite_graph",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

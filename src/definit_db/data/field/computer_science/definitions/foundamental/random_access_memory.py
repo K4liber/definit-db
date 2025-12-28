@@ -1,9 +1,10 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.computer_memory import COMPUTER_MEMORY
 from definit_db.data.field.computer_science.definitions.foundamental.data import DATA
 from definit_db.data.field.computer_science.definitions.foundamental.program import PROGRAM
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _RandomAccessMemory(Definition):
@@ -19,4 +20,4 @@ quickly accessed and modified during {PROGRAM.key.get_reference()} execution.
 """
 
 
-RANDOM_ACCESS_MEMORY = _RandomAccessMemory(DefinitionKey(name="random access memory", field=Field.COMPUTER_SCIENCE))
+RANDOM_ACCESS_MEMORY = _RandomAccessMemory(DefinitionKey(name="random access memory", field=FieldName.COMPUTER_SCIENCE))

@@ -1,6 +1,7 @@
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 
 
 class _Criterion(Definition):
@@ -13,6 +14,6 @@ A standard or principle by which something is judged or decided.
 CRITERION = _Criterion(
     key=DefinitionKey(
         name="criterion",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

@@ -1,7 +1,8 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.object import OBJECT
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Label(Definition):
@@ -15,6 +16,6 @@ meaning or identify it.
 LABEL = _Label(
     key=DefinitionKey(
         name="label",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

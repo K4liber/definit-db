@@ -1,8 +1,9 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.relation import RELATION
 from definit_db.data.field.mathematics.definitions.graph.node import NODE
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Edge(Definition):
@@ -16,6 +17,6 @@ It defines a {RELATION.key.get_reference(phrase="relationship")} or link between
 EDGE = _Edge(
     key=DefinitionKey(
         name="edge",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

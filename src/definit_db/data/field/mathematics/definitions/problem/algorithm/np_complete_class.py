@@ -1,3 +1,7 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.computation.deterministic_turing_machine import (
     DETERMINISTIC_TURING_MACHINE,
 )
@@ -9,9 +13,6 @@ from definit_db.data.field.mathematics.definitions.problem.algorithm.time_comple
 from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
 from definit_db.data.field.mathematics.definitions.problem.reduction import REDUCTION
 from definit_db.data.field.mathematics.definitions.problem.solution import SOLUTION
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _NPCompleteClass(Definition):
@@ -32,4 +33,4 @@ computational difficulty.
 """
 
 
-NP_COMPLETE_CLASS = _NPCompleteClass(DefinitionKey(name="NP-Complete class", field=Field.MATHEMATICS))
+NP_COMPLETE_CLASS = _NPCompleteClass(DefinitionKey(name="NP-Complete class", field=FieldName.MATHEMATICS))

@@ -1,8 +1,9 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.function import FUNCTION
 from definit_db.data.field.mathematics.definitions.fundamental.input_data import INPUT_DATA
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _PureFunction(Definition):
@@ -17,4 +18,4 @@ on their input values to produce their output values.
 """
 
 
-PURE_FUNCTION = _PureFunction(DefinitionKey(name="pure function", field=Field.MATHEMATICS))
+PURE_FUNCTION = _PureFunction(DefinitionKey(name="pure function", field=FieldName.MATHEMATICS))

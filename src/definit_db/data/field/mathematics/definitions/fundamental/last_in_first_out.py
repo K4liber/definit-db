@@ -1,7 +1,8 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.sequence import SEQUENCE
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _LastInFirstOut(Definition):
@@ -16,4 +17,4 @@ similar to a stack of plates where you can only access the top plate.
 """
 
 
-LAST_IN_FIRST_OUT = _LastInFirstOut(DefinitionKey(name="last in first out", field=Field.MATHEMATICS))
+LAST_IN_FIRST_OUT = _LastInFirstOut(DefinitionKey(name="last in first out", field=FieldName.MATHEMATICS))

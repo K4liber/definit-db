@@ -1,9 +1,10 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.foundamental.heap_memory import HEAP_MEMORY
 from definit_db.data.field.computer_science.definitions.foundamental.memory_allocation import MEMORY_ALLOCATION
 from definit_db.data.field.computer_science.definitions.foundamental.program import PROGRAM
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _HeapOverflow(Definition):
@@ -19,4 +20,4 @@ the program may fail to allocate memory and typically terminates with an error.
 """
 
 
-HEAP_OVERFLOW = _HeapOverflow(DefinitionKey(name="heap overflow", field=Field.COMPUTER_SCIENCE))
+HEAP_OVERFLOW = _HeapOverflow(DefinitionKey(name="heap overflow", field=FieldName.COMPUTER_SCIENCE))

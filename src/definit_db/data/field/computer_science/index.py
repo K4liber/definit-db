@@ -1,3 +1,5 @@
+from definit.definition.definition import Definition
+
 from definit_db.data.field.computer_science.definitions.algorithms.bit_manipulation import BIT_MANIPULATION
 from definit_db.data.field.computer_science.definitions.algorithms.problems.graph_labeling.graph_coloring import (
     GRAPH_COLORING,
@@ -80,7 +82,6 @@ from definit_db.data.field.computer_science.definitions.foundamental.stack_memor
 from definit_db.data.field.computer_science.definitions.foundamental.stack_overflow import STACK_OVERFLOW
 from definit_db.data.field.computer_science.definitions.foundamental.twos_complement import TWOS_COMPLEMENT
 from definit_db.data.field.computer_science.definitions.foundamental.variable import VARIABLE
-from definit_db.definition.definition import Definition
 
 field_index: list[Definition] = [
     OBJECT,

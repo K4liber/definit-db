@@ -1,8 +1,9 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.data_structure.collection.list.list import LIST
 from definit_db.data.field.computer_science.definitions.foundamental.data_type import DATA_TYPE
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Array(Definition):
@@ -16,6 +17,6 @@ Array is a {LIST.key.get_reference(phrase="list")} of elements of the same
 ARRAY = _Array(
     key=DefinitionKey(
         name="array",
-        field=Field.COMPUTER_SCIENCE,
+        field=FieldName.COMPUTER_SCIENCE,
     )
 )

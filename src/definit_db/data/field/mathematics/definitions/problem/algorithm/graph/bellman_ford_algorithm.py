@@ -1,3 +1,7 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.graph.cycle import CYCLE
 from definit_db.data.field.mathematics.definitions.graph.edge import EDGE
 from definit_db.data.field.mathematics.definitions.graph.graph import GRAPH
@@ -8,9 +12,6 @@ from definit_db.data.field.mathematics.definitions.problem.algorithm.algorithm i
 from definit_db.data.field.mathematics.definitions.problem.algorithm.graph.dijkstras_algorithm import (
     DIJKSTRAS_ALGORITHM,
 )
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _BellmanFordAlgorithm(Definition):
@@ -28,6 +29,6 @@ can detect negative-weight {CYCLE.key.get_reference("cycles")}, making it more v
 BELLMAN_FORD_ALGORITHM = _BellmanFordAlgorithm(
     key=DefinitionKey(
         name="bellman_ford_algorithm",
-        field=Field.MATHEMATICS,
+        field=FieldName.MATHEMATICS,
     )
 )

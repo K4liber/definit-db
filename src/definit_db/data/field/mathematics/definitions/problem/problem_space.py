@@ -1,10 +1,11 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.set import SET
 from definit_db.data.field.mathematics.definitions.problem.optimal_solution import OPTIMAL_SOLUTION
 from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
 from definit_db.data.field.mathematics.definitions.problem.solution import SOLUTION
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _ProblemSpace(Definition):
@@ -21,4 +22,4 @@ more computational resources to explore.
 """
 
 
-PROBLEM_SPACE = _ProblemSpace(DefinitionKey(name="problem space", field=Field.MATHEMATICS))
+PROBLEM_SPACE = _ProblemSpace(DefinitionKey(name="problem space", field=FieldName.MATHEMATICS))

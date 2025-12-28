@@ -1,9 +1,10 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.function import FUNCTION
 from definit_db.data.field.mathematics.definitions.fundamental.number.integer import INTEGER
 from definit_db.data.field.mathematics.definitions.fundamental.operation import OPERATION
-from definit_db.definition.definition import Definition
-from definit_db.definition.definition_key import DefinitionKey
-from definit_db.definition.field import Field
 
 
 class _Polynomial(Definition):
@@ -21,4 +22,4 @@ non-negative {INTEGER.key.get_reference("integer")} called the degree of the pol
 """
 
 
-POLYNOMIAL = _Polynomial(DefinitionKey(name="polynomial", field=Field.MATHEMATICS))
+POLYNOMIAL = _Polynomial(DefinitionKey(name="polynomial", field=FieldName.MATHEMATICS))

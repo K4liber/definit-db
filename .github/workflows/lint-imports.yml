@@ -34,4 +34,4 @@ jobs:
       - name: Run lint-imports
         run: |
           cd src
-          un run lint-imports --verbose --config ../.importlinter
+          uv run lint-imports --verbose --config ../.importlinter

@@ -1,7 +1,9 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const repoRoot = path.resolve(import.meta.dirname, '..');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const repoRoot = path.resolve(__dirname, '..');
 const indexPath = path.resolve(repoRoot, '../src/definit_db/data_md/index.md');
 const defsRoot = path.resolve(repoRoot, '../src/definit_db/data_md/definitions');
 const outPath = path.resolve(repoRoot, './public/defs.json');

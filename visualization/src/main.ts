@@ -1124,7 +1124,7 @@ function bindInteractions(nodeSel: d3.Selection<SVGGElement, DefNode, SVGGElemen
 // App bootstrap / state
 // -------------------------------
 
-const rawPromise: Promise<Raw> = fetch('/defs.json')
+const rawPromise: Promise<Raw> = fetch('./defs.json')
   .then((r) => r.json())
   .then((def: DefGraph) => buildRaw(def));
 
@@ -1234,13 +1234,9 @@ async function openLeaf(node: DefNode) {
   selectedNodeId = node.id;
   applyRingHighlight();
 
-  try {
-    const url = `/md/${encodeURIComponent(node.relPath)}.md`;
-    const md = await fetch(url).then((r) => r.text());
-    showViewer(node, md);
-  } catch {
-    showViewer(node, '(failed to load markdown)');
-  }
+  // Use preloaded content from defs.json if available
+  const md = node.content || '(no content)';
+  showViewer(node, md);
 }
 
 // Initial render

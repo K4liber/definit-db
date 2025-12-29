@@ -16,11 +16,6 @@ function normalizeId(s) {
     .replace(/[^a-z0-9_\-]/g, '');
 }
 
-function normalizeRef(ref) {
-  // ref is expected as "field_name/definition_name" (can contain more segments)
-  return normalizeId(String(ref).replace(/\.[a-z0-9]+$/i, '')); // remove .md, normalize
-}
-
 function parseIndex(md) {
   // lines like: - [object](mathematics/fundamental/object)
   const items = [];
@@ -265,7 +260,7 @@ async function main() {
     const md = await readIfExists(it.filePath);
     if (!md) missingFiles++;
     const deps = md ? extractDeps(md, it, idByRelPath, stats) : [];
-    nodes.push({ ...it, deps, level: 0 });
+    nodes.push({ ...it, deps, level: 0, content: md || '' });
   }
 
   // Validate deps and detect cycles (also assigns temporary levels on nodes).

@@ -30,8 +30,8 @@ export type DefNode = {
   /** If present, right-click collapses this whole group id. */
   owningGroup?: string;
 
-  /** Optional preloaded markdown for viewer (not currently generated) */
-  md?: string;
+  /** Preloaded markdown content for viewer */
+  content?: string;
 };
 
 export type DefGraph = {

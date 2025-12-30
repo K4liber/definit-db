@@ -2,7 +2,6 @@
 __pycache__/
 *.py[oc]
 build/
-dist/
 wheels/
 *.egg-info
 
@@ -18,3 +17,6 @@ prompts-local.md
 
 # generated md-database
 src/definit_db/data_md
+
+# visualization build files
+visualization/dist

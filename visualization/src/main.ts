@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import type { DefGraph, DefNode, NodeKind } from './types';
+import type { DefGraph, DefNode } from './types';
 
 const svg = d3.select<SVGSVGElement, unknown>('#viz');
 
@@ -20,10 +20,6 @@ const zoom = d3
 
 svg.call(zoom as any);
 
-function colorForLevel(level: number) {
-  return level === 0 ? '#38bdf8' : d3.interpolateRainbow(Math.min(1, level / 20));
-}
-
 function normalizeId(s: string) {
   return s
     .trim()
@@ -41,7 +37,6 @@ function setStats(graph: DefGraph) {
     ['Nodes', String(graph.nodes.length)],
     ['Edges', String(graph.edges.length)],
     ['Levels', String(maxLevel + 1)],
-    ['Max level', String(maxLevel)],
   ];
   for (const [k, v] of kv) {
     const dk = document.createElement('div');
@@ -95,15 +90,6 @@ function hash01(s: string) {
   return (h >>> 0) / 0xffffffff;
 }
 
-function fieldOfId(id: string) {
-  if (id.startsWith('field:')) return id.slice('field:'.length);
-  if (id.startsWith('cat:')) {
-    const rest = id.slice('cat:'.length);
-    return rest.split('/')[0] ?? rest;
-  }
-  return id.split('/')[0] ?? id;
-}
-
 // Learning-state coloring (Definitions mode)
 const COLOR_OFF = 'rgba(148, 163, 184, 0.18)'; // barely visible
 const COLOR_VISIBLE = 'rgba(148, 163, 184, 0.8)'; // normal grey
@@ -146,9 +132,7 @@ function clearLearnedProgress() {
 const learned = loadLearnedFromStorage();
 
 function learnStateForNode(n: DefNode): LearnState {
-  // Base state from learning/progression only.
-  // Only leaves exist in Definitions mode; treat anything else as off.
-  if (n.kind !== 'leaf') return 'off';
+  // Base state from learning/progression only..
   if (learned.has(n.id)) return 'learned';
 
   // Ready if all deps are learned (including "no deps").
@@ -416,17 +400,10 @@ function draw(graph: DefGraph) {
       const circleR = 8;
       const leafR = 11;
 
-      // Circle for non-leaves
+      // circle for nodes
       g.append('circle').attr('class', 'node-circle').attr('r', circleR);
 
-      // Star for leaves
-      const star = d3
-        .symbol()
-        .type(d3.symbolStar)
-        .size(Math.PI * leafR * leafR);
-      g.append('path').attr('class', 'node-star').attr('d', star() ?? '');
-
-      // underline/accent ring for leaves
+      // underline/accent ring for nodes
       g.append('circle').attr('class', 'leaf-underline').attr('r', leafR + 4);
 
       g.append('text').attr('dx', 12).attr('dy', 5);
@@ -441,20 +418,8 @@ function draw(graph: DefGraph) {
   nodeSel
     .select('title')
     .text((d: DefNode) => {
-      const kind = d.kind ?? 'leaf';
-
-      const isDefinition = kind === 'leaf';
-      const isCategoryish = kind === 'field' || kind === 'category' || kind === 'final-category';
-
-      const path = d.relPath
-        ? isDefinition
-          ? `${d.relPath}.md`
-          : isCategoryish
-            ? `${d.relPath}/`
-            : d.relPath
-        : d.id;
-
-      return `${d.title}\n${path}\n(kind: ${kind}, level: ${d.level ?? 0})`;
+      const path = `${d.relPath}.md`
+      return `${d.title} (level: ${d.level ?? 0})\n${path}`;
     });
 
   // hover effect
@@ -497,33 +462,21 @@ function draw(graph: DefGraph) {
     return base === 'off' && visibleNodeIds.has(d.id) ? 'visible' : base;
   };
 
-  // show circle only when not a leaf
   nodeSel
     .select<SVGCircleElement>('circle.node-circle')
     .attr('display', (d) => {
-      const showAsStar = d.kind === 'leaf' || d.kind === 'final-category';
-      return showAsStar ? 'none' : null;
+      return null;
     })
     .attr('fill', (d) => fillFor(d))
     .attr('opacity', 1);
 
-  // show star for leaves and final categories
-  nodeSel
-    .select<SVGPathElement>('path.node-star')
-    .attr('display', (d) => {
-      const showAsStar = d.kind === 'leaf' || d.kind === 'final-category';
-      return showAsStar ? null : 'none';
-    })
-    .attr('fill', (d) => fillFor(d))
-    .attr('opacity', 1);
-
-  // underline ring only for leaves
+  // underline ring only for nodes
   nodeSel
     .select<SVGCircleElement>('circle.leaf-underline')
     .attr('fill', 'none')
-    .attr('stroke', (d) => (d.kind === 'leaf' ? fillFor(d) : 'none'))
-    .attr('stroke-width', (d) => (d.kind === 'leaf' ? 2 : 0))
-    .attr('opacity', (d) => (d.kind === 'leaf' ? 0.9 : 0));
+    .attr('stroke', (d) => (fillFor(d)))
+    .attr('stroke-width', (d) => (2))
+    .attr('opacity', (d) => (0.9));
 
   // label text
   nodeSel
@@ -543,17 +496,15 @@ function draw(graph: DefGraph) {
     const isMatch = (d: DefNode) => q && normalizeId(d.id).includes(q);
 
     nodeSel
-      .selectAll<SVGCircleElement | SVGPathElement, DefNode>('circle.node-circle, path.node-star')
+      .selectAll<SVGCircleElement | SVGPathElement, DefNode>('circle.node-circle')
       .attr('stroke', (d) => (isMatch(d) ? '#ef4444' : 'none'))
-      .attr('stroke-width', (d) => (isMatch(d) ? 2.5 : 0));
+      .attr('stroke-width', (d) => (isMatch(d) ? 2.5 : 1));
   };
 }
 
 // -------------------------------
 // Interactive projection model
 // -------------------------------
-
-type GroupId = string;
 
 type Raw = {
   def: DefGraph;
@@ -565,7 +516,6 @@ type Raw = {
 type VisualizationMode = 'definitions' | 'categories';
 
 type UIState = {
-  expanded: Set<GroupId>; // group ids that are expanded
   selectedLeaf?: string; // leaf id
   mode: VisualizationMode;
 };
@@ -578,7 +528,7 @@ const markLearnedBtn = document.getElementById('markLearned') as HTMLButtonEleme
 
 function updateMarkLearnedButton(node?: DefNode) {
   if (!markLearnedBtn) return;
-  if (!node || state.mode !== 'definitions' || node.kind !== 'leaf') {
+  if (!node || state.mode !== 'definitions') {
     markLearnedBtn.style.display = 'none';
     markLearnedBtn.disabled = true;
     markLearnedBtn.onclick = null;
@@ -774,18 +724,6 @@ function groupIdForPath(parts: string[], depth: number) {
   return parts.slice(0, depth).join('/');
 }
 
-function isLeaf(ownParts: string[]) {
-  // Leaf ids are definition relPaths like field/sub/.../name (>=2 segments).
-  // (Field nodes in projected graph are synthetic and do NOT come from raw ids.)
-  return ownParts.length >= 2;
-}
-
-function ownerGroupForLeaf(id: string) {
-  const parts = splitPath(id);
-  // owning group is the immediate category containing the leaf: everything but last segment
-  return parts.slice(0, Math.max(1, parts.length - 1)).join('/');
-}
-
 function buildRaw(def: DefGraph): Raw {
   const byId = new Map(def.nodes.map((n) => [n.id, n] as const));
 
@@ -816,85 +754,14 @@ function buildRaw(def: DefGraph): Raw {
   return { def, byId, childrenByPrefix, fields };
 }
 
-function topLevelGroups(raw: Raw) {
-  // Start with just the field nodes.
-  return raw.fields.map((f) => ({ id: `field:${f}`, title: f, field: f }));
-}
-
-function projectedIdForGroup(groupId: string) {
-  // groupId is like mathematics/fundamental ; field is just mathematics
-  const parts = splitPath(groupId);
-  if (parts.length === 1) return `field:${parts[0]}`;
-  return `cat:${groupId}`;
-}
-
-function groupIdFromProjected(nodeId: string): string | undefined {
-  if (nodeId.startsWith('field:')) return nodeId.slice('field:'.length);
-  if (nodeId.startsWith('cat:')) return nodeId.slice('cat:'.length);
-  return undefined;
-}
-
-function titleForGroup(raw: Raw, groupId: string) {
-  const parts = splitPath(groupId);
-  return parts[parts.length - 1] ?? groupId;
-}
-
-function listDirectChildGroups(raw: Raw, groupId: string) {
-  // Return immediate child categories under groupId.
-  // BUT: if a child name is also a direct leaf under this group, prefer the leaf (no separate category node).
-  const prefix = groupId + '/';
-
-  // Collect direct leaf names for this group.
-  const directLeaves = new Set<string>();
-  for (const leafId of listDirectLeafChildren(raw, groupId)) {
-    const parts = splitPath(leafId);
-    directLeaves.add(parts[parts.length - 1] ?? leafId);
-  }
-
-  const children = new Set<string>();
-
-  // A child category exists if there is any definition under (groupId + '/child/...')
-  for (const id of raw.byId.keys()) {
-    if (!id.startsWith(prefix)) continue;
-    const rest = id.slice(prefix.length);
-    const segs = rest.split('/').filter(Boolean);
-
-    // needs to be deeper than direct leaf: groupId/<child>/<...>
-    if (segs.length < 2) continue;
-
-    const child = segs[0];
-    if (!child) continue;
-
-    // If there is a direct leaf with the same name, suppress the category node.
-    if (directLeaves.has(child)) continue;
-
-    children.add(`${groupId}/${child}`);
-  }
-
-  return Array.from(children).sort();
-}
-
-function listDirectLeafChildren(raw: Raw, groupId: string) {
-  // Direct leaves: defs whose owning group equals groupId
-  const prefix = groupId + '/';
-  const leaves: string[] = [];
-  for (const id of raw.byId.keys()) {
-    if (!id.startsWith(prefix)) continue;
-    if (ownerGroupForLeaf(id) === groupId) leaves.push(id);
-  }
-  return leaves.sort();
-}
-
 function projectGraph(raw: Raw, state: UIState): DefGraph {
   // Mode behavior:
   // - definitions: show *all* leaves (no categories), no expand/collapse needed
-  // - categories: show fields/categories only, expansion allowed, never show leaves
+  // - categories: TODO
 
   if (state.mode === 'definitions') {
     const nodes = raw.def.nodes.map((n) => ({
       ...n,
-      kind: 'leaf' as NodeKind,
-      owningGroup: ownerGroupForLeaf(n.id),
       level: 0,
     }));
 
@@ -917,163 +784,7 @@ function projectGraph(raw: Raw, state: UIState): DefGraph {
     return { nodes, edges };
   }
 
-  // categories mode
-  const nodes: DefNode[] = [];
-  const addNode = (n: DefNode) => nodes.push(n);
-
-  const isGroupExpanded = (gid: string) => state.expanded.has(gid);
-
-  // Helper: find the set of leaf ids represented by a visible group node.
-  // If the group is expanded, it should represent the remainder of its subtree that is NOT covered by any visible descendant group nodes.
-  // If it's not expanded, it represents its full subtree.
-  const representedLeavesForGroup = (gid: string, byId: Map<string, DefNode>) => {
-    const all = new Set(raw.childrenByPrefix.get(gid) ?? []);
-
-    // subtract leaves that are owned by any visible descendant group
-    const descendants = Array.from(byId.keys())
-      .map((nid) => groupIdFromProjected(nid))
-      .filter((x): x is string => !!x)
-      .filter((dgid) => dgid !== gid && dgid.startsWith(gid + '/'))
-      // prefer deepest first so we subtract larger chunks early
-      .sort((a, b) => b.length - a.length);
-
-    for (const dgid of descendants) {
-      const sub = raw.childrenByPrefix.get(dgid) ?? [];
-      for (const leafId of sub) all.delete(leafId);
-    }
-
-    return Array.from(all);
-  };
-
-  for (const f of raw.fields) {
-    if (!isGroupExpanded(f)) {
-      addNode({
-        id: projectedIdForGroup(f),
-        title: f,
-        relPath: f,
-        filePath: '',
-        deps: [],
-        level: 0,
-        kind: 'field',
-        owningGroup: undefined,
-      });
-      continue;
-    }
-
-    // expanded field: show subcategories only (NO leaves)
-    for (const childG of listDirectChildGroups(raw, f)) {
-      const hasChildren = listDirectChildGroups(raw, childG).length > 0;
-      addNode({
-        id: projectedIdForGroup(childG),
-        title: titleForGroup(raw, childG),
-        relPath: childG,
-        filePath: '',
-        deps: [],
-        level: 0,
-        kind: hasChildren ? 'category' : 'final-category',
-        owningGroup: f,
-      });
-    }
-  }
-
-  // Expand visible categories when in expanded state (category disappears)
-  let changed = true;
-  while (changed) {
-    changed = false;
-
-    const visibleCats = nodes.filter((n) => n.kind === 'category');
-    for (const cat of visibleCats) {
-      const gid = groupIdFromProjected(cat.id);
-      if (!gid) continue;
-      if (!isGroupExpanded(gid)) continue;
-
-      const idx = nodes.findIndex((n) => n.id === cat.id);
-      if (idx >= 0) nodes.splice(idx, 1);
-
-      for (const childG of listDirectChildGroups(raw, gid)) {
-        const hasChildren = listDirectChildGroups(raw, childG).length > 0;
-        addNode({
-          id: projectedIdForGroup(childG),
-          title: titleForGroup(raw, childG),
-          relPath: childG,
-          filePath: '',
-          deps: [],
-          level: 0,
-          kind: hasChildren ? 'category' : 'final-category',
-          owningGroup: gid,
-        });
-      }
-
-      changed = true;
-      break;
-    }
-  }
-
-  const byId = new Map<string, DefNode>();
-  for (const n of nodes) byId.set(n.id, n);
-
-  const visible = Array.from(byId.values());
-
-  const pickRepresentative = (rawId: string): string | undefined => {
-    if (!raw.byId.has(rawId)) return undefined;
-
-    // Leaves are not visible in categories mode. Find the nearest visible group.
-    const parts = splitPath(rawId);
-    for (let d = parts.length - 1; d >= 1; d--) {
-      const gid = groupIdForPath(parts, d);
-      const cand = projectedIdForGroup(gid);
-      if (byId.has(cand)) return cand;
-      if (d === 1) {
-        const f = parts[0];
-        const fieldNode = projectedIdForGroup(f);
-        if (byId.has(fieldNode)) return fieldNode;
-      }
-    }
-
-    return undefined;
-  };
-
-  const edgeKey = new Set<string>();
-  const edges: Array<{ source: string; target: string }> = [];
-
-  for (const n of visible) {
-    const gid = groupIdFromProjected(n.id);
-    if (!gid) continue;
-
-    const leafIds = representedLeavesForGroup(gid, byId);
-
-    const deps = new Set<string>();
-    for (const leafId of leafIds) {
-      const leaf = raw.byId.get(leafId);
-      if (!leaf) continue;
-      for (const d of leaf.deps) deps.add(d);
-    }
-
-    for (const depRawId of deps) {
-      const rep = pickRepresentative(depRawId);
-      if (!rep) continue;
-      if (rep === n.id) continue;
-      const k = `${n.id}->${rep}`;
-      if (edgeKey.has(k)) continue;
-      edgeKey.add(k);
-      edges.push({ source: n.id, target: rep });
-    }
-  }
-
-  // assign deps on projected nodes from edges
-  const depsByNode = new Map<string, string[]>();
-  for (const e of edges) {
-    const arr = depsByNode.get(e.source) ?? [];
-    arr.push(e.target);
-    depsByNode.set(e.source, arr);
-  }
-  for (const n of visible) {
-    n.deps = depsByNode.get(n.id) ?? [];
-    n.level = 0;
-  }
-
-  computeLevels(visible);
-  return { nodes: visible, edges };
+  throw new Error('Categories mode not implemented');
 }
 
 function bindInteractions(nodeSel: d3.Selection<SVGGElement, DefNode, SVGGElement, unknown>) {
@@ -1089,34 +800,7 @@ function bindInteractions(nodeSel: d3.Selection<SVGGElement, DefNode, SVGGElemen
         return;
       }
 
-      // Categories mode: do not expand final categories.
-      if (d.kind === 'final-category') return;
-
-      const gid = groupIdFromProjected(d.id);
-      if (!gid) return;
-
-      if (state.expanded.has(gid)) state.expanded.delete(gid);
-      else state.expanded.add(gid);
-
-      hideViewer();
-      rerender(true);
-    })
-    .on('contextmenu.interact', (ev: MouseEvent, d: DefNode) => {
-      ev.preventDefault();
-      ev.stopPropagation();
-
-      // Definitions mode: no special right-click behavior.
-      if (state.mode === 'definitions') return;
-
-      const gid = d.owningGroup ?? groupIdFromProjected(d.id);
-      if (!gid) return;
-
-      for (const eg of Array.from(state.expanded) as string[]) {
-        if (eg === gid || eg.startsWith(gid + '/')) state.expanded.delete(eg);
-      }
-
-      hideViewer();
-      rerender(true);
+      // TODO Categories mode: toggle expansion of group nodes.
     });
 }
 
@@ -1129,7 +813,6 @@ const rawPromise: Promise<Raw> = fetch('./defs.json')
   .then((def: DefGraph) => buildRaw(def));
 
 const state: UIState = {
-  expanded: new Set<GroupId>(),
   selectedLeaf: undefined,
   mode: 'definitions',
 };

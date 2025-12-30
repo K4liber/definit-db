@@ -1,5 +1,3 @@
-export type NodeKind = 'field' | 'category' | 'final-category' | 'leaf';
-
 export type DefNode = {
   /**
    * Unique id used throughout the visualization.
@@ -23,12 +21,6 @@ export type DefNode = {
    * Not persisted in defs.json.
    */
   level?: number;
-
-  /** interactive projection metadata */
-  kind?: NodeKind;
-
-  /** If present, right-click collapses this whole group id. */
-  owningGroup?: string;
 
   /** Preloaded markdown content for viewer */
   content?: string;

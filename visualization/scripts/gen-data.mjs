@@ -85,10 +85,7 @@ function normalizeHrefToIndexRelPath(href, ctx, idByRelPath) {
 
 function extractDeps(md, ctx, idByRelPath, stats) {
   // Heuristic: dependencies are written inside definitions content.
-  // Supported patterns:
-  // 1) Markdown links: [label](some/path) - we take label as a candidate dependency id
-  // 2) "Depends on:" / "Dependencies:" sections with bullet lists
-  // 3) Inline tokens like `dependency_name`
+  // Pattern: [label](some/path) - we take label as a candidate dependency id
   //
   // Notes:
   // - We try hard to ignore self-references and non-dependency links.
@@ -110,7 +107,6 @@ function extractDeps(md, ctx, idByRelPath, stats) {
     return false;
   };
 
-  // (1) markdown links
   const linkRe = /\[([^\]]+)\]\(([^)]+)\)/g;
   for (const m of md.matchAll(linkRe)) {
     const label = m[1];
@@ -131,50 +127,6 @@ function extractDeps(md, ctx, idByRelPath, stats) {
     // Fallback: label-based (not unique across fields)
     const labelId = normalizeId(label);
     if (labelId && !isSelf(labelId, href)) deps.add(labelId);
-  }
-
-  // (2) dependencies blocks
-  const blockRe = /^(?:depends on|dependencies)\s*:\s*$/im;
-  if (blockRe.test(md)) {
-    const lines = md.split(/\r?\n/);
-    let inBlock = false;
-    for (const line of lines) {
-      if (blockRe.test(line)) {
-        inBlock = true;
-        continue;
-      }
-      if (inBlock) {
-        if (!line.trim()) break;
-        const m = /^-\s+(.+)$/.exec(line.trim());
-        if (!m) continue;
-
-        const raw = m[1].trim();
-        const rel = raw.includes('/') ? normalizeHrefToIndexRelPath(raw, ctx, idByRelPath) : null;
-        if (rel) {
-          const depId = idByRelPath.get(rel);
-          if (depId && !isSelf(depId)) deps.add(depId);
-          continue;
-        }
-
-        const id = normalizeId(raw);
-        if (id && !isSelf(id)) deps.add(id);
-      }
-    }
-  }
-
-  // (3) inline code ticks
-  const codeRe = /`([^`]+)`/g;
-  for (const m of md.matchAll(codeRe)) {
-    const raw = String(m[1]).trim();
-    const rel = raw.includes('/') ? normalizeHrefToIndexRelPath(raw, ctx, idByRelPath) : null;
-    if (rel) {
-      const depId = idByRelPath.get(rel);
-      if (depId && !isSelf(depId)) deps.add(depId);
-      continue;
-    }
-
-    const id = normalizeId(raw);
-    if (id && !isSelf(id)) deps.add(id);
   }
 
   return [...deps].filter(Boolean);

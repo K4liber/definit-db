@@ -105,13 +105,7 @@
       background: #0f1526;
     }
 
-    .muted {
-      color: #a9b4c0;
-      font-size: 12px;
-      line-height: 1.4;
-    }
-
-    .kv {
+    .dagStats {
       display: grid;
       grid-template-columns: 130px 1fr;
       gap: 6px 10px;
@@ -119,7 +113,7 @@
       font-size: 13px;
     }
 
-    .kv div:nth-child(odd) {
+    .dagStats div:nth-child(odd) {
       color: #a9b4c0;
     }
 
@@ -133,9 +127,8 @@
       display: block;
     }
 
-    .node circle {
-      stroke: #0b0f19;
-      stroke-width: 1px;
+    .node .node-circle {
+      vector-effect: non-scaling-stroke;
     }
 
     .node text {
@@ -164,28 +157,6 @@
     .ring {
       stroke: rgba(56, 189, 248, 0.10);
       fill: none;
-    }
-
-    .legend {
-      margin-top: 10px;
-    }
-
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 8px;
-      border-radius: 999px;
-      border: 1px solid #24314f;
-      background: #0f1526;
-      font-size: 12px;
-    }
-
-    .swatch {
-      width: 10px;
-      height: 10px;
-      border-radius: 2px;
-      display: inline-block;
     }
 
     a {
@@ -248,23 +219,22 @@
     @keyframes pulseNode {
       0% {
         transform: scale(1);
-        opacity: 0.95;
+        opacity: 0.9;
       }
 
       50% {
-        transform: scale(1.18);
+        transform: scale(1.9);
         opacity: 1;
       }
 
       100% {
         transform: scale(1);
-        opacity: 0.95;
+        opacity: 0.9;
       }
     }
 
-    /* Apply pulse to the node's shape only (circle/star), not the whole <g> so labels stay readable */
-    .node.hovering .node-circle,
-    .node.hovering .node-star {
+    /* Apply pulse to the nodes, not the whole <g> so labels stay readable */
+    .node.hovering .node-circle {
       transform-box: fill-box;
       transform-origin: center;
       animation: pulseNode 900ms ease-in-out infinite;
@@ -274,16 +244,6 @@
     .ring.hovered {
       stroke: rgba(56, 189, 248, 0.55);
       stroke-width: 2px;
-    }
-
-    /* Keep circle outlines, but allow star stroke to be controlled by JS (search highlight) */
-    .node .node-star {
-      vector-effect: non-scaling-stroke;
-    }
-
-    /* Prevent the global circle stroke from applying to the leaf underline ring */
-    .node circle.leaf-underline {
-      stroke: none;
     }
   </style>
 </head>
@@ -300,7 +260,7 @@
         <div>
           <input id="search" type="text" placeholder="Search node by id/title..." />
         </div>
-        <div class="kv" id="stats"></div>
+        <div class="dagStats" id="stats"></div>
         <div class="viewer" id="viewer" style="display:none;">
           <h3 id="viewerTitle"></h3>
           <div class="path" id="viewerPath"></div>

@@ -189,3 +189,18 @@ Intended behavior (when enabled):
 - Click to expand/collapse subcategories.
 - Do **not** show definition leaf nodes.
 - Mark a category with no further subcategories as a final category (rendered as a star).
+
+## Mobile adapted view
+
+UI of the visualization is mobile adapted. The graph panel with graph visualized is always a rectangle in order to shown a level ring on a full panel.
+
+At the top of the screen we have the menu panel with the following buttons:
+- "Progress", focusing on the most outer ring with at least one definition in a state different than "off"
+- "Overview", focusing on the whole definitions graph
+- "Reset progress", resetting the current learning progress
+
+At the bottom of the screen we have the functional panel that can be hidden/shown using a button on the left side of the panel. When it is hidden then only a button to show it is visible on the panel. When it is shown it contains:
+- "Search", input for the searching functionality
+- "Content", content of an active definition
+- "Graph details", stats of a graph e.g. number of nodes
+The functional panel keeps it state, so even if it is hidden and then showed again, the state will remain and be displayed again.

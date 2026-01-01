@@ -16,54 +16,109 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       background: #0b0f19;
       color: #e6edf3;
+      overflow: hidden;
     }
 
     #app {
       height: 100%;
       display: grid;
-      grid-template-columns: 360px 1fr;
+      place-items: center;
+      padding: 10px;
+      box-sizing: border-box;
     }
 
-    /* Panel layout: top controls + middle scrollable content + bottom controls */
-    .panel {
-      border-right: 1px solid #1f2a44;
-      padding: 12px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .panelMain {
-      overflow: auto;
-      overflow-x: hidden;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    /* Shared-width centered viewport: top menu, main panel, bottom menu */
+    .viewport {
+      width: min(1100px, 100%);
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
       min-height: 0;
-      /* allow flex child to shrink */
-      flex: 1 1 auto;
-      /* take remaining space so bottom stays pinned */
+      position: relative;
     }
 
-    .top {
+    /* Top menu (centered) */
+    .topMenu {
       display: flex;
-      gap: 8px;
       align-items: center;
       justify-content: center;
+      gap: 8px;
       flex-wrap: wrap;
+      padding: 10px 12px;
+      border: 1px solid rgba(31, 42, 68, 0.9);
+      border-bottom: none;
+      background: rgba(11, 15, 25, 0.92);
+      backdrop-filter: blur(6px);
+      border-top-left-radius: 14px;
+      border-top-right-radius: 14px;
+      margin: 0;
+      box-sizing: border-box;
+      width: 100%;
     }
 
-    .bottom {
+    /* NEW: main panel (canvas + bottom panel) */
+    .mainPanel {
+      min-height: 0;
+      display: grid;
+      grid-template-rows: 1fr;
+      /* collapsed: canvas uses all */
+    }
+
+    .mainPanel.expanded {
+      grid-template-rows: 1fr 1fr;
+      /* expanded: 50/50 split */
+    }
+
+    .canvasArea {
+      position: relative;
+      min-height: 0;
       display: flex;
-      gap: 8px;
-      align-items: center;
+      align-items: stretch;
       justify-content: center;
-      flex-wrap: wrap;
-      padding-top: 8px;
-      border-top: 1px solid #1f2a44;
-      margin-top: auto;
-      /* pin to very bottom */
+      padding: 0;
+    }
+
+    /* Canvas fills all available space */
+    .canvasWrap {
+      width: 100%;
+      height: 100%;
+      border: 1px solid rgba(31, 42, 68, 0.9);
+      border-top: none;
+      border-bottom: none;
+      overflow: hidden;
+      background: radial-gradient(1200px 800px at 50% 40%, rgba(30, 58, 138, 0.10), rgba(15, 23, 42, 0.0)), #0b0f19;
+    }
+
+    /* Bottom panel participates in layout (not overlay). Hidden when not expanded. */
+    .bottomPanel {
+      position: relative;
+      left: auto;
+      right: auto;
+      top: auto;
+      bottom: auto;
+
+      display: none;
+      flex-direction: column;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .bottomPanel.expanded {
+      display: flex;
+    }
+
+    /* Keep it a rectangle by constraining the max width; height comes from layout */
+    @media (min-width: 900px) {
+      .canvasWrap {
+        border-left: 1px solid rgba(31, 42, 68, 0.9);
+        border-right: 1px solid rgba(31, 42, 68, 0.9);
+      }
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+      display: block;
     }
 
     input[type="text"] {
@@ -84,6 +139,7 @@
       background: #121a2f;
       color: #e6edf3;
       cursor: pointer;
+      user-select: none;
     }
 
     .btn:hover {
@@ -105,11 +161,125 @@
       background: #0f1526;
     }
 
+    /* Persistent bottom menu panel (toggle + search) */
+    .bottomMenu {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: flex-start;
+      padding: 8px 8px 10px 8px;
+      border: 1px solid rgba(31, 42, 68, 0.9);
+      border-top: none;
+      background: rgba(11, 15, 25, 0.92);
+      backdrop-filter: blur(6px);
+      border-bottom-left-radius: 14px;
+      border-bottom-right-radius: 14px;
+      box-sizing: border-box;
+    }
+
+    .bottomMenu input[type="text"] {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    /* Tabs header inside bottom panel */
+    .bottomPanelMenu {
+      display: flex;
+      gap: 8px;
+      padding: 6px;
+      border: 1px solid rgba(31, 42, 68, 0.9);
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.55);
+      backdrop-filter: blur(6px);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    .tabBtn {
+      flex: 1 1 0;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid #24314f;
+      background: #121a2f;
+      color: #e6edf3;
+      cursor: pointer;
+    }
+
+    .tabBtn:hover {
+      background: #162040;
+    }
+
+    .tabBtn.active {
+      background: #1a2850;
+      border-color: #35518f;
+    }
+
+    .tabPage {
+      display: none;
+      min-height: 0;
+    }
+
+    .tabPage.active {
+      display: block;
+    }
+
+    .bottomPanelContent {
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      justify-content: flex-start;
+
+      /* allow pushing sections to bottom */
+      min-height: 0;
+
+      background: rgba(11, 15, 25, 0.92);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(31, 42, 68, 0.9);
+      border-radius: 14px;
+      box-sizing: border-box;
+
+      height: 100%;
+      max-height: 100%;
+      overflow: auto;
+    }
+
+    /* Keep viewer at top; push the following panel sections to the bottom */
+    .bottomPanelContent> .panelSection.viewer {
+      margin-bottom: 0;
+      flex: 0 0 auto;
+      display: block;
+      min-height: auto;
+    }
+
+    /* Make the viewer body scroll within the remaining space */
+    .bottomPanelContent> .panelSection.viewer .viewerBody {
+      overflow: visible;
+    }
+
+    .panelSection {
+      border: 1px solid #24314f;
+      border-radius: 12px;
+      background: #0f1526;
+      padding: 10px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .panelSection h3 {
+      margin: 0 0 8px 0;
+      font-size: 13px;
+      color: #e6edf3;
+    }
+
     .dagStats {
       display: grid;
       grid-template-columns: 130px 1fr;
       gap: 6px 10px;
-      margin-top: 10px;
       font-size: 13px;
     }
 
@@ -117,74 +287,8 @@
       color: #a9b4c0;
     }
 
-    .canvasWrap {
-      position: relative;
-    }
-
-    svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    .node .node-circle {
-      vector-effect: non-scaling-stroke;
-    }
-
-    .node text {
-      fill: #e6edf3;
-      font-size: 11px;
-      pointer-events: none;
-    }
-
-    /* NOTE: Edge styles are set dynamically in TS based on learning state. */
-    .link {
-      fill: none;
-    }
-
-    /* Fallback classes (TS also sets inline stroke/width) */
-    .link.link-on {
-      stroke: rgba(226, 232, 240, 0.4);
-      stroke-width: 1;
-    }
-
-    .link.link-off {
-      stroke: rgba(148, 163, 184, 0.16);
-      stroke-width: 1;
-      stroke-dasharray: 3 5;
-    }
-
-    .ring {
-      stroke: rgba(56, 189, 248, 0.10);
-      fill: none;
-    }
-
     a {
       color: #7dd3fc;
-    }
-
-    .viewer {
-      margin-top: 12px;
-      padding: 10px;
-      border: 1px solid #24314f;
-      border-radius: 10px;
-      background: #0f1526;
-    }
-
-    .viewer h3 {
-      margin: 0 0 6px 0;
-      font-size: 13px;
-      color: #e6edf3;
-    }
-
-    .viewer .path {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 12px;
-      color: #a9b4c0;
-      margin-bottom: 8px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
     }
 
     .viewerBody {
@@ -196,6 +300,16 @@
 
     .viewerBody p {
       margin: 0 0 8px 0;
+    }
+
+    .viewer .path {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+      color: #a9b4c0;
+      margin-bottom: 8px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .viewerBody .dep {
@@ -214,6 +328,38 @@
       margin-top: 10px;
       display: flex;
       gap: 8px;
+      justify-content: flex-start;
+    }
+
+    /* Visualization styles */
+    .node .node-circle {
+      vector-effect: non-scaling-stroke;
+    }
+
+    .node text {
+      fill: #e6edf3;
+      font-size: 11px;
+      pointer-events: none;
+    }
+
+    .link {
+      fill: none;
+    }
+
+    .link.link-on {
+      stroke: rgba(226, 232, 240, 0.4);
+      stroke-width: 1;
+    }
+
+    .link.link-off {
+      stroke: rgba(148, 163, 184, 0.16);
+      stroke-width: 1;
+      stroke-dasharray: 3 5;
+    }
+
+    .ring {
+      stroke: rgba(56, 189, 248, 0.10);
+      fill: none;
     }
 
     @keyframes pulseNode {
@@ -233,7 +379,6 @@
       }
     }
 
-    /* Apply pulse to the nodes, not the whole <g> so labels stay readable */
     .node.hovering .node-circle {
       transform-box: fill-box;
       transform-origin: center;
@@ -250,34 +395,55 @@
 
 <body>
   <div id="app">
-    <div class="panel">
-      <div class="top">
-        <button id="modeDefinitions" class="btn active">Definitions</button>
-        <button id="modeCategories" class="btn" disabled title="Temporarily disabled">Categories</button>
+    <div class="viewport">
+      <div class="topMenu">
+        <button id="progress" class="btn">Current progress</button>
+        <button id="overview" class="btn">Full graph</button>
+        <button id="resetProgress" class="btn">Reset progress</button>
       </div>
 
-      <div class="panelMain">
-        <div>
-          <input id="search" type="text" placeholder="Search node by id/title..." />
+      <!-- NEW: main panel (canvas + bottom panel) -->
+      <div id="mainPanel" class="mainPanel">
+        <div class="canvasArea">
+          <div class="canvasWrap">
+            <svg id="viz"></svg>
+          </div>
         </div>
-        <div class="dagStats" id="stats"></div>
-        <div class="viewer" id="viewer" style="display:none;">
-          <h3 id="viewerTitle"></h3>
-          <div class="path" id="viewerPath"></div>
-          <div id="viewerBody" class="viewerBody"></div>
-          <div class="viewerActions">
-            <button id="markLearned" class="btn" style="display:none;">Mark as learned</button>
+
+        <div id="bottomPanel" class="bottomPanel">
+          <div class="bottomPanelContent">
+            <div class="bottomPanelMenu" role="tablist" aria-label="Bottom panel tabs">
+              <button id="tabDefinition" class="tabBtn active" type="button" role="tab" aria-selected="true" aria-controls="tabPageDefinition">Definition</button>
+              <button id="tabGraph" class="tabBtn" type="button" role="tab" aria-selected="false" aria-controls="tabPageGraph">Graph</button>
+            </div>
+
+            <div id="tabPageDefinition" class="tabPage active" role="tabpanel" aria-labelledby="tabDefinition">
+              <div class="panelSection viewer" id="viewer">
+                <h3 id="viewerTitle">Content</h3>
+                <div class="path" id="viewerPath" style="display:none;"></div>
+                <div id="viewerBody" class="viewerBody">
+                  <p style="margin:0; color:#a9b4c0;">Select a definition to show the content.</p>
+                </div>
+                <div class="viewerActions">
+                  <button id="markLearned" class="btn" style="display:none;">Mark as learned</button>
+                </div>
+              </div>
+            </div>
+
+            <div id="tabPageGraph" class="tabPage" role="tabpanel" aria-labelledby="tabGraph">
+              <div class="panelSection">
+                <h3>Graph details</h3>
+                <div class="dagStats" id="stats"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="bottom">
-        <button id="focus" class="btn">Overview</button>
-        <button id="resetProgress" class="btn">Reset progress</button>
+      <div class="bottomMenu">
+        <button id="togglePanel" class="btn" aria-expanded="false" aria-controls="bottomPanel" aria-label="Toggle bottom panel">▲</button>
+        <input id="search" type="text" placeholder="Search node by id/title..." />
       </div>
-    </div>
-    <div class="canvasWrap">
-      <svg id="viz"></svg>
     </div>
   </div>
 

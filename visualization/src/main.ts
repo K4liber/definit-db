@@ -610,6 +610,9 @@ function selectLeafById(id: string) {
   const node = lastProjected.nodes.find((n) => n.id === id);
   if (!node) return;
 
+  // Ensure the functional panel is visible when selecting a node.
+  setPanelCollapsed(false);
+
   // Track selection for ring focus + pulsing.
   state.selectedLeaf = id;
   selectedNodeId = id;
@@ -701,18 +704,21 @@ function renderViewerBody(md: string, deps: string[]) {
 }
 
 function showViewer(node: DefNode, md: string) {
-  viewerEl.style.display = 'block';
+  viewerEl.style.display = '';
   viewerTitleEl.textContent = node.title;
+  viewerPathEl.style.display = '';
   viewerPathEl.textContent = `${node.relPath}.md`;
   renderViewerBody(md, node.deps ?? []);
   updateMarkLearnedButton(node);
 }
 
 function hideViewer() {
-  viewerEl.style.display = 'none';
-  viewerTitleEl.textContent = '';
+  // Keep the viewer panel visible, but show a placeholder.
+  viewerEl.style.display = '';
+  viewerTitleEl.textContent = 'Content';
   viewerPathEl.textContent = '';
-  viewerBodyEl.textContent = '';
+  viewerPathEl.style.display = 'none';
+  viewerBodyEl.innerHTML = '<p style="margin:0; color:#a9b4c0;">Select a definition to show the content.</p>';
   updateMarkLearnedButton(undefined);
 }
 
@@ -913,6 +919,9 @@ function focusRingOfNode(id: string) {
 async function openLeaf(node: DefNode) {
   if (!node.relPath) return;
 
+  // Ensure the functional panel is visible when opening a node.
+  setPanelCollapsed(false);
+
   // Ensure pulsing matches whatever opened the viewer.
   selectedNodeId = node.id;
   applyRingHighlight();
@@ -925,44 +934,117 @@ async function openLeaf(node: DefNode) {
 // Initial render
 rerender(false);
 
-// UI wiring
-const overviewBtn = (document.getElementById('focus') ?? document.getElementById('overview')) as HTMLButtonElement | null;
-overviewBtn?.addEventListener('click', () => {
-  if (!lastProjected) return;
-  // Fit whole graph: focus max ring.
-  const maxLevel = Math.max(0, ...lastProjected.nodes.map((n) => n.level ?? 0));
-  focusRing(maxLevel);
-  setRingHighlight(maxLevel);
+// Bottom functional panel collapse/expand (persisted)
+const PANEL_COLLAPSED_KEY = 'definit-db.ui.bottomPanelCollapsed';
+const bottomPanelEl = document.getElementById('bottomPanel') as HTMLDivElement | null;
+const togglePanelBtn = document.getElementById('togglePanel') as HTMLButtonElement | null;
+const mainPanelEl = document.getElementById('mainPanel') as HTMLDivElement | null;
+
+function setPanelCollapsed(collapsed: boolean) {
+  if (!bottomPanelEl || !togglePanelBtn) return;
+  // Track if the state has changed
+  const stateChanged = togglePanelBtn.getAttribute('aria-expanded') !== String(!collapsed);
+
+  if (!stateChanged) return;
+
+  bottomPanelEl.classList.toggle('expanded', !collapsed);
+  mainPanelEl?.classList.toggle('expanded', !collapsed);
+
+  togglePanelBtn.textContent = collapsed ? '▲' : '▼';
+  togglePanelBtn.setAttribute('aria-expanded', String(!collapsed));
+
+  try {
+    localStorage.setItem(PANEL_COLLAPSED_KEY, collapsed ? '1' : '0');
+  } catch {
+    // ignore
+  }
+
+  requestAnimationFrame(() => {
+    focusHighestActiveRing();
+  });
+}
+
+if (bottomPanelEl && togglePanelBtn) {
+  let initialCollapsed = false;
+  try {
+    initialCollapsed = localStorage.getItem(PANEL_COLLAPSED_KEY) === '1';
+  } catch {
+    initialCollapsed = false;
+  }
+
+  setPanelCollapsed(initialCollapsed);
+
+  togglePanelBtn.addEventListener('click', (ev) => {
+    ev.preventDefault();
+    const collapsed = !bottomPanelEl.classList.contains('expanded');
+    setPanelCollapsed(!collapsed);
+  });
+}
+
+// Bottom panel tabs
+const tabDefinitionBtn = document.getElementById('tabDefinition') as HTMLButtonElement | null;
+const tabGraphBtn = document.getElementById('tabGraph') as HTMLButtonElement | null;
+const tabPageDefinition = document.getElementById('tabPageDefinition') as HTMLDivElement | null;
+const tabPageGraph = document.getElementById('tabPageGraph') as HTMLDivElement | null;
+
+function setBottomTab(tab: 'definition' | 'graph') {
+  const isDef = tab === 'definition';
+
+  tabDefinitionBtn?.classList.toggle('active', isDef);
+  tabGraphBtn?.classList.toggle('active', !isDef);
+
+  tabDefinitionBtn?.setAttribute('aria-selected', String(isDef));
+  tabGraphBtn?.setAttribute('aria-selected', String(!isDef));
+
+  tabPageDefinition?.classList.toggle('active', isDef);
+  tabPageGraph?.classList.toggle('active', !isDef);
+}
+
+tabDefinitionBtn?.addEventListener('click', (ev) => {
+  ev.preventDefault();
+  setBottomTab('definition');
 });
 
-const resetBtn =
-  (document.getElementById('resetProgress') ?? document.getElementById('reset')) as HTMLButtonElement | null;
-resetBtn?.addEventListener('click', () => {
-  clearLearnedProgress();
-  saveLearnedToStorage();
-  hideViewer();
-  rerender(true);
+tabGraphBtn?.addEventListener('click', (ev) => {
+  ev.preventDefault();
+  setBottomTab('graph');
 });
 
-const modeDefinitionsBtn = document.getElementById('modeDefinitions') as HTMLButtonElement | null;
-modeDefinitionsBtn?.addEventListener('click', () => {
+// Default tab
+setBottomTab('definition');
+
+// Progress button: focus highest ring that has at least one node not "off" (ready/learned preferred)
+const progressBtn = (document.getElementById('progress')) as
+  | HTMLButtonElement
+  | null;
+progressBtn?.addEventListener('click', () => {
   state.mode = 'definitions';
 
-  // Reset selection + viewer when switching back to Definitions.
+  // Clear selection + viewer to behave like entering Progress mode.
   state.selectedLeaf = undefined;
   selectedNodeId = null;
   hideViewer();
 
-  // Re-render, then focus to the highest active ring (same logic as init).
   rerender(true);
-
   requestAnimationFrame(() => {
     focusHighestActiveRing();
   });
 });
 
-const modeCategoriesBtn = document.getElementById('modeCategories') as HTMLButtonElement | null;
-modeCategoriesBtn?.addEventListener('click', () => {
-  // Categories mode intentionally disabled/experimental.
-  return;
+// Overview button: fit whole graph into view
+const overviewBtn = (document.getElementById('overview') ?? document.getElementById('focus')) as HTMLButtonElement | null;
+overviewBtn?.addEventListener('click', () => {
+  if (!lastProjected) return;
+  const maxLevel = Math.max(0, ...lastProjected.nodes.map((n) => n.level ?? 0));
+  focusRing(maxLevel);
+  setRingHighlight(maxLevel);
+});
+
+// Reset progress button
+const resetBtn = (document.getElementById('resetProgress') ?? document.getElementById('reset')) as HTMLButtonElement | null;
+resetBtn?.addEventListener('click', () => {
+  clearLearnedProgress();
+  saveLearnedToStorage();
+  hideViewer();
+  rerender(true);
 });

@@ -27,7 +27,6 @@
       box-sizing: border-box;
     }
 
-    /* Shared-width centered viewport: top menu, main panel, bottom menu */
     .viewport {
       width: min(1100px, 100%);
       height: 100%;
@@ -37,7 +36,6 @@
       position: relative;
     }
 
-    /* Top menu (centered) */
     .topMenu {
       display: flex;
       align-items: center;
@@ -56,12 +54,10 @@
       width: 100%;
     }
 
-    /* NEW: main panel (canvas + bottom panel) */
     .mainPanel {
       min-height: 0;
       display: grid;
       grid-template-rows: 1fr;
-      /* collapsed: canvas uses all */
     }
 
     .mainPanel.expanded {
@@ -161,7 +157,6 @@
       background: #0f1526;
     }
 
-    /* Persistent bottom menu panel (toggle + search) */
     .bottomMenu {
       display: flex;
       align-items: center;
@@ -182,7 +177,6 @@
       min-width: 0;
     }
 
-    /* Tabs header inside bottom panel */
     .bottomPanelMenu {
       display: flex;
       gap: 8px;
@@ -233,31 +227,16 @@
       align-items: stretch;
       justify-content: flex-start;
 
-      /* allow pushing sections to bottom */
-      min-height: 0;
-
       background: rgba(11, 15, 25, 0.92);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(31, 42, 68, 0.9);
       border-radius: 14px;
       box-sizing: border-box;
 
+      min-height: 0;
       height: 100%;
       max-height: 100%;
       overflow: auto;
-    }
-
-    /* Keep viewer at top; push the following panel sections to the bottom */
-    .bottomPanelContent> .panelSection.viewer {
-      margin-bottom: 0;
-      flex: 0 0 auto;
-      display: block;
-      min-height: auto;
-    }
-
-    /* Make the viewer body scroll within the remaining space */
-    .bottomPanelContent> .panelSection.viewer .viewerBody {
-      overflow: visible;
     }
 
     .panelSection {
@@ -391,7 +370,7 @@
       stroke-width: 2px;
     }
   </style>
-  <script type="module" crossorigin src="./assets/index-BKIdjhrE.js"></script>
+  <script type="module" crossorigin src="./assets/index-CwhueUO_.js"></script>
 </head>
 
 <body>
@@ -403,7 +382,6 @@
         <button id="resetProgress" class="btn">Reset progress</button>
       </div>
 
-      <!-- NEW: main panel (canvas + bottom panel) -->
       <div id="mainPanel" class="mainPanel">
         <div class="canvasArea">
           <div class="canvasWrap">

@@ -934,10 +934,6 @@ async function openLeaf(node: DefNode) {
 // Initial render
 rerender(false);
 
-// -------------------------------
-// UI wiring (new mobile layout)
-// -------------------------------
-
 // Bottom functional panel collapse/expand (persisted)
 const PANEL_COLLAPSED_KEY = 'definit-db.ui.bottomPanelCollapsed';
 const bottomPanelEl = document.getElementById('bottomPanel') as HTMLDivElement | null;
@@ -946,13 +942,14 @@ const mainPanelEl = document.getElementById('mainPanel') as HTMLDivElement | nul
 
 function setPanelCollapsed(collapsed: boolean) {
   if (!bottomPanelEl || !togglePanelBtn) return;
+  // Track if the state has changed
+  const stateChanged = togglePanelBtn.getAttribute('aria-expanded') !== String(!collapsed);
 
-  // Panel: expanded when NOT collapsed.
+  if (!stateChanged) return;
+
   bottomPanelEl.classList.toggle('expanded', !collapsed);
   mainPanelEl?.classList.toggle('expanded', !collapsed);
 
-  // Expanded -> show "▼" (collapse)
-  // Collapsed -> show "▲" (expand)
   togglePanelBtn.textContent = collapsed ? '▲' : '▼';
   togglePanelBtn.setAttribute('aria-expanded', String(!collapsed));
 
@@ -961,6 +958,10 @@ function setPanelCollapsed(collapsed: boolean) {
   } catch {
     // ignore
   }
+
+  requestAnimationFrame(() => {
+    focusHighestActiveRing();
+  });
 }
 
 if (bottomPanelEl && togglePanelBtn) {
@@ -1013,7 +1014,7 @@ tabGraphBtn?.addEventListener('click', (ev) => {
 setBottomTab('definition');
 
 // Progress button: focus highest ring that has at least one node not "off" (ready/learned preferred)
-const progressBtn = (document.getElementById('progress') ?? document.getElementById('modeDefinitions')) as
+const progressBtn = (document.getElementById('progress')) as
   | HTMLButtonElement
   | null;
 progressBtn?.addEventListener('click', () => {
@@ -1046,26 +1047,4 @@ resetBtn?.addEventListener('click', () => {
   saveLearnedToStorage();
   hideViewer();
   rerender(true);
-});
-
-// Back-compat: if the older "Definitions" button exists, keep it working too.
-const modeDefinitionsBtn = document.getElementById('modeDefinitions') as HTMLButtonElement | null;
-modeDefinitionsBtn?.addEventListener('click', () => {
-  state.mode = 'definitions';
-
-  state.selectedLeaf = undefined;
-  selectedNodeId = null;
-  hideViewer();
-
-  rerender(true);
-
-  requestAnimationFrame(() => {
-    focusHighestActiveRing();
-  });
-});
-
-const modeCategoriesBtn = document.getElementById('modeCategories') as HTMLButtonElement | null;
-modeCategoriesBtn?.addEventListener('click', () => {
-  // Categories mode intentionally disabled/experimental.
-  return;
 });

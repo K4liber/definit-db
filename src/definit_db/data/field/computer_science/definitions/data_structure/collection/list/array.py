@@ -3,7 +3,7 @@ from definit.definition.definition_key import DefinitionKey
 
 from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.data_structure.collection.list.list import LIST
-from definit_db.data.field.computer_science.definitions.foundamental.data_type import DATA_TYPE
+from definit_db.data.field.computer_science.definitions.fundamental.data_type import DATA_TYPE
 
 
 class _Array(Definition):

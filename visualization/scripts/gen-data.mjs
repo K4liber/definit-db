@@ -28,7 +28,7 @@ function parseIndex(md) {
     const relPath = m[2].replace(/\.md$/i, '');
 
     // Use relPath as the stable, human-readable unique id.
-    // Example: "computer_science/foundamental/bit"
+    // Example: "computer_science/fundamental/bit"
     const id = relPath;
 
     const filePath = path.resolve(defsRoot, `${relPath}.md`);

@@ -3,10 +3,10 @@ from definit.definition.definition_key import DefinitionKey
 
 from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.data_structure.primitive.integer import INTEGER
-from definit_db.data.field.mathematics.definitions.fundamental.notations.label import LABEL
 from definit_db.data.field.mathematics.definitions.graph.edge import EDGE
 from definit_db.data.field.mathematics.definitions.graph.graph import GRAPH
 from definit_db.data.field.mathematics.definitions.graph.node import NODE
+from definit_db.data.field.mathematics.definitions.notations.label import LABEL
 from definit_db.data.field.mathematics.definitions.problem.problem import PROBLEM
 
 

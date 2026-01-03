@@ -5,7 +5,7 @@ from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.data_structure.collection.string.character_encoding import (
     CHARACTER_ENCODING,
 )
-from definit_db.data.field.computer_science.definitions.foundamental.bit import BIT
+from definit_db.data.field.computer_science.definitions.fundamental.bit import BIT
 
 
 class _Ascii(Definition):

@@ -188,6 +188,7 @@
       position: sticky;
       top: 0;
       z-index: 2;
+      flex: 0 0 auto;
     }
 
     .tabBtn {
@@ -218,6 +219,7 @@
       display: block;
     }
 
+    /* NOTE: Keep bottom panel scrolling exactly as it was originally. */
     .bottomPanelContent {
       padding: 10px 12px;
       display: flex;
@@ -239,35 +241,105 @@
       overflow: auto;
     }
 
-    .panelSection {
-      border: 1px solid #24314f;
-      border-radius: 12px;
-      background: #0f1526;
-      padding: 10px;
-      width: 100%;
-      max-width: 100%;
-      box-sizing: border-box;
+    /* Avoid forcing fixed height on panel sections; let tab page manage scrolling */
+    .tabPage .panelSection {
+      height: auto;
+      min-height: 0;
     }
 
-    .panelSection h3 {
-      margin: 0 0 8px 0;
-      font-size: 13px;
-      color: #e6edf3;
+    /* Categories (Explorer-like) */
+    .categoriesTree {
+      font-size: 12px;
+      line-height: 1.55;
+      user-select: none;
     }
 
-    .dagStats {
-      display: grid;
-      grid-template-columns: 130px 1fr;
-      gap: 6px 10px;
-      font-size: 13px;
+    .treeRow {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 2px;
+      border-radius: 6px;
+      cursor: default;
     }
 
-    .dagStats div:nth-child(odd) {
+    .treeRow:hover {
+      background: rgba(30, 58, 138, 0.10);
+    }
+
+    .treeRow.clickable {
+      cursor: pointer;
+    }
+
+    .treeIndent {
+      width: calc(var(--indent, 0) * 14px);
+      flex: 0 0 auto;
+    }
+
+    .treeChevron {
+      width: 14px;
+      height: 14px;
+      display: inline-grid;
+      place-items: center;
       color: #a9b4c0;
+      flex: 0 0 auto;
+      visibility: hidden;
     }
 
-    a {
-      color: #7dd3fc;
+    .treeRow.hasChildren .treeChevron {
+      visibility: visible;
+    }
+
+    .treeChevron.open {
+      transform: rotate(90deg);
+    }
+
+    .treeCheckbox {
+      width: 14px;
+      height: 14px;
+      accent-color: #38bdf8;
+      flex: 0 0 auto;
+    }
+
+    .treeLabel {
+      flex: 1 1 auto;
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .treeMeta {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #a9b4c0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 11px;
+    }
+
+    .stateDot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    .stateDot.off {
+      background: rgba(148, 163, 184, 0.45);
+    }
+
+    .stateDot.visible {
+      background: rgba(148, 163, 184, 0.95);
+    }
+
+    .stateDot.ready {
+      background: #fbbf24;
+    }
+
+    .stateDot.learned {
+      background: #22c55e;
     }
 
     .viewerBody {
@@ -369,6 +441,24 @@
       stroke: rgba(56, 189, 248, 0.55);
       stroke-width: 2px;
     }
+
+    .panelSection h3 {
+      margin: 0 0 8px 0;
+      font-size: 13px;
+      color: #e6edf3;
+    }
+
+    /* Graph tab stats grid */
+    .dagStats {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 6px 10px;
+      font-size: 13px;
+    }
+
+    .dagStats div:nth-child(odd) {
+      color: #a9b4c0;
+    }
   </style>
 </head>
 
@@ -392,6 +482,7 @@
           <div class="bottomPanelContent">
             <div class="bottomPanelMenu" role="tablist" aria-label="Bottom panel tabs">
               <button id="tabDefinition" class="tabBtn active" type="button" role="tab" aria-selected="true" aria-controls="tabPageDefinition">Definition</button>
+              <button id="tabCategories" class="tabBtn" type="button" role="tab" aria-selected="false" aria-controls="tabPageCategories">Categories</button>
               <button id="tabGraph" class="tabBtn" type="button" role="tab" aria-selected="false" aria-controls="tabPageGraph">Graph</button>
             </div>
 
@@ -405,6 +496,13 @@
                 <div class="viewerActions">
                   <button id="markLearned" class="btn" style="display:none;">Mark as learned</button>
                 </div>
+              </div>
+            </div>
+
+            <div id="tabPageCategories" class="tabPage" role="tabpanel" aria-labelledby="tabCategories">
+              <div class="panelSection">
+                <h3>Categories</h3>
+                <div id="categoriesTree" class="categoriesTree"></div>
               </div>
             </div>
 

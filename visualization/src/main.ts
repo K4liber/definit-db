@@ -1,6 +1,10 @@
 import * as d3 from 'd3';
 import type { DefGraph, DefNode } from './types';
 
+// Keep raw graph around so checkbox toggles can materialize default included set.
+// It is assigned in rerender() after defs.json is loaded.
+let raw: Raw | null = null;
+
 const svg = d3.select<SVGSVGElement, unknown>('#viz');
 
 const W = () => svg.node()!.clientWidth;
@@ -98,7 +102,106 @@ const COLOR_LEARNED = '#22c55e'; // green
 
 type LearnState = 'off' | 'visible' | 'ready' | 'learned';
 
+// Learning progress is persisted independently from visibility filtering.
 const LEARNED_STORAGE_KEY = 'definit-db.learned';
+
+// --- Categories visibility (checkbox) model ---
+// A checked box means the item is INCLUDED in the graph.
+const VISIBILITY_STORAGE_KEY = 'definit-db.ui.includedIds';
+
+function loadIncludedFromStorage() {
+  try {
+    const raw = localStorage.getItem(VISIBILITY_STORAGE_KEY);
+    if (!raw) return null as Set<string> | null;
+    const arr = JSON.parse(raw);
+    if (!Array.isArray(arr)) return null;
+    return new Set<string>(arr.filter((x) => typeof x === 'string'));
+  } catch {
+    return null;
+  }
+}
+
+function saveIncludedToStorage(set: Set<string>) {
+  try {
+    localStorage.setItem(VISIBILITY_STORAGE_KEY, JSON.stringify(Array.from(set)));
+  } catch {
+    // ignore
+  }
+}
+
+// Manual selection is persisted, but can be overwritten by a recompute.
+let includedIds: Set<string> | null = loadIncludedFromStorage();
+
+function recomputeIncludedSetFromReady(rawGraph: Raw) {
+  // Identify the *specific* categories (immediate parent folder) that contain >=1 READY node.
+  // We intentionally do NOT bubble readiness up to ancestors (fields).
+  const readyParentPrefixes = new Set<string>();
+
+  for (const n of rawGraph.def.nodes) {
+    if (learnStateForNode(n) !== 'ready') continue;
+
+    const parts = splitPath(n.id);
+    const parentDepth = Math.max(1, parts.length - 1);
+    const parent = groupIdForPath(parts, parentDepth);
+    if (parent) readyParentPrefixes.add(parent);
+  }
+
+  // If nothing is ready, default to include everything.
+  if (!readyParentPrefixes.size) {
+    includedIds = null;
+    try {
+      localStorage.removeItem(VISIBILITY_STORAGE_KEY);
+    } catch {
+      // ignore
+    }
+    return;
+  }
+
+  includedIds = new Set<string>();
+
+  for (const leaf of rawGraph.def.nodes) {
+    const parts = splitPath(leaf.id);
+    const parentDepth = Math.max(1, parts.length - 1);
+    const parent = groupIdForPath(parts, parentDepth);
+
+    if (parent && readyParentPrefixes.has(parent)) includedIds.add(leaf.id);
+  }
+
+  saveIncludedToStorage(includedIds);
+}
+
+function isIncluded(id: string) {
+  // Default: include everything.
+  if (!includedIds) return true;
+  return includedIds.has(id);
+}
+
+function setIncluded(id: string, include: boolean) {
+  if (!includedIds) {
+    // First time the user changes something: materialize the full included set.
+    includedIds = new Set<string>((raw?.def.nodes ?? []).map((n: DefNode) => n.id));
+  }
+  if (!includedIds) includedIds = new Set<string>();
+
+  if (include) includedIds.add(id);
+  else includedIds.delete(id);
+
+  saveIncludedToStorage(includedIds);
+}
+
+function setIncludedMany(ids: string[], include: boolean) {
+  if (!includedIds) {
+    includedIds = new Set<string>((raw?.def.nodes ?? []).map((n: DefNode) => n.id));
+  }
+  if (!includedIds) includedIds = new Set<string>();
+
+  for (const id of ids) {
+    if (include) includedIds.add(id);
+    else includedIds.delete(id);
+  }
+
+  saveIncludedToStorage(includedIds);
+}
 
 function loadLearnedFromStorage() {
   try {
@@ -136,6 +239,7 @@ function learnStateForNode(n: DefNode): LearnState {
   if (learned.has(n.id)) return 'learned';
 
   // Ready if all deps are learned (including "no deps").
+  // IMPORTANT: this is intentionally independent from UI visibility (checkbox filtering).
   const deps = n.deps ?? [];
   const allLearned = deps.every((d) => learned.has(d));
   if (allLearned) return 'ready';
@@ -282,6 +386,74 @@ function computeLevels(nodes: DefNode[]) {
   for (const n of nodes) dfs(n.id);
 }
 
+// Compute group DAG (prefix -> prefix) from leaf deps and return per-group level.
+function computeGroupLevels(raw: Raw) {
+  const groups = new Set<string>(raw.childrenByPrefix.keys());
+
+  const depsByGroup = new Map<string, Set<string>>();
+  for (const g of groups) depsByGroup.set(g, new Set());
+
+  const groupOfLeafAtDepth = (leafId: string, depth: number) => {
+    const parts = splitPath(leafId);
+    if (parts.length < depth) return null;
+    // group prefixes exist only for depths < leaf length
+    if (depth > parts.length - 1) return null;
+    return groupIdForPath(parts, depth);
+  };
+
+  // Group dependency rule: if any leaf within A depends on any leaf within B,
+  // then A depends on B (at that same depth), unless it stays within the same group.
+  for (const n of raw.def.nodes) {
+    const srcParts = splitPath(n.id);
+    for (const depId of n.deps ?? []) {
+      const depParts = splitPath(depId);
+
+      const maxDepth = Math.min(srcParts.length - 1, depParts.length - 1);
+      for (let d = 1; d <= maxDepth; d++) {
+        const a = groupOfLeafAtDepth(n.id, d);
+        const b = groupOfLeafAtDepth(depId, d);
+        if (!a || !b) continue;
+        if (a === b) continue;
+        depsByGroup.get(a)?.add(b);
+      }
+    }
+  }
+
+  // Level is max(dep.level + 1) (same as leaf levels). DAG assumed.
+  const levelByGroup = new Map<string, number>();
+  const visiting = new Set<string>();
+  const visited = new Set<string>();
+
+  const dfs = (g: string): number => {
+    const cached = levelByGroup.get(g);
+    if (cached !== undefined) return cached;
+    if (visited.has(g)) return levelByGroup.get(g) ?? 0;
+    if (visiting.has(g)) return 0; // should not happen if DAG; guard anyway
+
+    visiting.add(g);
+    let lvl = 0;
+    for (const dep of depsByGroup.get(g) ?? []) {
+      lvl = Math.max(lvl, dfs(dep) + 1);
+    }
+    visiting.delete(g);
+    visited.add(g);
+    levelByGroup.set(g, lvl);
+    return lvl;
+  };
+
+  for (const g of groups) dfs(g);
+
+  return { depsByGroup, levelByGroup };
+}
+
+// For sorting groups: compare by topo level first, then name.
+function compareGroupsTopo(a: TreeNode, b: TreeNode) {
+  const la = a.groupLevel ?? 0;
+  const lb = b.groupLevel ?? 0;
+  if (la !== lb) return la - lb;
+  return a.name.localeCompare(b.name);
+}
+
 function draw(graph: DefGraph) {
   // Ensure dynamic levels exist for rendering.
   computeLevels(graph.nodes);
@@ -418,8 +590,7 @@ function draw(graph: DefGraph) {
   nodeSel
     .select('title')
     .text((d: DefNode) => {
-      const path = `${d.category}.md`
-      return `${d.title} (level: ${d.level ?? 0})\n${path}`;
+      return `${d.title} (level: ${d.level ?? 0})\n${d.category}`;
     });
 
   // hover effect
@@ -546,6 +717,9 @@ function updateMarkLearnedButton(node?: DefNode) {
     learned.add(node.id);
     saveLearnedToStorage();
 
+    // After learning, recompute the suggested visibility set (may unlock/shift readiness).
+    if (raw) recomputeIncludedSetFromReady(raw);
+
     // Re-render to update node+edge styles and any newly-ready nodes.
     rerender(true);
 
@@ -650,12 +824,11 @@ function renderViewerBody(md: string, deps: string[]) {
   const depMap = buildDepLinkMap(deps);
 
   // (A) convert markdown links [label](href) into dependency spans (when href points to a known dep)
-  // We support both absolute-like "field/path" and simple "field/name" hrefs (no .md).
   const linkRe = /\[([^\]]+)\]\(([^)]+)\)/g;
 
   const replaced = clean.replace(linkRe, (_m, labelRaw, hrefRaw) => {
     const label = String(labelRaw ?? '').trim();
-    const href = String(hrefRaw ?? '').trim().replace(/\.md$/i, '');
+    const href = String(hrefRaw ?? '').trim();
 
     // Try to resolve by exact dep id first.
     let depId: string | undefined;
@@ -704,7 +877,7 @@ function showViewer(node: DefNode, md: string) {
   viewerEl.style.display = '';
   viewerTitleEl.textContent = node.title;
   viewerPathEl.style.display = '';
-  viewerPathEl.textContent = `${node.category}.md`;
+  viewerPathEl.textContent = node.category;
   renderViewerBody(md, node.deps ?? []);
   updateMarkLearnedButton(node);
 }
@@ -757,37 +930,323 @@ function buildRaw(def: DefGraph): Raw {
   return { def, byId, childrenByPrefix, fields };
 }
 
+type TreeNode = {
+  id: string; // prefix (group) or leaf id
+  name: string;
+  kind: 'group' | 'leaf';
+  depth: number;
+  children: TreeNode[];
+  // leaf metadata
+  leaf?: DefNode;
+  // group metadata
+  groupLevel?: number;
+};
+
+const CATEGORIES_OPEN_KEY = 'definit-db.ui.categories.openPrefixes';
+function loadOpenPrefixes() {
+  try {
+    const raw = localStorage.getItem(CATEGORIES_OPEN_KEY);
+    if (!raw) return new Set<string>();
+    const arr = JSON.parse(raw);
+    if (!Array.isArray(arr)) return new Set<string>();
+    return new Set<string>(arr.filter((x) => typeof x === 'string'));
+  } catch {
+    return new Set<string>();
+  }
+}
+function saveOpenPrefixes(s: Set<string>) {
+  try {
+    localStorage.setItem(CATEGORIES_OPEN_KEY, JSON.stringify(Array.from(s)));
+  } catch {
+    // ignore
+  }
+}
+
+let openPrefixes = loadOpenPrefixes();
+
+function learnStateRank(s: LearnState) {
+  // Desired order: ready, learned, visible, off
+  if (s === 'ready') return 0;
+  if (s === 'learned') return 1;
+  if (s === 'visible') return 2;
+  return 3;
+}
+
+function computeVisibleSetFromProjected(projected: DefGraph) {
+  // Same logic as inside draw(), but we need it for Categories sorting.
+  const visible = new Set<string>();
+  const byId = new Map(projected.nodes.map((n) => [n.id, n] as const));
+
+  for (const e of projected.edges as Array<{ source: string; target: string }>) {
+    const prereq = byId.get(e.target);
+    if (!prereq) continue;
+    if (learnStateForNode(prereq) !== 'learned') continue;
+
+    const dep = byId.get(e.source);
+    if (!dep) continue;
+    if (learnStateForNode(dep) === 'off') visible.add(dep.id);
+  }
+
+  return visible;
+}
+
+function stateForCategories(leaf: DefNode, visibleNodeIds: Set<string>): LearnState {
+  const base = learnStateForNode(leaf);
+  return base === 'off' && visibleNodeIds.has(leaf.id) ? 'visible' : base;
+}
+
+function buildCategoryTree(raw: Raw, projected: DefGraph) {
+  const byId = raw.byId;
+  const visibleNodeIds = computeVisibleSetFromProjected(projected);
+
+  const { levelByGroup } = computeGroupLevels(raw);
+
+  const root: TreeNode = { id: '', name: '', kind: 'group', depth: 0, children: [], groupLevel: 0 };
+
+  // Insert leaves into a folder-like tree based on id path parts.
+  for (const leaf of raw.def.nodes) {
+    const parts = splitPath(leaf.id);
+    let cur = root;
+    for (let i = 0; i < parts.length - 1; i++) {
+      const prefix = parts.slice(0, i + 1).join('/');
+      let child = cur.children.find((c) => c.kind === 'group' && c.id === prefix);
+      if (!child) {
+        child = {
+          id: prefix,
+          name: parts[i],
+          kind: 'group',
+          depth: i + 1,
+          children: [],
+          groupLevel: levelByGroup.get(prefix) ?? 0,
+        };
+        cur.children.push(child);
+      } else {
+        // Ensure computed group level is present even if node existed.
+        child.groupLevel = levelByGroup.get(prefix) ?? child.groupLevel ?? 0;
+      }
+      cur = child;
+    }
+
+    const leafNode: TreeNode = {
+      id: leaf.id,
+      name: parts.at(-1) ?? leaf.id,
+      kind: 'leaf',
+      depth: parts.length,
+      children: [],
+      leaf: byId.get(leaf.id) ?? leaf,
+    };
+    cur.children.push(leafNode);
+  }
+
+  const sortRec = (n: TreeNode) => {
+    for (const c of n.children) sortRec(c);
+
+    n.children.sort((a, b) => {
+      if (a.kind !== b.kind) return a.kind === 'group' ? -1 : 1;
+
+      if (a.kind === 'group' && b.kind === 'group') {
+        return compareGroupsTopo(a, b);
+      }
+
+      // leaf sort: 1) state 2) level 3) title
+      const la = a.leaf!;
+      const lb = b.leaf!;
+
+      const sa = stateForCategories(la, visibleNodeIds);
+      const sb = stateForCategories(lb, visibleNodeIds);
+      const ra = learnStateRank(sa);
+      const rb = learnStateRank(sb);
+      if (ra !== rb) return ra - rb;
+
+      const da = la.level ?? 0;
+      const db = lb.level ?? 0;
+      if (da !== db) return da - db;
+
+      return (la.title ?? la.id).localeCompare(lb.title ?? lb.id);
+    });
+  };
+
+  sortRec(root);
+
+  return { root, visibleNodeIds };
+}
+
+function renderCategoriesTree(raw: Raw, projected: DefGraph) {
+  const host = document.getElementById('categoriesTree') as HTMLDivElement | null;
+  if (!host) return;
+
+  const { root, visibleNodeIds } = buildCategoryTree(raw, projected);
+
+  host.innerHTML = '';
+
+  const isOpen = (prefix: string) => {
+    // Root is always open; groups default to open unless explicitly collapsed.
+    if (!prefix) return true;
+    return !openPrefixes.has(prefix);
+  };
+
+  const setOpen = (prefix: string, open: boolean) => {
+    if (!prefix) return;
+    // We store "collapsed" prefixes for simpler defaults.
+    if (open) openPrefixes.delete(prefix);
+    else openPrefixes.add(prefix);
+    saveOpenPrefixes(openPrefixes);
+  };
+
+  const leafIdsUnderPrefix = (prefix: string) => {
+    if (!prefix) return raw.def.nodes.map((n) => n.id);
+    return raw.childrenByPrefix.get(prefix) ?? [];
+  };
+
+  const renderNode = (n: TreeNode) => {
+    // Skip rendering children if parent is closed.
+    const open = n.kind === 'group' ? isOpen(n.id) : true;
+
+    if (n.id !== '') {
+      const row = document.createElement('div');
+      row.className = 'treeRow';
+      row.style.setProperty('--indent', String(Math.max(0, n.depth - 1)));
+
+      const indent = document.createElement('span');
+      indent.className = 'treeIndent';
+      row.appendChild(indent);
+
+      const chevron = document.createElement('span');
+      chevron.className = 'treeChevron';
+      chevron.textContent = '▶';
+      row.appendChild(chevron);
+
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.className = 'treeCheckbox';
+
+      const label = document.createElement('span');
+      label.className = 'treeLabel';
+
+      const meta = document.createElement('span');
+      meta.className = 'treeMeta';
+
+      if (n.kind === 'group') {
+        const childLeafIds = leafIdsUnderPrefix(n.id);
+        const allIncluded = childLeafIds.length ? childLeafIds.every((id) => isIncluded(id)) : true;
+        const anyIncluded = childLeafIds.some((id) => isIncluded(id));
+
+        cb.checked = allIncluded;
+        // Make it show indeterminate when mixed.
+        cb.indeterminate = anyIncluded && !allIncluded;
+
+        label.textContent = n.name;
+
+        row.classList.add('hasChildren');
+        row.classList.add('clickable');
+        chevron.classList.toggle('open', open);
+
+        // Toggle open/close on row click (not on checkbox).
+        row.onclick = (ev) => {
+          const t = ev.target as HTMLElement | null;
+          if (t && (t.tagName === 'INPUT')) return;
+          setOpen(n.id, !open);
+          renderCategoriesTree(raw, lastProjected ?? projected);
+        };
+
+        cb.onchange = () => {
+          const next = cb.checked;
+          setIncludedMany(childLeafIds, next);
+          rerender(true);
+          renderCategoriesTree(raw, lastProjected ?? projected);
+        };
+
+        // Keep group labels from wrapping.
+        meta.textContent = '';
+
+        // Show computed group level.
+        const lvl = document.createElement('span');
+        lvl.textContent = `L${n.groupLevel ?? 0}`;
+        meta.appendChild(lvl);
+      } else {
+        const leaf = n.leaf!;
+        cb.checked = isIncluded(leaf.id);
+
+        const st = stateForCategories(leaf, visibleNodeIds);
+        const dot = document.createElement('span');
+        dot.className = `stateDot ${st}`;
+        meta.appendChild(dot);
+
+        const lvl = document.createElement('span');
+        lvl.textContent = `L${leaf.level ?? 0}`;
+        meta.appendChild(lvl);
+
+        label.textContent = leaf.title;
+
+        row.classList.add('clickable');
+        row.onclick = (ev) => {
+          const t = ev.target as HTMLElement | null;
+          if (t && (t.tagName === 'INPUT')) return;
+          // Selecting a definition from Categories behaves like clicking in the graph.
+          setBottomTab('definition');
+          selectLeafById(leaf.id);
+
+          // Ensure panel is expanded.
+          if (bottomPanelEl && !bottomPanelEl.classList.contains('expanded')) {
+            setPanelCollapsed(false);
+          }
+        };
+
+        cb.onchange = () => {
+          setIncluded(leaf.id, cb.checked);
+          rerender(true);
+          renderCategoriesTree(raw, lastProjected ?? projected);
+        };
+      }
+
+      row.appendChild(cb);
+      row.appendChild(label);
+      row.appendChild(meta);
+
+      host.appendChild(row);
+    }
+
+    if (n.kind === 'group' && open) {
+      for (const c of n.children) renderNode(c);
+    }
+  };
+
+  renderNode(root);
+}
+
 function projectGraph(raw: Raw, state: UIState): DefGraph {
   // Mode behavior:
   // - definitions: show *all* leaves (no categories), no expand/collapse needed
-  // - categories: TODO
+  // - categories: same graph projection, but UI uses different bottom tab.
 
-  if (state.mode === 'definitions') {
-    const nodes = raw.def.nodes.map((n) => ({
+  // Leaf set depends on checkbox filtering in BOTH modes.
+  const includeLeaf = (id: string) => isIncluded(id);
+
+  const nodes = raw.def.nodes
+    .filter((n) => includeLeaf(n.id))
+    .map((n) => ({
       ...n,
       level: 0,
     }));
 
-    // Edges are already leaf->leaf in raw.def
-    const edges = raw.def.edges.map((e) => ({ ...e }));
+  // Keep only edges where both ends exist.
+  const nodeSet = new Set(nodes.map((n) => n.id));
+  const edges = raw.def.edges.filter((e) => nodeSet.has(e.source) && nodeSet.has(e.target)).map((e) => ({ ...e }));
 
-    // Assign deps from edges
-    const depsByNode = new Map<string, string[]>();
-    for (const e of edges) {
-      const arr = depsByNode.get(e.source) ?? [];
-      arr.push(e.target);
-      depsByNode.set(e.source, arr);
-    }
-    for (const n of nodes) {
-      n.deps = depsByNode.get(n.id) ?? (n.deps ?? []);
-      n.level = 0;
-    }
-
-    computeLevels(nodes);
-    return { nodes, edges };
+  // Assign deps from edges (projected deps, used for level layout).
+  const depsByNode = new Map<string, string[]>();
+  for (const e of edges) {
+    const arr = depsByNode.get(e.source) ?? [];
+    arr.push(e.target);
+    depsByNode.set(e.source, arr);
+  }
+  for (const n of nodes) {
+    n.deps = depsByNode.get(n.id) ?? (n.deps ?? []);
+    n.level = 0;
   }
 
-  throw new Error('Categories mode not implemented');
+  computeLevels(nodes);
+  return { nodes, edges };
 }
 
 function bindInteractions(nodeSel: d3.Selection<SVGGElement, DefNode, SVGGElement, unknown>) {
@@ -797,13 +1256,10 @@ function bindInteractions(nodeSel: d3.Selection<SVGGElement, DefNode, SVGGElemen
       ev.preventDefault();
       ev.stopPropagation();
 
-      // Definitions mode: single left-click does the full experience.
-      if (state.mode === 'definitions') {
-        selectLeafById(d.id);
-        return;
-      }
-
-      // TODO Categories mode: toggle expansion of group nodes.
+      // Both modes: clicking a rendered node opens its definition.
+      setBottomTab('definition');
+      selectLeafById(d.id);
+      return;
     });
 }
 
@@ -849,8 +1305,18 @@ function rerender(keepTransform: boolean) {
   const current = keepTransform ? d3.zoomTransform(svg.node() as any) : null;
 
   rawPromise
-    .then((raw) => {
-      const projected = projectGraph(raw, state);
+    .then((r) => {
+      raw = r;
+
+      // On reload, if there is no manual selection stored, derive initial selection from "ready".
+      // If there IS a stored selection, keep it (manual overrides).
+      if (loadIncludedFromStorage() === null) {
+        recomputeIncludedSetFromReady(r);
+      } else {
+        includedIds = loadIncludedFromStorage();
+      }
+
+      const projected = projectGraph(r, state);
       lastProjected = projected;
       draw(projected);
 
@@ -875,6 +1341,9 @@ function rerender(keepTransform: boolean) {
         const n = projected.nodes.find((x: DefNode) => x.id === state.selectedLeaf);
         if (n) void openLeaf(n);
       }
+
+      // Categories panel content is independent from mode: render if tab exists.
+      renderCategoriesTree(r, projected);
     })
     .catch((err) => {
       // eslint-disable-next-line no-console
@@ -975,26 +1444,46 @@ if (bottomPanelEl && togglePanelBtn) {
 
 // Bottom panel tabs
 const tabDefinitionBtn = document.getElementById('tabDefinition') as HTMLButtonElement | null;
+const tabCategoriesBtn = document.getElementById('tabCategories') as HTMLButtonElement | null;
 const tabGraphBtn = document.getElementById('tabGraph') as HTMLButtonElement | null;
 const tabPageDefinition = document.getElementById('tabPageDefinition') as HTMLDivElement | null;
+const tabPageCategories = document.getElementById('tabPageCategories') as HTMLDivElement | null;
 const tabPageGraph = document.getElementById('tabPageGraph') as HTMLDivElement | null;
 
-function setBottomTab(tab: 'definition' | 'graph') {
+type BottomTab = 'definition' | 'categories' | 'graph';
+
+function setBottomTab(tab: BottomTab) {
   const isDef = tab === 'definition';
+  const isCat = tab === 'categories';
+  const isGraph = tab === 'graph';
 
   tabDefinitionBtn?.classList.toggle('active', isDef);
-  tabGraphBtn?.classList.toggle('active', !isDef);
+  tabCategoriesBtn?.classList.toggle('active', isCat);
+  tabGraphBtn?.classList.toggle('active', isGraph);
 
   tabDefinitionBtn?.setAttribute('aria-selected', String(isDef));
-  tabGraphBtn?.setAttribute('aria-selected', String(!isDef));
+  tabCategoriesBtn?.setAttribute('aria-selected', String(isCat));
+  tabGraphBtn?.setAttribute('aria-selected', String(isGraph));
 
   tabPageDefinition?.classList.toggle('active', isDef);
-  tabPageGraph?.classList.toggle('active', !isDef);
+  tabPageCategories?.classList.toggle('active', isCat);
+  tabPageGraph?.classList.toggle('active', isGraph);
+
+  // Refresh categories content when tab is opened.
+  if (isCat && raw && lastProjected) {
+    renderCategoriesTree(raw, lastProjected);
+  }
 }
 
 tabDefinitionBtn?.addEventListener('click', (ev) => {
   ev.preventDefault();
   setBottomTab('definition');
+});
+
+tabCategoriesBtn?.addEventListener('click', (ev) => {
+  ev.preventDefault();
+  setBottomTab('categories');
+  // Keep the graph as-is; this is only a panel tab.
 });
 
 tabGraphBtn?.addEventListener('click', (ev) => {
@@ -1016,6 +1505,12 @@ progressBtn?.addEventListener('click', () => {
   state.selectedLeaf = undefined;
   selectedNodeId = null;
   hideViewer();
+
+  // Reset visibility selection to the same default as a fresh load with no stored selection:
+  // derived from current READY nodes.
+  if (raw) {
+    recomputeIncludedSetFromReady(raw);
+  }
 
   rerender(true);
   requestAnimationFrame(() => {

@@ -20,6 +20,18 @@ def get_field_index(field: Field) -> list[Definition]:
     return getattr(module, "field_index")
 
 
+def _verify_definitions_subpackage(subpackage_path: Path) -> None:
+    for item in subpackage_path.iterdir():
+        if item.name in {"__pycache__"}:
+            continue
+        if item.is_dir():
+            _verify_definitions_subpackage(subpackage_path=item)
+        elif item.suffix == ".py":
+            continue
+        else:
+            raise ValueError(f"Invalid file in definitions package: {item}")
+
+
 def verify_definitions_package(definitions_path: Path) -> None:
     """Verify the structure of a definitions package.
 
@@ -42,7 +54,7 @@ def verify_definitions_package(definitions_path: Path) -> None:
         if item.name in {"__pycache__"}:
             continue
         if item.is_dir():
-            verify_definitions_package(definitions_path=item)
+            _verify_definitions_subpackage(subpackage_path=item)
         elif item.suffix == ".py":
             continue
         else:

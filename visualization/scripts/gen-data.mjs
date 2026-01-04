@@ -16,7 +16,7 @@ function normalizeId(s) {
     .replace(/[^a-z0-9_\-]/g, '');
 }
 
-function parseIndex(md) {
+async function parseIndex(md) {
   // lines like: - [object](mathematics/fundamental/object)
   const items = [];
   const re = /^-\s+\[([^\]]+)\]\(([^)]+)\)\s*$/;
@@ -31,8 +31,15 @@ function parseIndex(md) {
     // Example: "computer_science/fundamental/bit"
     const id = relPath;
 
-    const filePath = path.resolve(defsRoot, `${relPath}.md`);
-    items.push({ id, title, relPath, filePath });
+    const contentFilePath = path.resolve(defsRoot, `${relPath}.md`);
+    const content = await readIfExists(contentFilePath);
+
+    if (!content) {
+      // Definition file is missing; raise an exception to catch during dev.
+      throw new Error(`Definition file not found: ${contentFilePath}`);
+    }
+
+    items.push({ id, title, relPath, content });
   }
   return items;
 }
@@ -199,20 +206,17 @@ function computeLevels(nodes) {
 
 async function main() {
   const indexMd = await fs.readFile(indexPath, 'utf8');
-  const items = parseIndex(indexMd);
+  const items = await parseIndex(indexMd);
 
   // map relPath -> id for dependency resolution
   const idByRelPath = new Map(items.map((it) => [it.relPath.replace(/\.md$/i, ''), it.id]));
 
   const nodes = [];
-  let missingFiles = 0;
   const stats = { unresolvedHref: 0 };
 
   for (const it of items) {
-    const md = await readIfExists(it.filePath);
-    if (!md) missingFiles++;
-    const deps = md ? extractDeps(md, it, idByRelPath, stats) : [];
-    nodes.push({ ...it, deps, level: 0, content: md || '' });
+    const deps = extractDeps(it.content, it, idByRelPath, stats);
+    nodes.push({ ...it, deps, level: 0, content: it.content });
   }
 
   // Validate deps and detect cycles (also assigns temporary levels on nodes).
@@ -227,7 +231,7 @@ async function main() {
   await fs.mkdir(path.dirname(outPath), { recursive: true });
   await fs.writeFile(outPath, JSON.stringify(graph, null, 2), 'utf8');
   console.log(
-    `Wrote ${outPath} (nodes=${nodes.length}, edges=${edges.length}, missingFiles=${missingFiles}, unresolvedHref=${stats.unresolvedHref})`
+    `Wrote ${outPath} (nodes=${nodes.length}, edges=${edges.length}, unresolvedHref=${stats.unresolvedHref})`
   );
 }
 

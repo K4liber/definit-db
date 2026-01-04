@@ -1,19 +1,15 @@
 export type DefNode = {
   /**
    * Unique id used throughout the visualization.
-   * In the current generator this equals relPath (slashes preserved).
+   * In the current generator this equals category (slashes preserved).
    */
   id: string;
 
   title: string;
 
-  /** path from index.md (without .md) */
-  relPath: string;
+  category: string;
 
-  /** client-only usage; kept for compatibility with generator output */
-  filePath: string;
-
-  /** dependency ids (ids resolve to relPaths) */
+  /** dependency ids (ids resolve to categories) */
   deps: string[];
 
   /**
@@ -23,7 +19,7 @@ export type DefNode = {
   level?: number;
 
   /** Preloaded markdown content for viewer */
-  content?: string;
+  content: string;
 };
 
 export type DefGraph = {

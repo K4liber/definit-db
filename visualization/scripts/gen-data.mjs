@@ -25,13 +25,15 @@ async function parseIndex(md) {
     const m = re.exec(line.trim());
     if (!m) continue;
     const title = m[1];
-    const relPath = m[2].replace(/\.md$/i, '');
+    const category = m[2].replace(/\.md$/i, '');
 
-    // Use relPath as the stable, human-readable unique id.
+    // For now, use category as the stable, human-readable unique id.
     // Example: "computer_science/fundamental/bit"
-    const id = relPath;
+    // In the future, it could probably just a <field>/<definition_name>
+    // Example: "computer_science/bit"
+    const id = category;
 
-    const contentFilePath = path.resolve(defsRoot, `${relPath}.md`);
+    const contentFilePath = path.resolve(defsRoot, `${category}.md`);
     const content = await readIfExists(contentFilePath);
 
     if (!content) {
@@ -39,7 +41,7 @@ async function parseIndex(md) {
       throw new Error(`Definition file not found: ${contentFilePath}`);
     }
 
-    items.push({ id, title, relPath, content });
+    items.push({ id, title, category, content });
   }
   return items;
 }
@@ -52,7 +54,7 @@ async function readIfExists(p) {
   }
 }
 
-function normalizeHrefToIndexRelPath(href, ctx, idByRelPath) {
+function normalizeHrefToIndexRelPath(href, idByCategory) {
   const clean = String(href ?? '').trim();
   if (!clean) return null;
   if (clean.startsWith('#')) return null;
@@ -68,11 +70,11 @@ function normalizeHrefToIndexRelPath(href, ctx, idByRelPath) {
   if (!p.includes('/')) return null;
 
   // Exact match
-  if (idByRelPath.has(p)) return p;
+  if (idByCategory.has(p)) return p;
 
   // Shorthand: "field/definition" where index uses deeper paths like
   // "field/<subtree>/definition".
-  // Resolve by looking for an index relPath that ends with "/definition" *within the same field*.
+  // Resolve by looking for an index category that ends with "/definition" *within the same field*.
   const parts = p.split('/');
   const field = parts[0];
   const last = parts.at(-1);
@@ -81,7 +83,7 @@ function normalizeHrefToIndexRelPath(href, ctx, idByRelPath) {
   const suffix = `/${last}`;
 
   const matches = [];
-  for (const rel of idByRelPath.keys()) {
+  for (const rel of idByCategory.keys()) {
     if (rel.startsWith(`${field}/`) && rel.endsWith(suffix)) matches.push(rel);
   }
 
@@ -90,7 +92,7 @@ function normalizeHrefToIndexRelPath(href, ctx, idByRelPath) {
   return null; // ambiguous or not found
 }
 
-function extractDeps(md, ctx, idByRelPath, stats) {
+function extractDeps(md, ctx, idByCategory, stats) {
   // Heuristic: dependencies are written inside definitions content.
   // Pattern: [label](some/path) - we take label as a candidate dependency id
   //
@@ -106,8 +108,8 @@ function extractDeps(md, ctx, idByRelPath, stats) {
     if (href) {
       const clean = String(href).trim();
       if (!clean) return false;
-      if (clean === ctx.relPath || clean === `${ctx.relPath}.md`) return true;
-      if (clean === `./${ctx.relPath}` || clean === `./${ctx.relPath}.md`) return true;
+      if (clean === ctx.category || clean === `${ctx.category}.md`) return true;
+      if (clean === `./${ctx.category}` || clean === `./${ctx.category}.md`) return true;
       if (clean.endsWith(`#${ctx.id}`) || clean === `#${ctx.id}`) return true;
     }
 
@@ -119,9 +121,9 @@ function extractDeps(md, ctx, idByRelPath, stats) {
     const label = m[1];
     const href = (m[2] ?? '').trim();
 
-    const rel = normalizeHrefToIndexRelPath(href, ctx, idByRelPath);
+    const rel = normalizeHrefToIndexRelPath(href, idByCategory);
     if (rel) {
-      const depId = idByRelPath.get(rel);
+      const depId = idByCategory.get(rel);
       if (depId && !isSelf(depId, href)) deps.add(depId);
       continue;
     }
@@ -156,7 +158,7 @@ function computeLevels(nodes) {
   function formatNode(id) {
     const n = byId.get(id);
     if (!n) return id;
-    return `${n.id} (${n.relPath})`;
+    return `${n.id} (${n.category})`;
   }
 
   function dfs(id) {
@@ -208,14 +210,14 @@ async function main() {
   const indexMd = await fs.readFile(indexPath, 'utf8');
   const items = await parseIndex(indexMd);
 
-  // map relPath -> id for dependency resolution
-  const idByRelPath = new Map(items.map((it) => [it.relPath.replace(/\.md$/i, ''), it.id]));
-
   const nodes = [];
   const stats = { unresolvedHref: 0 };
 
+  // map category -> id for dependency resolution
+  const idByCategory = new Map(items.map((it) => [it.category.replace(/\.md$/i, ''), it.id]));
+
   for (const it of items) {
-    const deps = extractDeps(it.content, it, idByRelPath, stats);
+    const deps = extractDeps(it.content, it, idByCategory, stats);
     nodes.push({ ...it, deps, level: 0, content: it.content });
   }
 

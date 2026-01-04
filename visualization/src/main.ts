@@ -418,7 +418,7 @@ function draw(graph: DefGraph) {
   nodeSel
     .select('title')
     .text((d: DefNode) => {
-      const path = `${d.relPath}.md`
+      const path = `${d.category}.md`
       return `${d.title} (level: ${d.level ?? 0})\n${path}`;
     });
 
@@ -610,9 +610,6 @@ function selectLeafById(id: string) {
   const node = lastProjected.nodes.find((n) => n.id === id);
   if (!node) return;
 
-  // Ensure the functional panel is visible when selecting a node.
-  setPanelCollapsed(false);
-
   // Track selection for ring focus + pulsing.
   state.selectedLeaf = id;
   selectedNodeId = id;
@@ -707,7 +704,7 @@ function showViewer(node: DefNode, md: string) {
   viewerEl.style.display = '';
   viewerTitleEl.textContent = node.title;
   viewerPathEl.style.display = '';
-  viewerPathEl.textContent = `${node.relPath}.md`;
+  viewerPathEl.textContent = `${node.category}.md`;
   renderViewerBody(md, node.deps ?? []);
   updateMarkLearnedButton(node);
 }
@@ -917,11 +914,6 @@ function focusRingOfNode(id: string) {
 }
 
 async function openLeaf(node: DefNode) {
-  if (!node.relPath) return;
-
-  // Ensure the functional panel is visible when opening a node.
-  setPanelCollapsed(false);
-
   // Ensure pulsing matches whatever opened the viewer.
   selectedNodeId = node.id;
   applyRingHighlight();

@@ -167,3 +167,7 @@ The UI is split into three vertical regions:
 ### Persistence
 
 The bottom panel collapsed/expanded state is persisted in `localStorage`.
+
+## Expanding/collapsing categories
+
+Each definition has a category 

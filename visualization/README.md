@@ -168,6 +168,10 @@ The UI is split into three vertical regions:
 
 The bottom panel collapsed/expanded state is persisted in `localStorage`.
 
-## Expanding/collapsing categories
+## Categories tab
 
-Each definition has a category 
+Between "Definition" tab and the "Graph" tab we have the "Categories" tab. The tab contains a structure similar to one the VSCode called "Explorer". It treats categories like folders structure and one can expand/collapse subcategories there. If a category contains definitions it list them, together with a state color and the level information. Definitions inside the category should be sorted based on two attributes 1) state: ready (yellow), learned (green), visible and off. 2) level.
+
+Next to each category and definition (on the left) there should be checkbox that allows to hide the definition or even the whole subgraph (in the category case) from the displayed graph. In such a case the graph level should be recomputed but the states of definitions should remain. Which means, the definition is ready to learn if all (does not matter if currently visible oo the graph or checkbox unselected to make it off the graph) the dependencies are learned.
+
+Categories should be topologically sorted since they can be and it will show the level for each category. For example, if we have to main categories (or so-called fields) computer_science and mathematics, they cannot depend on each other. Only one of them can depend on the other. It works for every sub-category. For example, in computer_science if computer_science/algorithms depends on computer_science/fundamental it means that computer_science/fundamental cannot depend on computer_science/algorithms. It is how the database should be created and the visualization should take it for granted and sort the categories topologically.

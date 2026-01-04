@@ -2,9 +2,11 @@ from definit.definition.definition import Definition
 from definit.definition.definition_key import DefinitionKey
 
 from definit_db.data.field import FieldName
-from definit_db.data.field.computer_science.definitions.data_structure.bit_field import BIT_FIELD
-from definit_db.data.field.computer_science.definitions.data_structure.primitive_data_type import PRIMITIVE_DATA_TYPE
-from definit_db.data.field.computer_science.definitions.foundamental.bit import BIT
+from definit_db.data.field.computer_science.definitions.data_structure.fundamental.bit_field import BIT_FIELD
+from definit_db.data.field.computer_science.definitions.data_structure.fundamental.primitive_data_type import (
+    PRIMITIVE_DATA_TYPE,
+)
+from definit_db.data.field.computer_science.definitions.fundamental.bit import BIT
 from definit_db.data.field.mathematics.definitions.fundamental.information import INFORMATION
 
 

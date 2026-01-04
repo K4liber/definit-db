@@ -6,8 +6,8 @@ from definit_db.data.field.computer_science.definitions.data_structure.collectio
     CHARACTER_ENCODING,
 )
 from definit_db.data.field.computer_science.definitions.data_structure.collection.string.string import STRING
-from definit_db.data.field.mathematics.definitions.fundamental.notations.label import LABEL
 from definit_db.data.field.mathematics.definitions.fundamental.sequence import SEQUENCE
+from definit_db.data.field.mathematics.definitions.notations.label import LABEL
 
 
 class _RegularExpression(Definition):

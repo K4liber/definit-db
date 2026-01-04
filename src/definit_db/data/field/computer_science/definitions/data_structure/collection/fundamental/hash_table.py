@@ -1,0 +1,26 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
+from definit_db.data.field.computer_science.definitions.data_structure.collection.fundamental.associative_array import (
+    ASSOCIATIVE_ARRAY,
+)
+from definit_db.data.field.mathematics.definitions.fundamental.hash_function import HASH_FUNCTION
+
+
+class _HashTable(Definition):
+    def _get_content(self) -> str:
+        return f"""
+Data structure that implements {ASSOCIATIVE_ARRAY.key.get_reference(phrase="associative array")} using a 
+{HASH_FUNCTION.key.get_reference(phrase="hash function")} to compute an index into an array of buckets or slots, 
+from which the desired value can be found. Hash tables are designed to provide fast access to data by using a hash 
+function to map keys to indices in an array.
+"""
+
+
+HASH_TABLE = _HashTable(
+    key=DefinitionKey(
+        name="hash_table",
+        field=FieldName.COMPUTER_SCIENCE,
+    )
+)

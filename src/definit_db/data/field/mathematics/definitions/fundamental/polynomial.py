@@ -3,7 +3,7 @@ from definit.definition.definition_key import DefinitionKey
 
 from definit_db.data.field import FieldName
 from definit_db.data.field.mathematics.definitions.fundamental.function import FUNCTION
-from definit_db.data.field.mathematics.definitions.fundamental.number.integer import INTEGER
+from definit_db.data.field.mathematics.definitions.fundamental.integer import INTEGER
 from definit_db.data.field.mathematics.definitions.fundamental.operation import OPERATION
 
 

@@ -2,7 +2,9 @@ from definit.definition.definition import Definition
 from definit.definition.definition_key import DefinitionKey
 
 from definit_db.data.field import FieldName
-from definit_db.data.field.computer_science.definitions.data_structure.collection.collection import COLLECTION
+from definit_db.data.field.computer_science.definitions.data_structure.collection.fundamental.collection import (
+    COLLECTION,
+)
 from definit_db.data.field.mathematics.definitions.graph.node import NODE
 
 

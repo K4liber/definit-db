@@ -2,8 +2,10 @@ from definit.definition.definition import Definition
 from definit.definition.definition_key import DefinitionKey
 
 from definit_db.data.field import FieldName
-from definit_db.data.field.computer_science.definitions.data_structure.collection.collection import COLLECTION
-from definit_db.data.field.computer_science.definitions.foundamental.data_type import DATA_TYPE
+from definit_db.data.field.computer_science.definitions.data_structure.collection.fundamental.collection import (
+    COLLECTION,
+)
+from definit_db.data.field.computer_science.definitions.fundamental.data_type import DATA_TYPE
 
 
 class _List(Definition):

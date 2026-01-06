@@ -65,6 +65,7 @@ from definit_db.data.field.computer_science.definitions.fundamental.binary_fract
 from definit_db.data.field.computer_science.definitions.fundamental.binary_representation import BINARY_REPRESENTATION
 from definit_db.data.field.computer_science.definitions.fundamental.bit import BIT
 from definit_db.data.field.computer_science.definitions.fundamental.bitwise_operation import BITWISE_OPERATION
+from definit_db.data.field.computer_science.definitions.fundamental.branch import BRANCH
 from definit_db.data.field.computer_science.definitions.fundamental.cache import CACHE
 from definit_db.data.field.computer_science.definitions.fundamental.call_stack import CALL_STACK
 from definit_db.data.field.computer_science.definitions.fundamental.computer import COMPUTER
@@ -110,6 +111,7 @@ field_index: list[Definition] = [
     PARALLELISM,
     PROCESSOR,
     PROGRAM,
+    BRANCH,
     RANDOM_ACCESS_MEMORY,
     RIGHT_SHIFT,
     HEAP_MEMORY,

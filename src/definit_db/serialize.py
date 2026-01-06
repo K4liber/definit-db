@@ -20,12 +20,17 @@ def get_field_index(field: Field) -> list[Definition]:
     return getattr(module, "field_index")
 
 
-def _verify_definitions_subpackage(subpackage_path: Path) -> None:
-    for item in subpackage_path.iterdir():
+def _verify_definitions_subpackage(subpackage_dir: Path) -> None:
+    init_file = subpackage_dir / "__init__.py"
+
+    if not init_file.exists():
+        raise FileNotFoundError(f"Package is missing __init__.py: {init_file}")
+
+    for item in subpackage_dir.iterdir():
         if item.name in {"__pycache__"}:
             continue
         if item.is_dir():
-            _verify_definitions_subpackage(subpackage_path=item)
+            _verify_definitions_subpackage(subpackage_dir=item)
         elif item.suffix == ".py":
             continue
         else:
@@ -45,20 +50,7 @@ def verify_definitions_package(definitions_path: Path) -> None:
     if not definitions_path.is_dir():
         raise NotADirectoryError(f"Package path is not a directory: {definitions_path}")
 
-    init_file = definitions_path / "__init__.py"
-
-    if not init_file.exists():
-        raise FileNotFoundError(f"Package is missing __init__.py: {init_file}")
-
-    for item in definitions_path.iterdir():
-        if item.name in {"__pycache__"}:
-            continue
-        if item.is_dir():
-            _verify_definitions_subpackage(subpackage_path=item)
-        elif item.suffix == ".py":
-            continue
-        else:
-            raise ValueError(f"Invalid file in definitions package: {item}")
+    _verify_definitions_subpackage(subpackage_dir=definitions_path)
 
 
 def serialize() -> Path:

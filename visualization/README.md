@@ -78,7 +78,7 @@ The generator tries to reduce false positives by:
 
 Use the “Search node by id/title…” input to highlight matching nodes.
 
-- Matching is performed against the node `id` (which equals the definition `relPath`) and title.
+- Matching is performed against the node `id` (which equals the definition `category`) and title.
 - Matches are indicated by a red outline around the node.
 
 ### Selection + focus + viewer
@@ -86,11 +86,10 @@ Use the “Search node by id/title…” input to highlight matching nodes.
 - **Hover** highlights the hovered node’s ring/level.
 - **Left click** selects a node and focuses/centers the view on its ring/level.
 - Selecting a node loads its markdown and shows it in the bottom panel **Definition** tab.
-- If the bottom panel is collapsed, selecting a node will auto-expand it.
 
 ### Initial view / starting focus
 
-On startup (and after resetting progress), the app focuses the view on the highest ring/level that contains at least one node that is **ready-to-learn** or **already-learned**. If no such nodes exist, it falls back to **Overview**.
+On startup (and after resetting progress), the app focuses the view on the highest ring/level that contains at least one node that is **ready-to-learn** or **already-learned**.
 
 ## Learning states
 
@@ -151,7 +150,7 @@ The visualization UI is designed to work well on both desktop and mobile.
 
 The UI is split into three vertical regions:
 
-- **Top menu**: primary view controls (Progress / Overview / Reset progress)
+- **Top menu**: primary view controls (Current progress / Full graph / Reset progress)
 - **Main panel**
   - **Graph canvas** (SVG visualization)
   - **Bottom panel** (details)
@@ -162,16 +161,57 @@ The UI is split into three vertical regions:
 ### Bottom panel contents (tabs)
 
 - **Definition** tab: selected definition content + “Mark as learned” action
-- **Graph** tab: graph statistics
+- **Categories** tab: folder-like tree with visibility (include/exclude) checkboxes
+- **Graph** tab: statistics of the currently rendered graph
 
 ### Persistence
 
-The bottom panel collapsed/expanded state is persisted in `localStorage`.
+The UI persists state in `localStorage`:
+
+- Bottom panel collapsed/expanded state
+- Learned definitions
+- Categories expand/collapse state
+- Categories/definitions visibility (include) selection
 
 ## Categories tab
 
-Between "Definition" tab and the "Graph" tab we have the "Categories" tab. The tab contains a structure similar to one the VSCode called "Explorer". It treats categories like folders structure and one can expand/collapse subcategories there. If a category contains definitions it list them, together with a state color and the level information. Definitions inside the category should be sorted based on two attributes 1) state: ready (yellow), learned (green), visible and off. 2) level.
+Between the **Definition** tab and the **Graph** tab there is a **Categories** tab.
 
-Next to each category and definition (on the left) there should be checkbox that allows to hide the definition or even the whole subgraph (in the category case) from the displayed graph. In such a case the graph level should be recomputed but the states of definitions should remain. Which means, the definition is ready to learn if all (does not matter if currently visible oo the graph or checkbox unselected to make it off the graph) the dependencies are learned.
+It is an Explorer-like tree:
 
-Categories should be topologically sorted since they can be and it will show the level for each category. For example, if we have to main categories (or so-called fields) computer_science and mathematics, they cannot depend on each other. Only one of them can depend on the other. It works for every sub-category. For example, in computer_science if computer_science/algorithms depends on computer_science/fundamental it means that computer_science/fundamental cannot depend on computer_science/algorithms. It is how the database should be created and the visualization should take it for granted and sort the categories topologically.
+- Category folders are derived from definition ids (split by `/`).
+- Folders can be expanded/collapsed (including top-level “fields”).
+- Leaf rows list definitions and show:
+  - a state dot color (ready/learned/visible/off)
+  - the definition level (`L#`).
+- Definitions inside a category are sorted by:
+  1) state: **ready** (yellow), **learned** (green), **visible**, **off**
+  2) level
+  3) title
+
+### Visibility (include/exclude) checkboxes
+
+Each folder and each definition has a checkbox:
+
+- **Checked = included** in the rendered graph.
+- Unchecking a **folder** includes/excludes *all definitions under that category*.
+- When the graph is filtered by checkboxes, **levels are recomputed** on the *rendered* graph.
+- Learning state rules **do not change** with visibility:
+  - A definition is **ready** when **all of its dependencies are learned**, even if some dependencies are currently hidden by checkboxes.
+
+### Category ordering and levels
+
+Categories are treated as a DAG and are **topologically sorted** (by computed group level).
+
+- Each folder row shows a computed folder level (`L#`).
+- The visualization assumes categories are acyclic (if a dependency implies `A -> B` at some category depth, then the reverse is not expected).
+
+### Default selection behavior (auto-selection)
+
+The checkbox selection is persisted, but there are moments where the app recomputes a “suggested” selection from the current learning progress:
+
+- **On page load**: if there is **no stored selection**, the app derives the selection from the current **ready-to-learn** nodes.
+- **After “Mark as learned”**: the app recomputes and **overwrites** the stored selection so the visible graph follows the newly-unlocked readiness.
+- **On “Current progress”**: the app recomputes and **overwrites** the stored selection the same way (equivalent to a fresh load with no stored selection).
+
+The auto-selection targets the *specific immediate parent categories* of ready definitions (it does **not** bubble readiness to ancestor prefixes/fields).

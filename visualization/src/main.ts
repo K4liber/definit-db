@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import type { DefGraph, DefNode } from './types';
+import type { BottomTab, DefGraph, DefNode, LearnState, Pos, Raw, TreeNode, UIState } from './types';
 
 // Keep raw graph around so checkbox toggles can materialize default included set.
 // It is assigned in rerender() after defs.json is loaded.
@@ -52,8 +52,6 @@ function setStats(graph: DefGraph) {
   }
 }
 
-type Pos = { x: number; y: number };
-
 // keep track of which level ring is currently highlighted
 let hoveredLevel: number | null = null;
 
@@ -64,8 +62,8 @@ function applyRingHighlight() {
   // Hover ring takes precedence; otherwise fall back to selected node ring.
   let level: number | null = hoveredLevel;
 
-  if (level === null && selectedNodeId && lastProjected) {
-    const n = lastProjected.nodes.find((x) => x.id === selectedNodeId);
+  if (level === null && selectedNodeId && lastRendered) {
+    const n = lastRendered.nodes.find((x) => x.id === selectedNodeId);
     level = n?.level ?? null;
   }
 
@@ -94,19 +92,17 @@ function hash01(s: string) {
   return (h >>> 0) / 0xffffffff;
 }
 
-// Learning-state coloring (Definitions mode)
+// Learning-state coloring
 const COLOR_OFF = 'rgba(148, 163, 184, 0.18)'; // barely visible
 const COLOR_VISIBLE = 'rgba(148, 163, 184, 0.8)'; // normal grey
 const COLOR_READY = '#fbbf24'; // yellow
 const COLOR_LEARNED = '#22c55e'; // green
 
-type LearnState = 'off' | 'visible' | 'ready' | 'learned';
-
 // Learning progress is persisted independently from visibility filtering.
 const LEARNED_STORAGE_KEY = 'definit-db.learned';
 
 // --- Categories visibility (checkbox) model ---
-// A checked box means the item is INCLUDED in the graph.
+// A checked box means the item is INCLUDED in the rendered graph.
 const VISIBILITY_STORAGE_KEY = 'definit-db.ui.includedIds';
 
 function loadIncludedFromStorage() {
@@ -134,7 +130,7 @@ let includedIds: Set<string> | null = loadIncludedFromStorage();
 
 function recomputeIncludedSetFromReady(rawGraph: Raw) {
   // Identify the *specific* categories (immediate parent folder) that contain >=1 READY node.
-  // We intentionally do NOT bubble readiness up to ancestors (fields).
+  // We intentionally do NOT bubble readiness up to ancestor categories/fields.
   const readyParentPrefixes = new Set<string>();
 
   for (const n of rawGraph.def.nodes) {
@@ -146,7 +142,7 @@ function recomputeIncludedSetFromReady(rawGraph: Raw) {
     if (parent) readyParentPrefixes.add(parent);
   }
 
-  // If nothing is ready, default to include everything.
+  // If nothing is ready, empty the state.
   if (!readyParentPrefixes.size) {
     includedIds = null;
     try {
@@ -159,6 +155,12 @@ function recomputeIncludedSetFromReady(rawGraph: Raw) {
 
   includedIds = new Set<string>();
 
+  // Include all with a learned state
+  for (const n of rawGraph.def.nodes) {
+    if (learnStateForNode(n) === 'learned') includedIds.add(n.id);
+  }
+
+  // Include all when parent category is ready
   for (const leaf of rawGraph.def.nodes) {
     const parts = splitPath(leaf.id);
     const parentDepth = Math.max(1, parts.length - 1);
@@ -171,22 +173,13 @@ function recomputeIncludedSetFromReady(rawGraph: Raw) {
 }
 
 function isIncluded(id: string) {
-  // Default: include everything.
+  // Default: if state is empty, include everything.
   if (!includedIds) return true;
   return includedIds.has(id);
 }
 
 function setIncluded(id: string, include: boolean) {
-  if (!includedIds) {
-    // First time the user changes something: materialize the full included set.
-    includedIds = new Set<string>((raw?.def.nodes ?? []).map((n: DefNode) => n.id));
-  }
-  if (!includedIds) includedIds = new Set<string>();
-
-  if (include) includedIds.add(id);
-  else includedIds.delete(id);
-
-  saveIncludedToStorage(includedIds);
+  setIncludedMany([id], include);
 }
 
 function setIncludedMany(ids: string[], include: boolean) {
@@ -446,8 +439,8 @@ function computeGroupLevels(raw: Raw) {
   return { depsByGroup, levelByGroup };
 }
 
-// For sorting groups: compare by topo level first, then name.
-function compareGroupsTopo(a: TreeNode, b: TreeNode) {
+// For sorting groups: compare by topological level first, then name.
+function compareGroupsTopologicalLevel(a: TreeNode, b: TreeNode) {
   const la = a.groupLevel ?? 0;
   const lb = b.groupLevel ?? 0;
   if (la !== lb) return la - lb;
@@ -677,20 +670,6 @@ function draw(graph: DefGraph) {
 // Interactive projection model
 // -------------------------------
 
-type Raw = {
-  def: DefGraph;
-  byId: Map<string, DefNode>;
-  childrenByPrefix: Map<string, string[]>; // prefix -> ids under that prefix
-  fields: string[]; // top-level fields (e.g. mathematics, computer_science)
-};
-
-type VisualizationMode = 'definitions' | 'categories';
-
-type UIState = {
-  selectedLeaf?: string; // leaf id
-  mode: VisualizationMode;
-};
-
 const viewerEl = document.getElementById('viewer') as HTMLDivElement;
 const viewerTitleEl = document.getElementById('viewerTitle') as HTMLHeadingElement;
 const viewerPathEl = document.getElementById('viewerPath') as HTMLDivElement;
@@ -699,7 +678,7 @@ const markLearnedBtn = document.getElementById('markLearned') as HTMLButtonEleme
 
 function updateMarkLearnedButton(node?: DefNode) {
   if (!markLearnedBtn) return;
-  if (!node || state.mode !== 'definitions') {
+  if (!node) {
     markLearnedBtn.style.display = 'none';
     markLearnedBtn.disabled = true;
     markLearnedBtn.onclick = null;
@@ -780,8 +759,8 @@ function normalizeMdForViewer(md: string) {
 }
 
 function selectLeafById(id: string) {
-  if (!lastProjected) return;
-  const node = lastProjected.nodes.find((n) => n.id === id);
+  if (!lastRendered) return;
+  const node = lastRendered.nodes.find((n) => n.id === id);
   if (!node) return;
 
   // Track selection for ring focus + pulsing.
@@ -808,8 +787,8 @@ function behaviorLikeGraphClick(id: string) {
 function buildDepLinkMap(deps: string[]) {
   const map = new Map<string, { id: string; title: string }>();
 
-  // Prefer the currently projected graph for titles (matches what's on screen)
-  const byId = new Map((lastProjected?.nodes ?? []).map((n) => [n.id, n] as const));
+  // Prefer the currently rendered graph for titles (matches what's on screen)
+  const byId = new Map((lastRendered?.nodes ?? []).map((n) => [n.id, n] as const));
 
   for (const id of deps) {
     const t = byId.get(id)?.title ?? id.split('/').at(-1) ?? id;
@@ -930,18 +909,6 @@ function buildRaw(def: DefGraph): Raw {
   return { def, byId, childrenByPrefix, fields };
 }
 
-type TreeNode = {
-  id: string; // prefix (group) or leaf id
-  name: string;
-  kind: 'group' | 'leaf';
-  depth: number;
-  children: TreeNode[];
-  // leaf metadata
-  leaf?: DefNode;
-  // group metadata
-  groupLevel?: number;
-};
-
 const CATEGORIES_OPEN_KEY = 'definit-db.ui.categories.openPrefixes';
 function loadOpenPrefixes() {
   try {
@@ -972,12 +939,12 @@ function learnStateRank(s: LearnState) {
   return 3;
 }
 
-function computeVisibleSetFromProjected(projected: DefGraph) {
+function computeVisibleSetFromRendered(rendered: DefGraph) {
   // Same logic as inside draw(), but we need it for Categories sorting.
   const visible = new Set<string>();
-  const byId = new Map(projected.nodes.map((n) => [n.id, n] as const));
+  const byId = new Map(rendered.nodes.map((n) => [n.id, n] as const));
 
-  for (const e of projected.edges as Array<{ source: string; target: string }>) {
+  for (const e of rendered.edges as Array<{ source: string; target: string }>) {
     const prereq = byId.get(e.target);
     if (!prereq) continue;
     if (learnStateForNode(prereq) !== 'learned') continue;
@@ -995,9 +962,9 @@ function stateForCategories(leaf: DefNode, visibleNodeIds: Set<string>): LearnSt
   return base === 'off' && visibleNodeIds.has(leaf.id) ? 'visible' : base;
 }
 
-function buildCategoryTree(raw: Raw, projected: DefGraph) {
+function buildCategoryTree(raw: Raw, rendered: DefGraph) {
   const byId = raw.byId;
-  const visibleNodeIds = computeVisibleSetFromProjected(projected);
+  const visibleNodeIds = computeVisibleSetFromRendered(rendered);
 
   const { levelByGroup } = computeGroupLevels(raw);
 
@@ -1038,14 +1005,14 @@ function buildCategoryTree(raw: Raw, projected: DefGraph) {
     cur.children.push(leafNode);
   }
 
-  const sortRec = (n: TreeNode) => {
-    for (const c of n.children) sortRec(c);
+  const sortChildren = (n: TreeNode) => {
+    for (const c of n.children) sortChildren(c);
 
     n.children.sort((a, b) => {
       if (a.kind !== b.kind) return a.kind === 'group' ? -1 : 1;
 
       if (a.kind === 'group' && b.kind === 'group') {
-        return compareGroupsTopo(a, b);
+        return compareGroupsTopologicalLevel(a, b);
       }
 
       // leaf sort: 1) state 2) level 3) title
@@ -1066,16 +1033,16 @@ function buildCategoryTree(raw: Raw, projected: DefGraph) {
     });
   };
 
-  sortRec(root);
+  sortChildren(root);
 
   return { root, visibleNodeIds };
 }
 
-function renderCategoriesTree(raw: Raw, projected: DefGraph) {
+function renderCategoriesTree(raw: Raw, rendered: DefGraph) {
   const host = document.getElementById('categoriesTree') as HTMLDivElement | null;
   if (!host) return;
 
-  const { root, visibleNodeIds } = buildCategoryTree(raw, projected);
+  const { root, visibleNodeIds } = buildCategoryTree(raw, rendered);
 
   host.innerHTML = '';
 
@@ -1146,14 +1113,14 @@ function renderCategoriesTree(raw: Raw, projected: DefGraph) {
           const t = ev.target as HTMLElement | null;
           if (t && (t.tagName === 'INPUT')) return;
           setOpen(n.id, !open);
-          renderCategoriesTree(raw, lastProjected ?? projected);
+          renderCategoriesTree(raw, lastRendered ?? rendered);
         };
 
         cb.onchange = () => {
           const next = cb.checked;
           setIncludedMany(childLeafIds, next);
           rerender(true);
-          renderCategoriesTree(raw, lastProjected ?? projected);
+          renderCategoriesTree(raw, lastRendered ?? rendered);
         };
 
         // Keep group labels from wrapping.
@@ -1195,7 +1162,7 @@ function renderCategoriesTree(raw: Raw, projected: DefGraph) {
         cb.onchange = () => {
           setIncluded(leaf.id, cb.checked);
           rerender(true);
-          renderCategoriesTree(raw, lastProjected ?? projected);
+          renderCategoriesTree(raw, lastRendered ?? rendered);
         };
       }
 
@@ -1214,12 +1181,7 @@ function renderCategoriesTree(raw: Raw, projected: DefGraph) {
   renderNode(root);
 }
 
-function projectGraph(raw: Raw, state: UIState): DefGraph {
-  // Mode behavior:
-  // - definitions: show *all* leaves (no categories), no expand/collapse needed
-  // - categories: same graph projection, but UI uses different bottom tab.
-
-  // Leaf set depends on checkbox filtering in BOTH modes.
+function renderGraph(raw: Raw, state: UIState): DefGraph {
   const includeLeaf = (id: string) => isIncluded(id);
 
   const nodes = raw.def.nodes
@@ -1256,7 +1218,7 @@ function bindInteractions(nodeSel: d3.Selection<SVGGElement, DefNode, SVGGElemen
       ev.preventDefault();
       ev.stopPropagation();
 
-      // Both modes: clicking a rendered node opens its definition.
+      // clicking a rendered node opens its definition.
       setBottomTab('definition');
       selectLeafById(d.id);
       return;
@@ -1273,20 +1235,19 @@ const rawPromise: Promise<Raw> = fetch('./defs.json')
 
 const state: UIState = {
   selectedLeaf: undefined,
-  mode: 'definitions',
 };
 
-let lastProjected: DefGraph | null = null;
+let lastRendered: DefGraph | null = null;
 
 function focusHighestActiveRing() {
-  if (!lastProjected) return;
+  if (!lastRendered) return;
 
-  const maxLevel = Math.max(0, ...lastProjected.nodes.map((n) => n.level ?? 0));
+  const maxLevel = Math.max(0, ...lastRendered.nodes.map((n) => n.level ?? 0));
 
   // Prefer highest ring that has something actionable/achieved.
   let best = maxLevel;
   for (let level = maxLevel; level >= 0; level--) {
-    const has = lastProjected.nodes.some((n) => {
+    const has = lastRendered.nodes.some((n) => {
       if ((n.level ?? 0) !== level) return false;
       const s = learnStateForNode(n);
       return s === 'ready' || s === 'learned';
@@ -1316,9 +1277,9 @@ function rerender(keepTransform: boolean) {
         includedIds = loadIncludedFromStorage();
       }
 
-      const projected = projectGraph(r, state);
-      lastProjected = projected;
-      draw(projected);
+      const rendered = renderGraph(r, state);
+      lastRendered = rendered;
+      draw(rendered);
 
       // Keep current zoom/pan transform when re-rendering due to UI actions.
       if (current) {
@@ -1330,20 +1291,19 @@ function rerender(keepTransform: boolean) {
 
       // If nothing is selected, focus + underline the highest active ring.
       // Do it in the next frame so layout+DOM are settled (same timing as button behavior).
-      if (state.mode === 'definitions' && !state.selectedLeaf) {
+      if (!state.selectedLeaf) {
         requestAnimationFrame(() => {
           focusHighestActiveRing();
         });
       }
 
       // Keep viewer updated if we have a selected leaf.
-      if (state.mode === 'definitions' && state.selectedLeaf) {
-        const n = projected.nodes.find((x: DefNode) => x.id === state.selectedLeaf);
+      if (state.selectedLeaf) {
+        const n = rendered.nodes.find((x: DefNode) => x.id === state.selectedLeaf);
         if (n) void openLeaf(n);
       }
 
-      // Categories panel content is independent from mode: render if tab exists.
-      renderCategoriesTree(r, projected);
+      renderCategoriesTree(r, rendered);
     })
     .catch((err) => {
       // eslint-disable-next-line no-console
@@ -1352,10 +1312,10 @@ function rerender(keepTransform: boolean) {
 }
 
 function focusRing(level: number) {
-  if (!lastProjected) return;
+  if (!lastRendered) return;
 
   // Use the actual layout used during the last draw() to avoid ring spacing mismatch.
-  const layout = lastLayout ?? radialLayout(lastProjected);
+  const layout = lastLayout ?? radialLayout(lastRendered);
   const r = layout.base + level * layout.ringGap;
 
   // Fit the circle to viewport.
@@ -1376,8 +1336,8 @@ function focusRing(level: number) {
 }
 
 function focusRingOfNode(id: string) {
-  if (!lastProjected) return;
-  const n = lastProjected.nodes.find((x: DefNode) => x.id === id);
+  if (!lastRendered) return;
+  const n = lastRendered.nodes.find((x: DefNode) => x.id === id);
   if (!n) return;
   focusRing(n.level ?? 0);
 }
@@ -1450,8 +1410,6 @@ const tabPageDefinition = document.getElementById('tabPageDefinition') as HTMLDi
 const tabPageCategories = document.getElementById('tabPageCategories') as HTMLDivElement | null;
 const tabPageGraph = document.getElementById('tabPageGraph') as HTMLDivElement | null;
 
-type BottomTab = 'definition' | 'categories' | 'graph';
-
 function setBottomTab(tab: BottomTab) {
   const isDef = tab === 'definition';
   const isCat = tab === 'categories';
@@ -1470,8 +1428,8 @@ function setBottomTab(tab: BottomTab) {
   tabPageGraph?.classList.toggle('active', isGraph);
 
   // Refresh categories content when tab is opened.
-  if (isCat && raw && lastProjected) {
-    renderCategoriesTree(raw, lastProjected);
+  if (isCat && raw && lastRendered) {
+    renderCategoriesTree(raw, lastRendered);
   }
 }
 
@@ -1499,9 +1457,7 @@ const progressBtn = (document.getElementById('progress')) as
   | HTMLButtonElement
   | null;
 progressBtn?.addEventListener('click', () => {
-  state.mode = 'definitions';
-
-  // Clear selection + viewer to behave like entering Progress mode.
+  // Clear selection + viewer to behave like entering Current Progress mode.
   state.selectedLeaf = undefined;
   selectedNodeId = null;
   hideViewer();
@@ -1521,8 +1477,8 @@ progressBtn?.addEventListener('click', () => {
 // Overview button: fit whole graph into view
 const overviewBtn = (document.getElementById('overview') ?? document.getElementById('focus')) as HTMLButtonElement | null;
 overviewBtn?.addEventListener('click', () => {
-  if (!lastProjected) return;
-  const maxLevel = Math.max(0, ...lastProjected.nodes.map((n) => n.level ?? 0));
+  if (!lastRendered) return;
+  const maxLevel = Math.max(0, ...lastRendered.nodes.map((n) => n.level ?? 0));
   focusRing(maxLevel);
   setRingHighlight(maxLevel);
 });

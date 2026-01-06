@@ -1,0 +1,23 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
+from definit_db.data.field.computer_science.definitions.fundamental.bit import BIT
+from definit_db.data.field.computer_science.definitions.fundamental.data_structure import DATA_STRUCTURE
+
+
+class _BitField(Definition):
+    def _get_content(self) -> str:
+        return f"""
+A bit field is a {DATA_STRUCTURE.key.get_reference(phrase="data structure")} that consist of one or more adjacent 
+{BIT.key.get_reference(phrase="bits")} which have been allocated for specific purposes, so that any single bit or 
+group of bits within the structure can be set or inspected.
+"""
+
+
+BIT_FIELD = _BitField(
+    key=DefinitionKey(
+        name="bit_field",
+        field=FieldName.COMPUTER_SCIENCE,
+    )
+)

@@ -1,19 +1,15 @@
 export type DefNode = {
   /**
    * Unique id used throughout the visualization.
-   * In the current generator this equals relPath (slashes preserved).
+   * In the current generator this equals category (slashes preserved).
    */
   id: string;
 
   title: string;
 
-  /** path from index.md (without .md) */
-  relPath: string;
+  category: string;
 
-  /** client-only usage; kept for compatibility with generator output */
-  filePath: string;
-
-  /** dependency ids (ids resolve to relPaths) */
+  /** dependency ids (ids resolve to categories) */
   deps: string[];
 
   /**
@@ -23,10 +19,41 @@ export type DefNode = {
   level?: number;
 
   /** Preloaded markdown content for viewer */
-  content?: string;
+  content: string;
 };
 
 export type DefGraph = {
   nodes: DefNode[];
   edges: Array<{ source: string; target: string }>; // source -> target (source depends on target)
 };
+
+// --- UI / visualization internal types ---
+
+export type Pos = { x: number; y: number };
+
+export type LearnState = 'off' | 'visible' | 'ready' | 'learned';
+
+export type Raw = {
+  def: DefGraph;
+  byId: Map<string, DefNode>;
+  childrenByPrefix: Map<string, string[]>; // prefix -> ids under that prefix
+  fields: string[]; // top-level fields (e.g. mathematics, computer_science)
+};
+
+export type UIState = {
+  selectedLeaf?: string; // leaf id
+};
+
+export type TreeNode = {
+  id: string; // prefix (group) or leaf id
+  name: string;
+  kind: 'group' | 'leaf';
+  depth: number;
+  children: TreeNode[];
+  // leaf metadata
+  leaf?: DefNode;
+  // group metadata
+  groupLevel?: number;
+};
+
+export type BottomTab = 'definition' | 'categories' | 'graph';

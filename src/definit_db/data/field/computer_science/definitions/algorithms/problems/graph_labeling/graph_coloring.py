@@ -5,7 +5,7 @@ from definit_db.data.field import FieldName
 from definit_db.data.field.computer_science.definitions.algorithms.problems.graph_labeling.graph_labeling import (
     GRAPH_LABELING,
 )
-from definit_db.data.field.mathematics.definitions.fundamental.notations.label import LABEL
+from definit_db.data.field.mathematics.definitions.notations.label import LABEL
 
 
 class _GraphColoring(Definition):

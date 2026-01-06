@@ -20,6 +20,39 @@ def get_field_index(field: Field) -> list[Definition]:
     return getattr(module, "field_index")
 
 
+def _verify_definitions_subpackage(subpackage_dir: Path) -> None:
+    init_file = subpackage_dir / "__init__.py"
+
+    if not init_file.exists():
+        raise FileNotFoundError(f"Package is missing __init__.py: {init_file}")
+
+    for item in subpackage_dir.iterdir():
+        if item.name in {"__pycache__"}:
+            continue
+        if item.is_dir():
+            _verify_definitions_subpackage(subpackage_dir=item)
+        elif item.suffix == ".py":
+            continue
+        else:
+            raise ValueError(f"Invalid file in definitions package: {item}")
+
+
+def verify_definitions_package(definitions_path: Path) -> None:
+    """Verify the structure of a definitions package.
+
+    It checks if the directory is a correct definitions package.
+    Each subdirectory of a definitions package should have only python modules or sub-packages.
+    If subdirectory contains both, it raises an error.
+    """
+    if not definitions_path.exists():
+        raise FileNotFoundError(f"Package path does not exist: {definitions_path}")
+
+    if not definitions_path.is_dir():
+        raise NotADirectoryError(f"Package path is not a directory: {definitions_path}")
+
+    _verify_definitions_subpackage(subpackage_dir=definitions_path)
+
+
 def serialize() -> Path:
     # Write Markdown files for each definition in the specified fields
     all_definitions: list[Definition] = []

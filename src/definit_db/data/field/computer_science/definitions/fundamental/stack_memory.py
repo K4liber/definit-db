@@ -1,0 +1,27 @@
+from definit.definition.definition import Definition
+from definit.definition.definition_key import DefinitionKey
+
+from definit_db.data.field import FieldName
+from definit_db.data.field.computer_science.definitions.fundamental.computer_memory import COMPUTER_MEMORY
+from definit_db.data.field.computer_science.definitions.fundamental.data import DATA
+from definit_db.data.field.computer_science.definitions.fundamental.memory_allocation import MEMORY_ALLOCATION
+from definit_db.data.field.computer_science.definitions.fundamental.program import PROGRAM
+from definit_db.data.field.computer_science.definitions.fundamental.variable import VARIABLE
+from definit_db.data.field.mathematics.definitions.fundamental.function import FUNCTION
+from definit_db.data.field.mathematics.definitions.fundamental.last_in_first_out import LAST_IN_FIRST_OUT
+
+
+class _StackMemory(Definition):
+    def __init__(self, key: DefinitionKey) -> None:
+        super().__init__(key)
+
+    def _get_content(self) -> str:
+        return f"""
+{self.key.get_reference()} is a region of {COMPUTER_MEMORY.key.get_reference()} used for static {MEMORY_ALLOCATION.key.get_reference()} 
+during {PROGRAM.key.get_reference()} execution. It stores {DATA.key.get_reference()} in a {LAST_IN_FIRST_OUT.key.get_reference()} order, 
+automatically allocating and deallocating memory as {FUNCTION.key.get_reference("functions")} are called and return. The stack manages local 
+{VARIABLE.key.get_reference("variables")} and function call information.
+"""
+
+
+STACK_MEMORY = _StackMemory(DefinitionKey(name="stack memory", field=FieldName.COMPUTER_SCIENCE))

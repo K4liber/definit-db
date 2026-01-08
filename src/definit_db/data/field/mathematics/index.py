@@ -75,6 +75,7 @@ from definit_db.data.field.mathematics.definitions.computation.turing_machine im
 from definit_db.data.field.mathematics.definitions.fundamental.distribution import DISTRIBUTION
 from definit_db.data.field.mathematics.definitions.fundamental.expected_value import EXPECTED_VALUE
 from definit_db.data.field.mathematics.definitions.fundamental.factorial import FACTORIAL
+from definit_db.data.field.mathematics.definitions.fundamental.fibonacci import FIBONACCI
 from definit_db.data.field.mathematics.definitions.fundamental.finite_sequence import FINITE_SEQUENCE
 from definit_db.data.field.mathematics.definitions.fundamental.finite_set import FINITE_SET
 from definit_db.data.field.mathematics.definitions.fundamental.function import FUNCTION
@@ -84,6 +85,7 @@ from definit_db.data.field.mathematics.definitions.fundamental.information impor
 from definit_db.data.field.mathematics.definitions.fundamental.input_data import INPUT_DATA
 from definit_db.data.field.mathematics.definitions.fundamental.instruction import INSTRUCTION
 from definit_db.data.field.mathematics.definitions.fundamental.integer import INTEGER
+from definit_db.data.field.mathematics.definitions.fundamental.intersection import INTERSECTION
 from definit_db.data.field.mathematics.definitions.fundamental.last_in_first_out import LAST_IN_FIRST_OUT
 from definit_db.data.field.mathematics.definitions.fundamental.loop import LOOP
 from definit_db.data.field.mathematics.definitions.fundamental.merge import MERGE
@@ -91,6 +93,8 @@ from definit_db.data.field.mathematics.definitions.fundamental.multiset import M
 from definit_db.data.field.mathematics.definitions.fundamental.number import NUMBER
 from definit_db.data.field.mathematics.definitions.fundamental.object import OBJECT
 from definit_db.data.field.mathematics.definitions.fundamental.operation import OPERATION
+from definit_db.data.field.mathematics.definitions.fundamental.perfect_square import PERFECT_SQUARE
+from definit_db.data.field.mathematics.definitions.fundamental.permutation import PERMUTATION
 from definit_db.data.field.mathematics.definitions.fundamental.polynomial import POLYNOMIAL
 from definit_db.data.field.mathematics.definitions.fundamental.prime_factorization import PRIME_FACTORIZATION
 from definit_db.data.field.mathematics.definitions.fundamental.prime_number import PRIME_NUMBER
@@ -102,8 +106,11 @@ from definit_db.data.field.mathematics.definitions.fundamental.relation import R
 from definit_db.data.field.mathematics.definitions.fundamental.reordering import REORDERING
 from definit_db.data.field.mathematics.definitions.fundamental.sequence import SEQUENCE
 from definit_db.data.field.mathematics.definitions.fundamental.set import SET
+from definit_db.data.field.mathematics.definitions.fundamental.square_root import SQUARE_ROOT
 from definit_db.data.field.mathematics.definitions.fundamental.uniform_distribution import UNIFORM_DISTRIBUTION
+from definit_db.data.field.mathematics.definitions.fundamental.union import UNION
 from definit_db.data.field.mathematics.definitions.fundamental.uniqueness import UNIQUENESS
+from definit_db.data.field.mathematics.definitions.fundamental.vector import VECTOR
 from definit_db.data.field.mathematics.definitions.graph.adjacency_list import ADJACENCY_LIST
 from definit_db.data.field.mathematics.definitions.graph.bipartite_graph import BIPARTITE_GRAPH
 from definit_db.data.field.mathematics.definitions.graph.cycle import CYCLE
@@ -151,6 +158,8 @@ field_index: list[Definition] = [
     INFORMATION,
     SEQUENCE,
     FINITE_SEQUENCE,
+    FIBONACCI,
+    VECTOR,
     INSTRUCTION,
     INDEX,
     LOOP,
@@ -158,6 +167,8 @@ field_index: list[Definition] = [
     OPERATION,
     RELATION,
     SET,
+    INTERSECTION,
+    UNION,
     FINITE_SET,
     FUNCTION,
     HASH_FUNCTION,
@@ -248,6 +259,8 @@ field_index: list[Definition] = [
     MERGE_SORT,
     BUCKET_SORT,
     NUMBER,
+    SQUARE_ROOT,
+    PERFECT_SQUARE,
     INTEGER,
     PRIME_NUMBER,
     PRIME_FACTORIZATION,
@@ -276,4 +289,5 @@ field_index: list[Definition] = [
     WORST_CASE,
     EXPECTED_CASE,
     EXPECTED_VALUE,
+    PERMUTATION,
 ]

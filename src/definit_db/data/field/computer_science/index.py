@@ -58,6 +58,9 @@ from definit_db.data.field.computer_science.definitions.data_structure.fundament
 from definit_db.data.field.computer_science.definitions.data_structure.fundamental.primitive_data_type import (
     PRIMITIVE_DATA_TYPE,
 )
+from definit_db.data.field.computer_science.definitions.data_structure.operation.string_concatenation import (
+    STRING_CONCATENATION,
+)
 from definit_db.data.field.computer_science.definitions.data_structure.primitive.boolean import BOOLEAN
 from definit_db.data.field.computer_science.definitions.data_structure.primitive.integer import INTEGER
 from definit_db.data.field.computer_science.definitions.fundamental.arithmetic_right_shift import ARITHMETIC_RIGHT_SHIFT
@@ -65,6 +68,9 @@ from definit_db.data.field.computer_science.definitions.fundamental.binary_fract
 from definit_db.data.field.computer_science.definitions.fundamental.binary_representation import BINARY_REPRESENTATION
 from definit_db.data.field.computer_science.definitions.fundamental.bit import BIT
 from definit_db.data.field.computer_science.definitions.fundamental.bitwise_operation import BITWISE_OPERATION
+from definit_db.data.field.computer_science.definitions.fundamental.bottleneck import BOTTLENECK
+from definit_db.data.field.computer_science.definitions.fundamental.branch import BRANCH
+from definit_db.data.field.computer_science.definitions.fundamental.bug import BUG
 from definit_db.data.field.computer_science.definitions.fundamental.cache import CACHE
 from definit_db.data.field.computer_science.definitions.fundamental.call_stack import CALL_STACK
 from definit_db.data.field.computer_science.definitions.fundamental.computer import COMPUTER
@@ -74,6 +80,7 @@ from definit_db.data.field.computer_science.definitions.fundamental.core import 
 from definit_db.data.field.computer_science.definitions.fundamental.data import DATA
 from definit_db.data.field.computer_science.definitions.fundamental.data_structure import DATA_STRUCTURE
 from definit_db.data.field.computer_science.definitions.fundamental.data_type import DATA_TYPE
+from definit_db.data.field.computer_science.definitions.fundamental.edge_case import EDGE_CASE
 from definit_db.data.field.computer_science.definitions.fundamental.hardware import HARDWARE
 from definit_db.data.field.computer_science.definitions.fundamental.heap_memory import HEAP_MEMORY
 from definit_db.data.field.computer_science.definitions.fundamental.heap_overflow import HEAP_OVERFLOW
@@ -86,8 +93,11 @@ from definit_db.data.field.computer_science.definitions.fundamental.processor im
 from definit_db.data.field.computer_science.definitions.fundamental.program import PROGRAM
 from definit_db.data.field.computer_science.definitions.fundamental.random_access_memory import RANDOM_ACCESS_MEMORY
 from definit_db.data.field.computer_science.definitions.fundamental.right_shift import RIGHT_SHIFT
+from definit_db.data.field.computer_science.definitions.fundamental.special_case import SPECIAL_CASE
 from definit_db.data.field.computer_science.definitions.fundamental.stack_memory import STACK_MEMORY
 from definit_db.data.field.computer_science.definitions.fundamental.stack_overflow import STACK_OVERFLOW
+from definit_db.data.field.computer_science.definitions.fundamental.test import TEST
+from definit_db.data.field.computer_science.definitions.fundamental.test_case import TEST_CASE
 from definit_db.data.field.computer_science.definitions.fundamental.twos_complement import TWOS_COMPLEMENT
 from definit_db.data.field.computer_science.definitions.fundamental.variable import VARIABLE
 
@@ -101,6 +111,8 @@ field_index: list[Definition] = [
     BINARY_REPRESENTATION,
     BINARY_FRACTIONS,
     BITWISE_OPERATION,
+    BOTTLENECK,
+    BUG,
     ARITHMETIC_RIGHT_SHIFT,
     HARDWARE,
     COMPUTER,
@@ -110,6 +122,7 @@ field_index: list[Definition] = [
     PARALLELISM,
     PROCESSOR,
     PROGRAM,
+    BRANCH,
     RANDOM_ACCESS_MEMORY,
     RIGHT_SHIFT,
     HEAP_MEMORY,
@@ -119,6 +132,10 @@ field_index: list[Definition] = [
     CALL_STACK,
     CACHE,
     STACK_OVERFLOW,
+    TEST,
+    TEST_CASE,
+    EDGE_CASE,
+    SPECIAL_CASE,
     MEMORY_ALLOCATION,
     VARIABLE,
     TWOS_COMPLEMENT,
@@ -147,6 +164,7 @@ field_index: list[Definition] = [
     UNICODE,
     REGULAR_EXPRESSION,
     STRING,
+    STRING_CONCATENATION,
     SUBSTRING,
     TRIE,
     GRAPH_LABELING,
